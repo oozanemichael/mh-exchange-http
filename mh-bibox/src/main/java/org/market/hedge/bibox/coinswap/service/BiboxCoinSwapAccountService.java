@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** @author odrotleff */
-public class BiboxCoinSwapAccountService extends BiboxAccountServiceRaw implements MHAccountService {
+public class BiboxCoinSwapAccountService extends BiboxCoinSwapAccountServiceRaw implements MHAccountService {
 
-  protected BiboxCoinSwapAccountService(Exchange exchange) {
+  public BiboxCoinSwapAccountService(Exchange exchange) {
     super(exchange);
   }
 }

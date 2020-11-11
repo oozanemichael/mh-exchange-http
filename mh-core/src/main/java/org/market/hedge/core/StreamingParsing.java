@@ -25,6 +25,9 @@ public class StreamingParsing {
             case Margin:
                 parsingCurrencyPair= this::instanceMargin;
                 break;
+            case CoinSwap:
+                parsingCurrencyPair= this::instanceCoinSwap;
+                break;
             default:
                 break;
         }
@@ -55,5 +58,11 @@ public class StreamingParsing {
         throw new NullTradingAreaException(TradingArea.Margin);
     }
 
+    /**
+     * 币本位解析
+    * */
+    public ParsingCurrencyPair instanceCoinSwap(CurrencyPair currencyPair,Object... args) {
+        throw new NullTradingAreaException(TradingArea.Margin);
+    }
 
 }

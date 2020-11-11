@@ -15,7 +15,7 @@ import org.market.hedge.bibox.dto.account.BiboxWithdrawal;
 import org.market.hedge.bibox.dto.trade.BiboxOrders;
 import si.mazi.rescu.ParamsDigest;
 
-/** @author odrotleff */
+/** @author jingbao */
 @Path("v1")
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 @Produces(MediaType.APPLICATION_JSON)

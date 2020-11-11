@@ -9,6 +9,9 @@ import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 import org.market.hedge.BaseMHExchange;
 import org.market.hedge.MHExchange;
 import org.market.hedge.MHExchangeSpecification;
+import org.market.hedge.bibox.coinswap.service.BiboxCoinSwapAccountService;
+import org.market.hedge.bibox.coinswap.service.BiboxCoinSwapMarketDataService;
+import org.market.hedge.bibox.coinswap.service.BiboxCoinSwapTradeService;
 import org.market.hedge.bibox.service.BiboxAccountService;
 import org.market.hedge.bibox.service.BiboxMarketDataService;
 import org.market.hedge.bibox.service.BiboxTradeService;
@@ -26,9 +29,15 @@ public class BiboxExchange extends BaseMHExchange implements MHExchange {
   protected void initServices() {
     switch (mHexchangeSpecification.getTradingArea()) {
       case Spot:
-        this.marketDataService = new BiboxMarketDataService(this);
-        this.accountService = new BiboxAccountService(this);
-        this.tradeService = new BiboxTradeService(this);
+        this.mHmarketDataService = new BiboxMarketDataService(this);
+        this.mHaccountService = new BiboxAccountService(this);
+        this.mHtradeService = new BiboxTradeService(this);
+        return;
+      case CoinSwap:
+        this.mHaccountService = new BiboxCoinSwapAccountService(this);
+        this.mHmarketDataService = new BiboxCoinSwapMarketDataService(this);
+        this.mHtradeService = new BiboxCoinSwapTradeService(this);
+        return;
       default:
         throw new NullTradingAreaException(mHexchangeSpecification.getTradingArea());
     }
@@ -36,11 +45,13 @@ public class BiboxExchange extends BaseMHExchange implements MHExchange {
 
   @Override
   public MHExchangeSpecification getDefaultExchangeSpecification(TradingArea tradingArea) {
+    this.streamingParsing=new BiboxStreamingParsing(tradingArea);
     MHExchangeSpecification exchangeSpecification =
             new MHExchangeSpecification(this.getClass().getCanonicalName());
     exchangeSpecification.setTradingArea(tradingArea);
     switch (tradingArea){
       case Spot:
+      case CoinSwap:
         exchangeSpecification.setSslUri("https://api.bibox.com/");
         exchangeSpecification.setHost("bibox.com");
         exchangeSpecification.setPort(80);
@@ -71,6 +82,12 @@ public class BiboxExchange extends BaseMHExchange implements MHExchange {
 
   @Override
   public void remoteInit() throws IOException, ExchangeException {
-    exchangeMetaData = ((BiboxMarketDataService) marketDataService).getMetadata();
+    switch (mHexchangeSpecification.getTradingArea()){
+      case Spot:
+        exchangeMetaData = ((BiboxMarketDataService) marketDataService).getMetadata();
+        return;
+      default:
+    }
+
   }
 }
