@@ -8,6 +8,10 @@ import org.market.hedge.core.PositionInfo;
 
 import java.io.IOException;
 
+/**
+ * 资产
+ * Auth
+ * */
 public interface MHAccountService extends AccountService {
 
     /**

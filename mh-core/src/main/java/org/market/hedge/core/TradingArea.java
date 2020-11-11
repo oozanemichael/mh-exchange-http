@@ -27,7 +27,7 @@ public enum TradingArea {
      * */
     Option,
 
-    /*
+    /**
     * 币本位永续
     * */
     CoinSwap;
