@@ -13,7 +13,7 @@ public enum TradingArea {
     Margin,
 
     /**
-     * 永续和约
+     * usdt永续和约
      * */
     PerpetualSwap,
 
@@ -25,6 +25,11 @@ public enum TradingArea {
     /**
      * 期权
      * */
-    Option;
+    Option,
+
+    /*
+    * 币本位永续
+    * */
+    CoinSwap;
 
 }
