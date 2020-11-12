@@ -1,11 +1,6 @@
-package org.market.hedge.bibox.coinswap.req;
+package org.market.hedge.bibox.coinswap.dto.trade.req;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-import lombok.NonNull;
-import sun.plugin2.message.Message;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * @ClassName: PlaceLimitOrderReqBo
@@ -14,8 +9,7 @@ import javax.validation.constraints.NotNull;
  * @author: liusongqi
  * @Date: 2020/11/12 13:56
  */
-@Data
-public class BiboxPlaceLimitOrderReqBo {
+public class BiboxCoinSwapOrderReqBo {
 
     /**
      * 合约符号
@@ -27,35 +21,30 @@ public class BiboxPlaceLimitOrderReqBo {
      * 数量转字符串
      */
     @JsonProperty("amount")
-    @NotNull(message = "数量转字符串不可为空")
     private String amount;
 
     /**
      * 下单类型,1开多,2开空,3平多,4平空
      */
     @JsonProperty("order_side")
-    @NotNull(message = "下单类型不可为空")
     private Integer orderSide;
 
     /**
      * 下单方式,1市价单,2限价单
      */
     @JsonProperty("order_type")
-    @NotNull(message = "下单方式不可为空")
     private Integer orderType;
 
     /**
      * 下单价格
      */
     @JsonProperty("price")
-    @NotNull(message = "下单价格不可为空")
     private String price;
 
     /**
      * 下单来源
      */
     @JsonProperty("order_from")
-    @NotNull(message = "下单来源不可为空")
     private Integer orderFrom;
 
     /**
@@ -64,4 +53,41 @@ public class BiboxPlaceLimitOrderReqBo {
     @JsonProperty("client_oid")
     private String clientOid;
 
+    public String getPair() {
+        return pair;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public Integer getOrderSide() {
+        return orderSide;
+    }
+
+    public BiboxCoinSwapOrderReqBo(String pair, String amount, Integer orderSide, Integer orderType, String price, Integer orderFrom, String clientOid) {
+        this.pair = pair;
+        this.amount = amount;
+        this.orderSide = orderSide;
+        this.orderType = orderType;
+        this.price = price;
+        this.orderFrom = orderFrom;
+        this.clientOid = clientOid;
+    }
+
+    public Integer getOrderType() {
+        return orderType;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public Integer getOrderFrom() {
+        return orderFrom;
+    }
+
+    public String getClientOid() {
+        return clientOid;
+    }
 }

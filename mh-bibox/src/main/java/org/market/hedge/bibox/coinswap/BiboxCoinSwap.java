@@ -15,6 +15,11 @@ import java.io.IOException;
 @Produces(MediaType.APPLICATION_JSON)
 public interface BiboxCoinSwap {
 
+    static final String FORM_CMDS = "cmds";
+    static final String FORM_APIKEY = "apikey";
+    static final String FORM_SIGNATURE = "sign";
+
+
     /**
      * Retrieves the order book for a currency pair.
      *
