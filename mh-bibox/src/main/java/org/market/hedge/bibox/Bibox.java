@@ -16,7 +16,7 @@ import org.market.hedge.bibox.dto.marketdata.BiboxTicker;
 import org.market.hedge.bibox.dto.trade.BiboxDeals;
 import org.market.hedge.bibox.dto.trade.BiboxOrderBook;
 
-/** @author odrotleff */
+/** @author jingbao */
 @Path("v1")
 @Produces(MediaType.APPLICATION_JSON)
 public interface Bibox {
