@@ -26,6 +26,7 @@
         <module>mh-bibox</module>
         <module>mh-huobi</module>
         <module>mh-core</module>
+        <module>mh-deribit</module>
     </modules>
 
     <properties>
