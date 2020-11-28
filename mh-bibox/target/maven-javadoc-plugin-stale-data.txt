@@ -1,0 +1,20 @@
+cmd.exe
+/X
+/C
+""C:\Program Files\Java\jdk1.8.0_221\jre\..\bin\javadoc.exe" @options @argfile"
+D:\javaPorjects\sw-exchange-http\mh-bibox\target\apidocs\allclasses-frame.html = 1606579904276
+D:\javaPorjects\sw-exchange-http\mh-bibox\target\apidocs\allclasses-noframe.html = 1606579904278
+D:\javaPorjects\sw-exchange-http\mh-bibox\target\apidocs\argfile = 1606579901973
+D:\javaPorjects\sw-exchange-http\mh-bibox\target\apidocs\constant-values.html = 1606579904046
+D:\javaPorjects\sw-exchange-http\mh-bibox\target\apidocs\deprecated-list.html = 1606579904274
+D:\javaPorjects\sw-exchange-http\mh-bibox\target\apidocs\help-doc.html = 1606579904285
+D:\javaPorjects\sw-exchange-http\mh-bibox\target\apidocs\index-all.html = 1606579904269
+D:\javaPorjects\sw-exchange-http\mh-bibox\target\apidocs\index.html = 1606579904280
+D:\javaPorjects\sw-exchange-http\mh-bibox\target\apidocs\options = 1606579901972
+D:\javaPorjects\sw-exchange-http\mh-bibox\target\apidocs\overview-frame.html = 1606579903973
+D:\javaPorjects\sw-exchange-http\mh-bibox\target\apidocs\overview-summary.html = 1606579904282
+D:\javaPorjects\sw-exchange-http\mh-bibox\target\apidocs\overview-tree.html = 1606579904248
+D:\javaPorjects\sw-exchange-http\mh-bibox\target\apidocs\package-list = 1606579903970
+D:\javaPorjects\sw-exchange-http\mh-bibox\target\apidocs\script.js = 1606579904288
+D:\javaPorjects\sw-exchange-http\mh-bibox\target\apidocs\serialized-form.html = 1606579904055
+D:\javaPorjects\sw-exchange-http\mh-bibox\target\apidocs\stylesheet.css = 1606579904287

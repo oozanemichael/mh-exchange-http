@@ -1,0 +1,20 @@
+cmd.exe
+/X
+/C
+""C:\Program Files\Java\jdk1.8.0_221\jre\..\bin\javadoc.exe" @options @argfile"
+D:\javaPorjects\sw-exchange-http\mh-deribit\target\apidocs\allclasses-frame.html = 1606579918844
+D:\javaPorjects\sw-exchange-http\mh-deribit\target\apidocs\allclasses-noframe.html = 1606579918846
+D:\javaPorjects\sw-exchange-http\mh-deribit\target\apidocs\argfile = 1606579916963
+D:\javaPorjects\sw-exchange-http\mh-deribit\target\apidocs\constant-values.html = 1606579918635
+D:\javaPorjects\sw-exchange-http\mh-deribit\target\apidocs\deprecated-list.html = 1606579918842
+D:\javaPorjects\sw-exchange-http\mh-deribit\target\apidocs\help-doc.html = 1606579918856
+D:\javaPorjects\sw-exchange-http\mh-deribit\target\apidocs\index-all.html = 1606579918837
+D:\javaPorjects\sw-exchange-http\mh-deribit\target\apidocs\index.html = 1606579918848
+D:\javaPorjects\sw-exchange-http\mh-deribit\target\apidocs\options = 1606579916962
+D:\javaPorjects\sw-exchange-http\mh-deribit\target\apidocs\overview-frame.html = 1606579918576
+D:\javaPorjects\sw-exchange-http\mh-deribit\target\apidocs\overview-summary.html = 1606579918851
+D:\javaPorjects\sw-exchange-http\mh-deribit\target\apidocs\overview-tree.html = 1606579918825
+D:\javaPorjects\sw-exchange-http\mh-deribit\target\apidocs\package-list = 1606579918574
+D:\javaPorjects\sw-exchange-http\mh-deribit\target\apidocs\script.js = 1606579918861
+D:\javaPorjects\sw-exchange-http\mh-deribit\target\apidocs\serialized-form.html = 1606579918644
+D:\javaPorjects\sw-exchange-http\mh-deribit\target\apidocs\stylesheet.css = 1606579918859

@@ -1,0 +1,15 @@
+org\market\hedge\bibox\dto\marketdata\BiboxMarketdataUnmarshalTest$3.class
+org\market\hedge\bibox\service\marketdata\MarketDataServiceIntegration.class
+org\market\hedge\bibox\dto\marketdata\BiboxMarketdataUnmarshalTest$2.class
+org\market\hedge\bibox\dto\marketdata\BiboxMarketdataUnmarshalTest.class
+org\market\hedge\bibox\Test$Person.class
+org\market\hedge\bibox\dto\trade\BiboxTradeUnmarshalTest$1.class
+org\market\hedge\bibox\Test.class
+org\market\hedge\bibox\dto\account\BiboxAccountUnmarshalTest$1.class
+org\market\hedge\bibox\dto\account\BiboxAccountUnmarshalTest.class
+org\market\hedge\bibox\coinswap\marketdata\BiboxCoinSwapMarketDataTest.class
+org\market\hedge\bibox\dto\trade\BiboxTradeUnmarshalTest$2.class
+org\market\hedge\bibox\BiboxTestUtils.class
+org\market\hedge\bibox\dto\marketdata\BiboxMarketdataUnmarshalTest$1.class
+org\market\hedge\bibox\BiboxOrderBookTest.class
+org\market\hedge\bibox\dto\trade\BiboxTradeUnmarshalTest.class
