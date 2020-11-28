@@ -1,10 +1,12 @@
 package org.market.hedge.deribit.service;
 
 import org.knowm.xchange.currency.CurrencyPair;
-import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.deribit.DeribitAdapters;
 import org.market.hedge.deribit.DeribitExchange;
+import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.deribit.dto.DeribitException;
+import org.market.hedge.deribit.dto.Kind;
+import org.market.hedge.deribit.dto.marketdata.DeribitInstrument;
 import org.market.hedge.deribit.dto.marketdata.DeribitOrderBook;
 import org.market.hedge.deribit.dto.marketdata.DeribitTicker;
 import org.market.hedge.deribit.dto.marketdata.DeribitTrades;
@@ -12,10 +14,10 @@ import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.dto.marketdata.Trades;
 import org.knowm.xchange.exceptions.ExchangeException;
-import org.knowm.xchange.service.marketdata.MarketDataService;
 import org.market.hedge.service.marketdata.MHMarketDataService;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Implementation of the market data service for Bitmex
@@ -90,4 +92,10 @@ public class DeribitMarketDataService extends DeribitMarketDataServiceRaw implem
 
     return DeribitAdapters.adaptTrades(deribitTrades);
   }
+
+  public List<DeribitInstrument> getContractInfos(String currency, Kind kind, Boolean expired)
+          throws IOException {
+    return getDeribitInstruments(currency, kind, expired);
+  }
+
 }

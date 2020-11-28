@@ -6,6 +6,7 @@ import org.market.hedge.deribit.dto.Kind;
 import org.market.hedge.deribit.dto.account.AccountSummary;
 import org.market.hedge.deribit.dto.account.Position;
 import org.market.hedge.deribit.dto.trade.*;
+import org.market.hedge.dto.trade.*;
 import si.mazi.rescu.ParamsDigest;
 
 import javax.ws.rs.*;
