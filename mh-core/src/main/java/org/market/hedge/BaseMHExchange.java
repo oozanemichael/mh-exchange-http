@@ -123,7 +123,7 @@ public abstract class BaseMHExchange extends BaseExchange implements  MHExchange
         this.initServices();
         if (this.mHexchangeSpecification.isShouldLoadRemoteMetaData()) {
             try {
-                this.logger.info("Calling Remote Init...");
+                //this.logger.info("Calling Remote Init...");
                 this.remoteInit();
             } catch (IOException var8) {
                 throw new ExchangeException(var8);

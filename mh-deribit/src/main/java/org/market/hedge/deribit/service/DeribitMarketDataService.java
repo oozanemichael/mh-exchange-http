@@ -53,8 +53,7 @@ public class DeribitMarketDataService extends DeribitMarketDataServiceRaw implem
 
   @Override
   public OrderBook getOrderBook(ParsingCurrencyPair currencyPair, Object... args) throws IOException {
-    Object []ar={"PERPETUAL"};
-    String deribitInstrumentName = DeribitAdapters.adaptInstrumentName(currencyPair.getCurrencyPair(),ar);
+    String deribitInstrumentName = DeribitAdapters.adaptInstrumentName(currencyPair.getCurrencyPair(),args);
     DeribitOrderBook deribitOrderBook;
     try {
       deribitOrderBook = super.getDeribitOrderBook(deribitInstrumentName, null);
@@ -91,11 +90,6 @@ public class DeribitMarketDataService extends DeribitMarketDataServiceRaw implem
     }
 
     return DeribitAdapters.adaptTrades(deribitTrades);
-  }
-
-  public List<DeribitInstrument> getContractInfos(String currency, Kind kind, Boolean expired)
-          throws IOException {
-    return getDeribitInstruments(currency, kind, expired);
   }
 
 }

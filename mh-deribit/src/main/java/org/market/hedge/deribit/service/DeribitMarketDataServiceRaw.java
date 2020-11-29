@@ -34,6 +34,7 @@ public class DeribitMarketDataServiceRaw extends DeribitBaseService {
     return deribit.getOrderBook(instrumentName, depth).getResult();
   }
 
+
   public DeribitTrades getLastTradesByInstrument(
       String instrumentName,
       Integer startSeq,

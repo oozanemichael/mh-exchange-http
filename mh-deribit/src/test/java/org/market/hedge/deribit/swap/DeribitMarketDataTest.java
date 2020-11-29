@@ -28,7 +28,7 @@ public class DeribitMarketDataTest {
         MHMarketDataService marketDataService=exchange.getMarketDataService();
         try {
             for (int i=0;i<10;i++){
-                OrderBook orderBook=marketDataService.getOrderBook(parsing.parsing(CurrencyPair.BTC_USDT));
+                OrderBook orderBook=marketDataService.getOrderBook(parsing.parsing(CurrencyPair.BTC_USDT),"18DEC20-13750-C");
                 logger.info("{}","ask:"+orderBook.getAsks().get(0).getLimitPrice()+" bid:"+orderBook.getBids().get(0).getLimitPrice());
             }
         } catch (IOException e) {
@@ -36,19 +36,5 @@ public class DeribitMarketDataTest {
         }
     }
 
-    @Test
-    public void getContractInfos(){
-        MHExchange exchange = MHExchangeFactory.INSTANCE.createExchange(DeribitExchange.class, TradingArea.Option);
-        StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
-        DeribitMarketDataService marketDataService= (DeribitMarketDataService) exchange.getMarketDataService();
-        try {
-            List<DeribitInstrument> result=marketDataService.getContractInfos("BTC",null,null);
-            result.forEach(e->{
-                logger.info("{}",e.getInstrumentName());
-            });
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
-    }
 
 }
