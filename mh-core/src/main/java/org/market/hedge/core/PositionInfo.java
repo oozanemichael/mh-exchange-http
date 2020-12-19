@@ -4,19 +4,68 @@ import java.math.BigDecimal;
 
 public class PositionInfo {
 
-    String symbol;	//true		品种代码	"BTC","ETH"...
-    String contract_code;	//	true		合约代码	"BTC180914" ...
-    BigDecimal volume	;	//true		持仓量
-    BigDecimal available;	//	true		可平仓数量
-    BigDecimal frozen	;	//true		冻结数量
-    BigDecimal cost_open;	//	true		开仓均价
-    BigDecimal cost_hold;	//	true		持仓均价
-    BigDecimal profit_unreal;	//	true		未实现盈亏
-    BigDecimal profit_rate;	//	true		收益率
-    BigDecimal profit	;	//true		收益
-    BigDecimal position_margin;	//	true		持仓保证金
-    Integer lever_rate;	//	true		杠杠倍数
-    String direction	;	//true		"buy":买 "sell":卖
+    /**
+     * //true		品种代码	"BTC","ETH"...
+     * */
+    String symbol;
+
+    /**
+     *	true		合约代码	"BTC180914" ...
+     * */
+    String contract_code;
+
+    /**
+     * true		持仓量
+     * */
+    BigDecimal volume	;
+
+    /**
+     *	true		可平仓数量
+     * */
+    BigDecimal available;
+
+    /**
+     * true		冻结数量
+     * */
+    BigDecimal frozen	;
+
+    /**
+     * true   开仓均价
+     * */
+    BigDecimal cost_open;
+    /**
+     *	true		持仓均价
+     * */
+    BigDecimal cost_hold;
+
+    /**
+     * 	true		未实现盈亏
+     * */
+    BigDecimal profit_unreal;
+
+    /**
+     *	true		收益率
+     * */
+    BigDecimal profit_rate;
+
+    /**
+     * true		收益
+     * */
+    BigDecimal profit	;
+
+    /**
+     * true   持仓保证金
+     * */
+    BigDecimal position_margin;
+    /**
+     * true  杠杠倍数
+     * */
+    Integer lever_rate;
+
+    /**
+     * true		"buy":买 "sell":卖
+     * */
+    String direction;
 
 
 
@@ -53,7 +102,7 @@ public class PositionInfo {
         private  BigDecimal profit	 = null;
         private  BigDecimal position_margin = null;
         private  Integer lever_rate= 0;
-        private String direction	 = null;
+        private String direction = null;
 
         public Builder addSymbol(String symbol) {
             this.symbol = symbol;

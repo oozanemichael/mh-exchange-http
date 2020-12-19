@@ -66,6 +66,7 @@ public class BiboxCoinSwapOrderReqBo {
     }
 
     public BiboxCoinSwapOrderReqBo(String pair, String amount, Integer orderSide, Integer orderType, String price, Integer orderFrom, String clientOid) {
+        super();
         this.pair = pair;
         this.amount = amount;
         this.orderSide = orderSide;

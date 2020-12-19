@@ -1,40 +1,38 @@
-package org.market.hedge.bibox.coinswap.service;
+package org.market.hedge.bibox.usdtswap.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.market.hedge.bibox.BiboxException;
 import org.market.hedge.bibox.coinswap.dto.BiboxCoinSwapSingleResponse;
-import org.market.hedge.bibox.coinswap.dto.trade.req.BiboxCoinSwapOrder;
-import org.market.hedge.bibox.coinswap.dto.trade.req.BiboxCoinSwapOrderReqBo;
 import org.market.hedge.bibox.dto.BiboxCommands;
 import org.market.hedge.bibox.dto.trade.BiboxOrderSide;
 import org.market.hedge.bibox.dto.trade.BiboxOrderType;
 import org.market.hedge.bibox.service.BiboxDigest;
+import org.market.hedge.bibox.usdtswap.dto.trade.req.BiboxUSDTSwapPostionReq;
 import org.market.hedge.dto.trade.MHLimitOrder;
 
-import java.util.Date;
-
-public class BiboxCoinSwapTradeServiceRaw  extends BiboxCoinSwapBaseService{
+public class BiboxUSDTSwapTradeServiceRaw  extends BiboxUSDTSwapBaseService {
     /**
      * Constructor
      *
      * @param exchange
      */
-    protected BiboxCoinSwapTradeServiceRaw(Exchange exchange) {
+    protected BiboxUSDTSwapTradeServiceRaw(Exchange exchange) {
         super(exchange);
     }
 
     public String placeBiboxLimitOrder(MHLimitOrder limitOrder) {
         try {
-            BiboxCoinSwapOrderReqBo cmd =new BiboxCoinSwapOrderReqBo(
-                            limitOrder.getParsingCurrencyPair().getParsing(),
-                            limitOrder.getOriginalAmount().toPlainString(),
-                            BiboxOrderSide.fromOrderType(limitOrder.getType()).asInt(),
-                            BiboxOrderType.LIMIT_ORDER.asInt(),
-                            limitOrder.getLimitPrice().toPlainString(),
-                            6,
-                            limitOrder.getId()
+            BiboxUSDTSwapPostionReq cmd =new BiboxUSDTSwapPostionReq(
+                    BiboxOrderType.LIMIT_ORDER.asInt(),
+                    0,
+                    Integer.valueOf(limitOrder.getLeverage()),
+                    BiboxOrderSide.fromOrderType(limitOrder.getType()).asInt(),
+                    limitOrder.getLimitPrice().toPlainString(),
+                    limitOrder.getOriginalAmount().toPlainString(),
+                    limitOrder.getParsingCurrencyPair().getParsing(),
+                    6,
+                    null
                     );
             String cmdJson=BiboxCommands.toJson(cmd);
             long millis=System.currentTimeMillis();
@@ -46,5 +44,4 @@ public class BiboxCoinSwapTradeServiceRaw  extends BiboxCoinSwapBaseService{
             throw new ExchangeException(e.getMessage());
         }
     }
-
 }

@@ -1,14 +1,26 @@
 package org.market.hedge.bibox.service;
 
 import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import javax.ws.rs.FormParam;
 
+import com.sun.crypto.provider.HmacMD5;
 import org.knowm.xchange.utils.DigestUtils;
 import org.market.hedge.bibox.BiboxAuthenticated;
 import org.knowm.xchange.service.BaseParamsDigest;
+import org.market.hedge.bibox.coinswap.util.Hex;
+import org.market.hedge.bibox.coinswap.util.MacUtils;
 import si.mazi.rescu.RestInvocation;
 
 public class BiboxDigest extends BaseParamsDigest {
+
+
+  public static String buildSignature(String parms,String secretKey) {
+    //new HmacUtils(HmacAlgorithms.HMAC_MD5, key).hmacHex(valueToDigest);
+    //HmacUtils.hmacMd5Hex(apiKey, parms);
+    return Hex.encodeHexString(
+            MacUtils.buildMAC(parms, "HmacMD5", secretKey)).toLowerCase();
+  }
 
   /**
    * Constructor

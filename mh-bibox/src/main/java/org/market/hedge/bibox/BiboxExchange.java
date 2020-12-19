@@ -13,6 +13,9 @@ import org.market.hedge.bibox.coinswap.service.BiboxCoinSwapTradeService;
 import org.market.hedge.bibox.service.BiboxAccountService;
 import org.market.hedge.bibox.service.BiboxMarketDataService;
 import org.market.hedge.bibox.service.BiboxTradeService;
+import org.market.hedge.bibox.usdtswap.service.BiboxUSDTSwapAccountService;
+import org.market.hedge.bibox.usdtswap.service.BiboxUSDTSwapMarketDataService;
+import org.market.hedge.bibox.usdtswap.service.BiboxUSDTSwapTradeService;
 import org.market.hedge.core.TradingArea;
 import org.market.hedge.exception.NullTradingAreaException;
 import org.knowm.xchange.exceptions.ExchangeException;
@@ -35,6 +38,11 @@ public class BiboxExchange extends BaseMHExchange implements MHExchange {
         this.mHmarketDataService = new BiboxCoinSwapMarketDataService(this);
         this.mHtradeService = new BiboxCoinSwapTradeService(this);
         return;
+      case PerpetualSwap:
+        this.mHaccountService = new BiboxUSDTSwapAccountService(this);
+        this.mHmarketDataService = new BiboxUSDTSwapMarketDataService(this);
+        this.mHtradeService = new BiboxUSDTSwapTradeService(this);
+        return;
       default:
         throw new NullTradingAreaException(mHexchangeSpecification.getTradingArea());
     }
@@ -49,13 +57,13 @@ public class BiboxExchange extends BaseMHExchange implements MHExchange {
     switch (tradingArea){
       case Spot:
       case CoinSwap:
+      case PerpetualSwap:
         exchangeSpecification.setSslUri("https://api.bibox.com/");
         exchangeSpecification.setHost("bibox.com");
         exchangeSpecification.setPort(80);
         exchangeSpecification.setExchangeName("Bibox");
         exchangeSpecification.setExchangeDescription("AI ENHANCED ENCRYPTED DIGITAL ASSET EXCHANGE.");
         return exchangeSpecification;
-      case Margin:
       default:
         throw new NullTradingAreaException(tradingArea);
     }

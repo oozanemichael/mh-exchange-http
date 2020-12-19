@@ -11,4 +11,7 @@ public class BiboxCoinSwapAccountServiceRaw extends BiboxCoinSwapBaseService {
     protected BiboxCoinSwapAccountServiceRaw(Exchange exchange) {
         super(exchange);
     }
+
+
+
 }

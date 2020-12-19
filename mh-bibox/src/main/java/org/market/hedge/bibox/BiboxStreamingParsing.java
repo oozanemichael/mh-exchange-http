@@ -22,7 +22,6 @@ public class BiboxStreamingParsing extends StreamingParsing {
     @Override
     public ParsingCurrencyPair instanceCoinSwap(CurrencyPair currencyPair, Object... args) {
         return new ParsingCurrencyPair("5"+currencyPair.base.toString()+"_"+currencyPair.counter.toString(),currencyPair, args);
-
     }
 
     @Override
@@ -30,6 +29,8 @@ public class BiboxStreamingParsing extends StreamingParsing {
         return new ParsingCurrencyPair(null,currencyPair, args);
     }
 
-
-
+    @Override
+    public ParsingCurrencyPair instancePerpetualSwap(CurrencyPair currencyPair, Object... args) {
+        return new ParsingCurrencyPair("4"+currencyPair.base.toString()+"_"+currencyPair.counter.toString(),currencyPair, args);
+    }
 }

@@ -1,10 +1,17 @@
 package org.market.hedge.bibox.coinswap.dto.trade.req;
 
-import org.market.hedge.bibox.dto.BiboxCommand;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BiboxCoinSwapOrder extends BiboxCommand<BiboxCoinSwapOrderReqBo> {
+public class BiboxCoinSwapOrder{
 
-    public BiboxCoinSwapOrder(BiboxCoinSwapOrderReqBo body) {
-        super("", body);
+    @JsonProperty("cmd")
+    String cmd;
+
+    public BiboxCoinSwapOrder(String cmd) {
+        this.cmd = cmd;
+    }
+
+    public String getCmd() {
+        return cmd;
     }
 }

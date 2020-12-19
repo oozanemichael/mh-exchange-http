@@ -1,4 +1,4 @@
-package org.market.hedge.bibox.coinswap;
+package org.market.hedge.bibox.usdtswap;
 
 import org.market.hedge.bibox.BiboxException;
 import org.market.hedge.bibox.dto.BiboxResponse;
@@ -13,13 +13,12 @@ import java.io.IOException;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
-public interface BiboxCoinSwap {
+public interface BiboxUSDTSwap {
 
     /*static final String FORM_CMDS = "cmds";
     static final String FORM_APIKEY = "apikey";
     static final String FORM_SIGNATURE = "sign";*/
 
-    static final String FORM_CMDS = "cmds";
     static final String FORM_APIKEY = "bibox-api-key";
     static final String FORM_SIGNATURE = "bibox-api-sign";
     static final String FROM_TIME = "bibox-timestamp";

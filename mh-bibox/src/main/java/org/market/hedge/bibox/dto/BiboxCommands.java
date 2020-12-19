@@ -1,6 +1,7 @@
 package org.market.hedge.bibox.dto;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.ArrayList;
@@ -16,9 +17,20 @@ public class BiboxCommands extends ArrayList<BiboxCommand<?>> {
   public static final BiboxCommands ASSETS_CMD =
       BiboxCommands.of(new BiboxCommand<>("transfer/assets", new BiboxAllAssetsBody()));
 
-  private static final ObjectMapper MAPPER =
+  public static final ObjectMapper MAPPER =
       new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
   private static final long serialVersionUID = 1L;
+
+  public static final ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+  public static String toJson(Object bean) {
+    try {
+      return BiboxCommands.objectMapper.writeValueAsString(bean);
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
 
   private BiboxCommands() {
     super();
