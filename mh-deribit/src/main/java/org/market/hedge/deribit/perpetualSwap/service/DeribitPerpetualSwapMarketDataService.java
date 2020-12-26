@@ -1,4 +1,4 @@
-package org.market.hedge.deribit.option.service;
+package org.market.hedge.deribit.perpetualSwap.service;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
@@ -10,28 +10,27 @@ import org.market.hedge.deribit.dto.DeribitException;
 import org.market.hedge.deribit.dto.Kind;
 import org.market.hedge.deribit.dto.marketdata.DeribitInstrument;
 import org.market.hedge.deribit.dto.marketdata.DeribitOrderBook;
-import org.market.hedge.deribit.service.DeribitMarketDataServiceRaw;
 import org.market.hedge.service.marketdata.MHMarketDataService;
 
 import java.io.IOException;
 import java.util.List;
 
-public class DeribitOptionMarketDataService extends DeribitOptionMarketDataServiceRaw implements MHMarketDataService {
+public class DeribitPerpetualSwapMarketDataService extends DeribitPerpetualSwapMarketDataServiceRaw implements MHMarketDataService {
     /**
      * Constructor
      *
      * @param exchange DeribitExchange
      */
-    public DeribitOptionMarketDataService(DeribitExchange exchange) {
+    public DeribitPerpetualSwapMarketDataService(DeribitExchange exchange) {
         super(exchange);
     }
 
     @Override
     public OrderBook getOrderBook(ParsingCurrencyPair currencyPair, Object... args) throws IOException {
-        //String deribitInstrumentName = DeribitAdapters.adaptInstrumentName(currencyPair.getCurrencyPair(),args);
+        String deribitInstrumentName = DeribitAdapters.adaptInstrumentName(currencyPair.getCurrencyPair(), new String[]{"PERPETUAL"});
         DeribitOrderBook deribitOrderBook;
         try {
-            deribitOrderBook = super.getDeribitOrderBook(currencyPair.getParsing(), null);
+            deribitOrderBook = super.getDeribitOrderBook(deribitInstrumentName, null);
         } catch (DeribitException ex) {
             throw new ExchangeException(ex);
         }

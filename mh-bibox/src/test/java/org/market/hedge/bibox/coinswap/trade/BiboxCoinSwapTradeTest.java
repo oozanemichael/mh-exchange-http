@@ -40,7 +40,7 @@ public class BiboxCoinSwapTradeTest {
                         CurrencyPair.BTC_USD ,
                         "11223311",
                         new Date(),
-                        new BigDecimal("19500"),
+                        new BigDecimal("30000"),
                         parsing.parsing(CurrencyPair.BTC_USD));
         order1.setLeverage("5");
        MHLimitOrder order2=new MHLimitOrder(

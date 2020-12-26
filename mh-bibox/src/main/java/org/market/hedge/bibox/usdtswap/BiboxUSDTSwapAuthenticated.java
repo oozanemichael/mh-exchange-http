@@ -1,9 +1,6 @@
 package org.market.hedge.bibox.usdtswap;
 
 import org.market.hedge.bibox.coinswap.dto.BiboxCoinSwapSingleResponse;
-import org.market.hedge.bibox.dto.BiboxSingleResponse;
-import si.mazi.rescu.ParamsDigest;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -22,6 +19,7 @@ public interface BiboxUSDTSwapAuthenticated extends BiboxUSDTSwap{
      */
     @POST
     @Path("v3.1/ctrade/order/open")
+    //@Consumes(MediaType.APPLICATION_JSON)
     BiboxCoinSwapSingleResponse<String> trade(
             @FormParam("cmd") String body,
             @HeaderParam(FORM_APIKEY) String apiKey,

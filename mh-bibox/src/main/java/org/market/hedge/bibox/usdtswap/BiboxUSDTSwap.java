@@ -24,6 +24,7 @@ public interface BiboxUSDTSwap {
     static final String FROM_TIME = "bibox-timestamp";
 
 
+
     /**
      * Retrieves the order book for a currency pair.
      *

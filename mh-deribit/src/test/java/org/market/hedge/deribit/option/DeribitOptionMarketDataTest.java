@@ -6,6 +6,8 @@ import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.service.marketdata.MarketDataService;
 import org.market.hedge.MHExchange;
 import org.market.hedge.MHExchangeFactory;
+import org.market.hedge.core.Direction;
+import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.core.TradingArea;
 import org.market.hedge.deribit.DeribitExchange;
 import org.market.hedge.deribit.dto.marketdata.DeribitInstrument;
@@ -18,21 +20,28 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 public class DeribitOptionMarketDataTest {
 
     static Logger logger= LoggerFactory.getLogger(DeribitOptionMarketDataTest.class);
 
+
     @Test
     public void getDeribitOrderBookTest() throws Exception {
         MHExchange exchange = MHExchangeFactory.INSTANCE.createExchange(DeribitExchange.class, TradingArea.Option);
         StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
-        DeribitOptionMarketDataService marketDataService= (DeribitOptionMarketDataService) exchange.getMarketDataService();
+        MHMarketDataService marketDataService=exchange.getMarketDataService();
+        ParsingCurrencyPair pair=parsing.parsing(CurrencyPair.BTC_USDT,new Date(1609480800000L),new BigDecimal("21000"), Direction.Call);
+        logger.info("{}",pair.getParsing());
         try {
-
-            DeribitOrderBook orderBook=marketDataService.getDeribitOrderBook(CurrencyPair.BTC_USDT,"18DEC20-13750-C");
-
+            for (int i=0;i<10;i++){
+                //"18DEC20-13750-C"
+                OrderBook orderBook=marketDataService.getOrderBook(pair);
+                logger.info("{}","ask:"+orderBook.getAsks().get(0).getLimitPrice()+" bid:"+orderBook.getBids().get(0).getLimitPrice());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

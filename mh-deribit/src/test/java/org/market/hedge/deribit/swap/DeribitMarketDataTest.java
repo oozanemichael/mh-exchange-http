@@ -23,12 +23,12 @@ public class DeribitMarketDataTest {
 
     @Test
     public void getDeribitOrderBookTest() throws Exception {
-        MHExchange exchange = MHExchangeFactory.INSTANCE.createExchange(DeribitExchange.class, TradingArea.Option);
+        MHExchange exchange = MHExchangeFactory.INSTANCE.createExchange(DeribitExchange.class, TradingArea.PerpetualSwap);
         StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
         MHMarketDataService marketDataService=exchange.getMarketDataService();
         try {
             for (int i=0;i<10;i++){
-                OrderBook orderBook=marketDataService.getOrderBook(parsing.parsing(CurrencyPair.BTC_USDT),"18DEC20-13750-C");
+                OrderBook orderBook=marketDataService.getOrderBook(parsing.parsing(CurrencyPair.BTC_USDT));
                 logger.info("{}","ask:"+orderBook.getAsks().get(0).getLimitPrice()+" bid:"+orderBook.getBids().get(0).getLimitPrice());
             }
         } catch (IOException e) {
