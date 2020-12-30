@@ -111,7 +111,7 @@ public class HuobiOptionTradeService extends HuobiOptionTradeServiceRaw implemen
     }
 
     @Override
-    public void cancelAll(ParsingCurrencyPair parsingCurrencyPair) throws IOException  {
+    public void cancelAllByInstrument(ParsingCurrencyPair parsingCurrencyPair) throws IOException  {
         HuobiOptionCancelAllResult result=huobiOption.cancelAll(
                 new HuobiOptionContractCodeRequest(parsingCurrencyPair.getCurrencyPair().base.getSymbol(),null,parsingCurrencyPair.getParsing()),
                 exchange.getExchangeSpecification().getApiKey(),

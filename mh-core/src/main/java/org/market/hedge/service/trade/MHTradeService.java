@@ -44,7 +44,7 @@ public interface MHTradeService extends TradeService {
     /**
      * 根据合约名称撤销关于此合约的所有订单
      * */
-    default void cancelAll(ParsingCurrencyPair parsingCurrencyPair) throws IOException {
+    default void cancelAllByInstrument(ParsingCurrencyPair parsingCurrencyPair) throws IOException {
         throw new NotYetImplementedForExchangeException();
     }
 }

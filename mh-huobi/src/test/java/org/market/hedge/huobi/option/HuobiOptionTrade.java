@@ -132,7 +132,7 @@ public class HuobiOptionTrade {
             logger.info("{}",tradeService.placeLimitOrders(list));*/
 
 
-        tradeService.cancelAll(parsing.parsing(CurrencyPair.BTC_USDT
+        tradeService.cancelAllByInstrument(parsing.parsing(CurrencyPair.BTC_USDT
                 ,new Date(1600433211000L)
                 ,new BigDecimal("10500")
                 , Direction.Call));

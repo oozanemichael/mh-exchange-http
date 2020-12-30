@@ -1,9 +1,13 @@
 package org.market.hedge.deribit.service;
 
 import org.market.hedge.deribit.DeribitExchange;
+import org.market.hedge.deribit.dto.DeribitException;
 import org.market.hedge.deribit.dto.trade.*;
 import org.market.hedge.dto.trade.*;
+import si.mazi.rescu.ParamsDigest;
 
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.QueryParam;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -130,4 +134,10 @@ public class DeribitTradeServiceRaw extends DeribitBaseService {
         .getSettlementHistoryByInstrument(instrumentName, type, count, deribitAuth)
         .getResult();
   }
+
+  public List<Order> getOrderHistoryByCurrency(String currency,String kind, String type) throws IOException {
+    return deribitAuthenticated.getOrderHistoryByCurrency(currency, kind, type, deribitAuth).getResult();
+  }
+
+
 }

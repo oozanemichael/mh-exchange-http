@@ -109,6 +109,24 @@ public interface DeribitAuthenticated {
       @QueryParam("order_id") String orderId, @HeaderParam("Authorization") ParamsDigest auth)
       throws DeribitException, IOException;
 
+
+  /**
+   * Cancels all orders by instrument, optionally filtered by order type.
+   *
+   * @param instrumentName 	Instrument name
+   * @param type (all,limit,stop) Order type - limit, stop or all, default - all
+   *
+   * @return result	number	Total number of successfully cancelled orders
+   */
+  @GET
+  @Path("cancel_all_by_instrument")
+  DeribitResponse<Integer> cancelAllByInstrument(
+          @QueryParam("instrument_name") String instrumentName,
+          @QueryParam("type") String type,
+          @HeaderParam("Authorization") ParamsDigest auth)
+          throws DeribitException, IOException;
+
+
   /**
    * https://docs.deribit.com/v2/#private-get_open_orders_by_instrument
    *
@@ -199,4 +217,24 @@ public interface DeribitAuthenticated {
       @QueryParam("count") Integer count,
       @HeaderParam("Authorization") ParamsDigest auth)
       throws DeribitException, IOException;
+
+
+  /**
+   * https://docs.deribit.com/v2/#private-get_order_history_by_currency
+   * Retrieves list of user's open orders.
+   *
+   * @param currency （ BTC，ETH，USDT ）The currency symbol
+   * @param kind （future，option）Instrument kind, if not provided instruments of all kinds are considered
+   * @param type （all，limit，stop_all，stop_limit，stop_market）Order type, default - all
+   */
+  @GET
+  @Path("get_order_history_by_currency")
+  DeribitResponse<List<Order>> getOrderHistoryByCurrency(
+          @QueryParam("currency") String currency,
+          @QueryParam("kind") String kind,
+          @QueryParam("type") String type,
+          @HeaderParam("Authorization") ParamsDigest auth)
+          throws DeribitException, IOException;
+
 }
+

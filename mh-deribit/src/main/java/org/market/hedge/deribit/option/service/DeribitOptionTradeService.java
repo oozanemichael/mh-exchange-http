@@ -9,7 +9,6 @@ import org.market.hedge.dto.trade.MHLimitOrder;
 import org.market.hedge.service.trade.MHTradeService;
 
 import java.io.IOException;
-import java.nio.channels.CancelledKeyException;
 
 public class DeribitOptionTradeService extends DeribitTradeServiceRaw implements MHTradeService {
 
@@ -52,7 +51,8 @@ public class DeribitOptionTradeService extends DeribitTradeServiceRaw implements
     }
 
     @Override
-    public void cancelAll(ParsingCurrencyPair parsingCurrencyPair) throws IOException {
-
+    public void cancelAllByInstrument(ParsingCurrencyPair parsingCurrencyPair) throws IOException {
+        deribitAuthenticated.cancelAllByInstrument("parsingCurrencyPair.getParsing()", null, deribitAuth);
     }
+
 }
