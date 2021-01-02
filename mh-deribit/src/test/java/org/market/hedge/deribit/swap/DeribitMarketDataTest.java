@@ -19,7 +19,7 @@ import java.util.List;
 
 public class DeribitMarketDataTest {
 
-    static Logger logger= LoggerFactory.getLogger(DeribitMarketDataTest.class);
+    Logger logger= LoggerFactory.getLogger(DeribitMarketDataTest.class);
 
     @Test
     public void getDeribitOrderBookTest() throws Exception {
@@ -29,7 +29,7 @@ public class DeribitMarketDataTest {
         try {
             for (int i=0;i<10;i++){
                 OrderBook orderBook=marketDataService.getOrderBook(parsing.parsing(CurrencyPair.BTC_USDT),"18DEC20-13750-C");
-                logger.info("{}","ask:"+orderBook.getAsks().get(0).getLimitPrice()+" bid:"+orderBook.getBids().get(0).getLimitPrice());
+                //logger.info("{}","ask:"+orderBook.getAsks().get(0).getLimitPrice()+" bid:"+orderBook.getBids().get(0).getLimitPrice());
             }
         } catch (IOException e) {
             e.printStackTrace();
