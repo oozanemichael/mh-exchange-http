@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import javax.ws.rs.FormParam;
 
 import com.sun.crypto.provider.HmacMD5;
+import org.apache.commons.codec.digest.HmacUtils;
 import org.knowm.xchange.utils.DigestUtils;
 import org.market.hedge.bibox.BiboxAuthenticated;
 import org.knowm.xchange.service.BaseParamsDigest;
@@ -16,10 +17,13 @@ public class BiboxDigest extends BaseParamsDigest {
 
 
   public static String buildSignature(String parms,String secretKey) {
-    //new HmacUtils(HmacAlgorithms.HMAC_MD5, key).hmacHex(valueToDigest);
-    //HmacUtils.hmacMd5Hex(apiKey, parms);
     return Hex.encodeHexString(
             MacUtils.buildMAC(parms, "HmacMD5", secretKey)).toLowerCase();
+  }
+
+
+  public static String sign(String parms,String secretKey) {
+    return HmacUtils.hmacMd5Hex(secretKey, parms);
   }
 
   /**

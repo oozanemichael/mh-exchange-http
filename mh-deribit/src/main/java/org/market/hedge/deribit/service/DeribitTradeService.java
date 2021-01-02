@@ -18,4 +18,6 @@ public class DeribitTradeService extends DeribitTradeServiceRaw implements Trade
     Order cancel = super.cancel(orderId);
     return cancel.getOrderState() == OrderState.cancelled;
   }
+
+
 }

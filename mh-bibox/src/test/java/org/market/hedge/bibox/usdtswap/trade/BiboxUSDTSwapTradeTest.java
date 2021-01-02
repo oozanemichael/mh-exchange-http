@@ -6,12 +6,14 @@ import org.knowm.xchange.dto.Order;
 import org.market.hedge.MHExchange;
 import org.market.hedge.MHExchangeFactory;
 import org.market.hedge.bibox.BiboxExchange;
+import org.market.hedge.bibox.usdtswap.BiboxUSDTSwapAuthenticated;
 import org.market.hedge.core.TradingArea;
 import org.market.hedge.dto.trade.MHLimitOrder;
 import org.market.hedge.service.StreamingParsingCurrencyPair;
 import org.market.hedge.service.trade.MHTradeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import si.mazi.rescu.RestProxyFactory;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -26,7 +28,10 @@ public class BiboxUSDTSwapTradeTest {
 
     @Test
     public void placeLimitOrder() throws IOException {
-        MHExchange bibox= MHExchangeFactory.INSTANCE.createExchange(BiboxExchange.class,"edf57c404c7724434f328fd7ed6f37e08055f375","dc1df5368ea42a6b2761fa296a11be77288415e9", TradingArea.PerpetualSwap);
+        MHExchange bibox= MHExchangeFactory.INSTANCE.createExchange(BiboxExchange.class,
+                "d9ada6ea00515e83236a2cff0c6f01646b3ea262",
+                "52f555b1c250eec5f96cb64bd0828a0845978e07",
+                TradingArea.PerpetualSwap);
         StreamingParsingCurrencyPair parsing=bibox.getStreamingParsing().parsingCurrencyPair;
         logger.warn("sss----{}",parsing.parsing(CurrencyPair.BTC_USDT).getParsing());
         MHTradeService tradeService=  bibox.getTradeService();
@@ -39,17 +44,17 @@ public class BiboxUSDTSwapTradeTest {
                         CurrencyPair.BTC_USDT ,
                         "11223311",
                         new Date(),
-                        new BigDecimal("19500"),
-                        parsing.parsing(CurrencyPair.BTC_USD));
+                        new BigDecimal("24000"),
+                        parsing.parsing(CurrencyPair.BTC_USDT));
         order1.setLeverage("5");
        MHLimitOrder order2=new MHLimitOrder(
                Order.OrderType.BID,
                 new BigDecimal("1") ,
-                CurrencyPair.BTC_USD ,
+                CurrencyPair.BTC_USDT ,
                 null,
                 new Date(),
                 new BigDecimal("19000"),
-                parsing.parsing(CurrencyPair.BTC_USD));
+                parsing.parsing(CurrencyPair.BTC_USDT));
        /*
         order1.setLeverage("10");
         order2.setLeverage("10");
@@ -61,5 +66,6 @@ public class BiboxUSDTSwapTradeTest {
             e.printStackTrace();
         }
     }
+
 
 }

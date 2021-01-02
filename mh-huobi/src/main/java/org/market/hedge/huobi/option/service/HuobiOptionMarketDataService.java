@@ -60,10 +60,14 @@ public class HuobiOptionMarketDataService  extends HuobiOptionMarketDataServiceR
                                                             String contract_code) throws IOException {
 
         HuobiOptionContractInfoResult huobiOptionContractInfoResult=huobiOption.getOptionContractInfo(
-                symbol,	//false		品种代码	"BTC","ETH"，如果缺省，默认返回所有品种
-                trade_partition,	//	false		交易分区，不填默认”USDT“	"USDT"
-                contract_type.getValue(),	//	false		合约类型	当周:"this_week", 次周:"next_week", 季度:"quarter"
-                contract_code);	//	false		合约代码	BTC-USDT-200508-C-8800)
+                //false		品种代码	"BTC","ETH"，如果缺省，默认返回所有品种
+                symbol,
+                //	false		交易分区，不填默认”USDT“	"USDT"
+                trade_partition,
+                //	false		合约类型	当周:"this_week", 次周:"next_week", 季度:"quarter"
+                contract_type.getValue(),
+                //	false		合约代码	BTC-USDT-200508-C-8800)
+                contract_code);
 
         return checkResult(huobiOptionContractInfoResult);
     }

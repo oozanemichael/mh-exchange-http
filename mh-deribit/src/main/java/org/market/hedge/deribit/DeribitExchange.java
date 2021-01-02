@@ -10,10 +10,11 @@ import org.market.hedge.core.TradingArea;
 import org.market.hedge.deribit.dto.marketdata.DeribitCurrency;
 import org.market.hedge.deribit.dto.marketdata.DeribitInstrument;
 import org.market.hedge.deribit.option.service.DeribitOptionMarketDataService;
+import org.market.hedge.deribit.option.service.DeribitOptionTradeService;
+import org.market.hedge.deribit.perpetualSwap.service.DeribitPerpetualSwapMarketDataService;
+import org.market.hedge.deribit.perpetualSwap.service.DeribitPerpetualSwapTradeDataService;
 import org.market.hedge.deribit.service.DeribitAccountService;
-import org.market.hedge.deribit.service.DeribitMarketDataService;
 import org.market.hedge.deribit.service.DeribitMarketDataServiceRaw;
-import org.market.hedge.deribit.service.DeribitTradeService;
 import org.knowm.xchange.dto.meta.CurrencyMetaData;
 import org.knowm.xchange.dto.meta.CurrencyPairMetaData;
 import org.knowm.xchange.exceptions.ExchangeException;
@@ -41,12 +42,12 @@ public class DeribitExchange extends BaseMHExchange implements MHExchange {
       case Option:
         this.mHmarketDataService = new DeribitOptionMarketDataService(this);
         this.accountService = new DeribitAccountService(this);
-        this.tradeService = new DeribitTradeService(this);
+        this.mHtradeService = new DeribitOptionTradeService(this);
         break;
       case PerpetualSwap:
-        this.mHmarketDataService = new DeribitMarketDataService(this);
+        this.mHmarketDataService = new DeribitPerpetualSwapMarketDataService(this);
         this.accountService = new DeribitAccountService(this);
-        this.tradeService = new DeribitTradeService(this);
+        this.mHtradeService = new DeribitPerpetualSwapTradeDataService(this);
         break;
       default:
         throw new NullTradingAreaException(mHexchangeSpecification.getTradingArea());
@@ -60,7 +61,7 @@ public class DeribitExchange extends BaseMHExchange implements MHExchange {
     MHExchangeSpecification exchangeSpecification =
             new MHExchangeSpecification(this.getClass().getCanonicalName());
     exchangeSpecification.setTradingArea(tradingArea);
-    exchangeSpecification.setSslUri("https://www.deribit.com");
+    exchangeSpecification.setSslUri("https://test.deribit.com");
     exchangeSpecification.setHost("deribit.com");
     //    exchangeSpecification.setPort(80);
     exchangeSpecification.setExchangeName("Deribit");
