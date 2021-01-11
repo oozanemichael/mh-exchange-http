@@ -5,10 +5,14 @@ import org.knowm.xchange.exceptions.ExchangeException;
 import org.market.hedge.bibox.BiboxException;
 import org.market.hedge.bibox.coinswap.dto.BiboxCoinSwapSingleResponse;
 import org.market.hedge.bibox.coinswap.dto.trade.req.BiboxCoinSwapOrderReqBo;
+import org.market.hedge.bibox.coinswap.dto.trade.req.BiboxCoinSwapReqBo;
 import org.market.hedge.bibox.dto.BiboxCommands;
+import org.market.hedge.bibox.dto.BiboxSingleResponse;
+import org.market.hedge.bibox.dto.trade.BiboxCancelTradeCommand;
 import org.market.hedge.bibox.dto.trade.BiboxOrderSide;
 import org.market.hedge.bibox.dto.trade.BiboxOrderType;
 import org.market.hedge.bibox.service.BiboxDigest;
+import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.dto.trade.MHLimitOrder;
 
 
@@ -39,6 +43,19 @@ public class BiboxCoinSwapTradeServiceRaw  extends BiboxCoinSwapBaseService{
             BiboxCoinSwapSingleResponse<String> response = bibox.trade(cmdJson,apiKey,sign,String.valueOf(millis));
             throwErrors(response);
             return response.getOrder_id();
+        } catch (BiboxException e) {
+            throw new ExchangeException(e.getMessage());
+        }
+    }
+
+    public void cancelAllBibox(ParsingCurrencyPair parsingCurrencyPair) {
+        try {
+            BiboxCoinSwapReqBo cmd = new BiboxCoinSwapReqBo(parsingCurrencyPair.getParsing());
+            String cmdJson=BiboxCommands.toJson(cmd);
+            long millis=System.currentTimeMillis();
+            String sign=BiboxDigest.buildSignature(millis+cmdJson,exchange.getExchangeSpecification().getSecretKey());
+            BiboxCoinSwapSingleResponse<String> response = bibox.closeAll(cmdJson,apiKey,sign,String.valueOf(millis));
+            throwErrors(response);
         } catch (BiboxException e) {
             throw new ExchangeException(e.getMessage());
         }

@@ -61,7 +61,7 @@ public class DeribitExchange extends BaseMHExchange implements MHExchange {
     MHExchangeSpecification exchangeSpecification =
             new MHExchangeSpecification(this.getClass().getCanonicalName());
     exchangeSpecification.setTradingArea(tradingArea);
-    exchangeSpecification.setSslUri("https://test.deribit.com");
+    exchangeSpecification.setSslUri("https://www.deribit.com");
     exchangeSpecification.setHost("deribit.com");
     //    exchangeSpecification.setPort(80);
     exchangeSpecification.setExchangeName("Deribit");
@@ -86,8 +86,8 @@ public class DeribitExchange extends BaseMHExchange implements MHExchange {
 
     ExchangeSpecification exchangeSpecification =
         new ExchangeSpecification(this.getClass().getCanonicalName());
-    exchangeSpecification.setSslUri("https://test.deribit.com/");
-    exchangeSpecification.setHost("test.deribit.com");
+    exchangeSpecification.setSslUri("https://www.deribit.com/");
+    exchangeSpecification.setHost("www.deribit.com");
     //    exchangeSpecification.setPort(80);
     return exchangeSpecification;
   }
