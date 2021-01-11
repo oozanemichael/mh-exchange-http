@@ -7,7 +7,9 @@ import org.knowm.xchange.exceptions.ExchangeException;
 /** @author odrotleff */
 public enum BiboxOrderSide {
   BID(1, OrderType.BID),
-  ASK(2, OrderType.ASK);
+  ASK(2, OrderType.ASK),
+  EXIT_BID(3,OrderType.EXIT_BID),
+  EXIT_ASK(4,OrderType.EXIT_ASK);
 
   private int orderSide;
   private OrderType orderType;
@@ -23,6 +25,10 @@ public enum BiboxOrderSide {
         return BiboxOrderSide.BID;
       case ASK:
         return BiboxOrderSide.ASK;
+      case EXIT_BID:
+        return BiboxOrderSide.EXIT_BID;
+      case EXIT_ASK:
+        return BiboxOrderSide.EXIT_ASK;
       default:
         throw new ExchangeException("Order type " + orderType + " unsupported.");
     }

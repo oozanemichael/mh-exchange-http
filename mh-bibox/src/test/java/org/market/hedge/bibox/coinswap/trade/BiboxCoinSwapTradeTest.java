@@ -28,7 +28,7 @@ public class BiboxCoinSwapTradeTest {
 
     @Test
     public void placeLimitOrder() throws IOException {
-        MHExchange bibox= MHExchangeFactory.INSTANCE.createExchange(BiboxExchange.class,"edf57c404c7724434f328fd7ed6f37e08055f375","dc1df5368ea42a6b2761fa296a11be77288415e9", TradingArea.CoinSwap);
+        MHExchange bibox= MHExchangeFactory.INSTANCE.createExchange(BiboxExchange.class,"00064ff6ec177438e289d5559b0693efc505af65","b53766db065a9413f572ad75b13f5464acbb75a0", TradingArea.CoinSwap);
         StreamingParsingCurrencyPair parsing=bibox.getStreamingParsing().parsingCurrencyPair;
         logger.warn("sss----{}",parsing.parsing(CurrencyPair.BTC_USD).getParsing());
         MHTradeService tradeService=  bibox.getTradeService();
@@ -36,27 +36,14 @@ public class BiboxCoinSwapTradeTest {
 
         MHLimitOrder order1=
                 new MHLimitOrder(
-                        Order.OrderType.ASK,
+                        Order.OrderType.EXIT_BID,
                         new BigDecimal("1") ,
                         CurrencyPair.BTC_USD ,
                         "11223311",
                         new Date(),
-                        new BigDecimal("30000"),
+                        new BigDecimal("31349.0"),
                         parsing.parsing(CurrencyPair.BTC_USD));
         order1.setLeverage("5");
-       MHLimitOrder order2=new MHLimitOrder(
-               Order.OrderType.BID,
-                new BigDecimal("1") ,
-                CurrencyPair.BTC_USD ,
-                null,
-                new Date(),
-                new BigDecimal("19000"),
-                parsing.parsing(CurrencyPair.BTC_USD));
-       /*
-        order1.setLeverage("10");
-        order2.setLeverage("10");
-        orders.add(order1);
-        orders.add(order2);*/
         try {
             tradeService.placeLimitOrder(order1);
         } catch (IOException e) {

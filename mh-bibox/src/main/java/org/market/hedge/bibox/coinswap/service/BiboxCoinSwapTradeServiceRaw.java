@@ -41,7 +41,7 @@ public class BiboxCoinSwapTradeServiceRaw  extends BiboxCoinSwapBaseService{
             long millis=System.currentTimeMillis();
             String sign=BiboxDigest.buildSignature(millis+cmdJson,exchange.getExchangeSpecification().getSecretKey());
             BiboxCoinSwapSingleResponse<String> response = bibox.trade(cmdJson,apiKey,sign,String.valueOf(millis));
-            throwErrors(response);
+            //throwErrors(response);
             return response.getOrder_id();
         } catch (BiboxException e) {
             throw new ExchangeException(e.getMessage());
