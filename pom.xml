@@ -27,6 +27,7 @@
         <module>mh-huobi</module>
         <module>mh-core</module>
         <module>mh-deribit</module>
+        <module>mh-bitget</module>
     </modules>
 
     <properties>

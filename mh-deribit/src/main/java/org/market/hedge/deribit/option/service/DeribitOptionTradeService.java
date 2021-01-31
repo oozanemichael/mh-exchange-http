@@ -52,7 +52,7 @@ public class DeribitOptionTradeService extends DeribitTradeServiceRaw implements
 
     @Override
     public void cancelAllByInstrument(ParsingCurrencyPair parsingCurrencyPair) throws IOException {
-        deribitAuthenticated.cancelAllByInstrument("parsingCurrencyPair.getParsing()", null, deribitAuth);
+        deribitAuthenticated.cancelAllByInstrument(parsingCurrencyPair.getParsing(), null, deribitAuth);
     }
 
 }

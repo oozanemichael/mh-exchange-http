@@ -24,7 +24,9 @@ public interface BiboxUSDTSwapAuthenticated extends BiboxUSDTSwap{
             @FormParam("cmd") String body,
             @HeaderParam(FORM_APIKEY) String apiKey,
             @HeaderParam(FORM_SIGNATURE) String signature,
-            @HeaderParam(FROM_TIME) String time);
+            @HeaderParam(FROM_TIME) String time,
+            @HeaderParam("content-type") String contentType);
+
 
 
 }

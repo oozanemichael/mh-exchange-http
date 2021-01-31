@@ -10,9 +10,11 @@ import org.market.hedge.core.Direction;
 import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.core.TradingArea;
 import org.market.hedge.deribit.DeribitExchange;
+import org.market.hedge.deribit.dto.Kind;
 import org.market.hedge.deribit.dto.marketdata.DeribitInstrument;
 import org.market.hedge.deribit.dto.marketdata.DeribitOrderBook;
 import org.market.hedge.deribit.option.service.DeribitOptionMarketDataService;
+import org.market.hedge.deribit.option.service.DeribitOptionMarketDataServiceRaw;
 import org.market.hedge.deribit.service.DeribitMarketDataService;
 import org.market.hedge.service.StreamingParsingCurrencyPair;
 import org.market.hedge.service.marketdata.MHMarketDataService;
@@ -59,6 +61,21 @@ public class DeribitOptionMarketDataTest {
             });
         } catch (IOException exception) {
             exception.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getDeribitInstruments(){
+        MHExchange exchange = MHExchangeFactory.INSTANCE.createExchange(DeribitExchange.class, TradingArea.Option);
+        StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
+        DeribitOptionMarketDataService marketDataService= (DeribitOptionMarketDataService) exchange.getMarketDataService();
+        try {
+            List<DeribitInstrument> list=marketDataService.getDeribitInstruments("BTC", Kind.option,null);
+            list.forEach(e->{
+                logger.info(e.getInstrumentName());
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

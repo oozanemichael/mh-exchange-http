@@ -10,6 +10,7 @@ public class BiboxUSDTSwapPostionReq {
     @JsonProperty("order_type")
     Integer order_type;
 
+
     /**
      * true	integer	杠杆倍数		全仓:0,逐仓:1,2,...
      */
@@ -57,6 +58,8 @@ public class BiboxUSDTSwapPostionReq {
      */
     @JsonProperty("client_oid")
     Long client_oid;
+
+
 
     public BiboxUSDTSwapPostionReq(Integer order_type, Integer leverage, Integer cross_leverage, Integer order_side, String price, String contract, String pair, Integer order_from, Long client_oid) {
         this.order_type = order_type;

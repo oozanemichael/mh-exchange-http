@@ -56,4 +56,9 @@ public class DeribitOptionMarketDataService extends DeribitOptionMarketDataServi
 
         return deribitOrderBook;
     }
+
+
+    public List<DeribitInstrument> getOptionContractInfo(String currency, Kind kind, Boolean expired) throws IOException {
+        return getDeribitInstruments(currency, kind, expired);
+    }
 }

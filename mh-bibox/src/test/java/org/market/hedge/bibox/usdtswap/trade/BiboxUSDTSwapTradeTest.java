@@ -29,8 +29,8 @@ public class BiboxUSDTSwapTradeTest {
     @Test
     public void placeLimitOrder() throws IOException {
         MHExchange bibox= MHExchangeFactory.INSTANCE.createExchange(BiboxExchange.class,
-                "d9ada6ea00515e83236a2cff0c6f01646b3ea262",
-                "52f555b1c250eec5f96cb64bd0828a0845978e07",
+                "2d62e7bdfcf37d32d2d75770572962f467f52619",
+                "e93e9539ec1c9faa707280e3723fccfbbeb8e35f",
                 TradingArea.PerpetualSwap);
         StreamingParsingCurrencyPair parsing=bibox.getStreamingParsing().parsingCurrencyPair;
         logger.warn("sss----{}",parsing.parsing(CurrencyPair.BTC_USDT).getParsing());
@@ -44,7 +44,7 @@ public class BiboxUSDTSwapTradeTest {
                         CurrencyPair.BTC_USDT ,
                         "11223311",
                         new Date(),
-                        new BigDecimal("24000"),
+                        new BigDecimal("35000"),
                         parsing.parsing(CurrencyPair.BTC_USDT));
         order1.setLeverage("5");
        MHLimitOrder order2=new MHLimitOrder(

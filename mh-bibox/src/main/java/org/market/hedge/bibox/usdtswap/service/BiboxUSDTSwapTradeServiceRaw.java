@@ -7,7 +7,6 @@ import org.market.hedge.bibox.coinswap.dto.BiboxCoinSwapSingleResponse;
 import org.market.hedge.bibox.dto.BiboxCommands;
 import org.market.hedge.bibox.dto.trade.BiboxOrderSide;
 import org.market.hedge.bibox.dto.trade.BiboxOrderType;
-import org.market.hedge.bibox.service.BiboxDigest;
 import org.market.hedge.bibox.usdtswap.dto.trade.req.BiboxUSDTSwapPostionReq;
 import org.market.hedge.dto.trade.MHLimitOrder;
 import org.slf4j.Logger;
@@ -34,8 +33,8 @@ public class BiboxUSDTSwapTradeServiceRaw  extends BiboxUSDTSwapBaseService {
         try {
             BiboxUSDTSwapPostionReq cmd =new BiboxUSDTSwapPostionReq(
                     BiboxOrderType.LIMIT_ORDER.asInt(),
+                    0,
                     Integer.valueOf(limitOrder.getLeverage()),
-                    null,
                     BiboxOrderSide.fromOrderType(limitOrder.getType()).asInt(),
                     limitOrder.getLimitPrice().toPlainString(),
                     limitOrder.getOriginalAmount().toPlainString(),
@@ -44,8 +43,22 @@ public class BiboxUSDTSwapTradeServiceRaw  extends BiboxUSDTSwapBaseService {
                     Long.parseLong(limitOrder.getId()));
             String cmdJson=BiboxCommands.toJson(cmd);
             long millis=System.currentTimeMillis();
-            String sign=BiboxDigest.buildSignature(millis+cmdJson,exchange.getExchangeSpecification().getSecretKey());
-            BiboxCoinSwapSingleResponse<String> response = bibox.trade(cmdJson,apiKey,sign,String.valueOf(millis));
+
+            byte[] keyHmacMD5 = new byte[0];
+            try {
+                keyHmacMD5 = HMACUtil.initHmacMD5Key(exchange.getExchangeSpecification().getSecretKey());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String sign= null;
+            try {
+                sign = HMACUtil.encodeHmacMD5((millis+cmdJson).getBytes(), keyHmacMD5);
+            } catch (Exception e) {
+                e.printStackTrace();
+            };
+
+            //String sign=BiboxDigest.buildSignature(millis+cmdJson,exchange.getExchangeSpecification().getSecretKey());
+            BiboxCoinSwapSingleResponse<String> response = bibox.trade(cmdJson,apiKey,sign,String.valueOf(millis),"application/json");
             throwErrors(response);
             return response.getOrder_id();
         } catch (BiboxException e) {
