@@ -9,6 +9,7 @@ import org.market.hedge.dto.trade.MHLimitOrder;
 import org.market.hedge.service.trade.MHTradeService;
 
 import java.io.IOException;
+import java.util.List;
 
 public class DeribitOptionTradeService extends DeribitTradeServiceRaw implements MHTradeService {
 
@@ -48,6 +49,40 @@ public class DeribitOptionTradeService extends DeribitTradeServiceRaw implements
                     null);
         }
         return placement.getOrder().getOrderId();
+    }
+
+    @Override
+    public List<String> placeLimitOrders(List<MHLimitOrder> LimitOrders) throws IOException {
+        for (MHLimitOrder limitOrder : LimitOrders) {
+            if (limitOrder.getType()== Order.OrderType.BID || limitOrder.getType()== Order.OrderType.EXIT_BID){
+                buy(limitOrder.getParsingCurrencyPair().getParsing(),
+                        limitOrder.getOriginalAmount(),
+                        null,
+                        null,
+                        limitOrder.getLimitPrice(),
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null);
+            }else{
+                sell(limitOrder.getParsingCurrencyPair().getParsing(),
+                        limitOrder.getOriginalAmount(),
+                        null,
+                        null,
+                        limitOrder.getLimitPrice(),
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null);
+            }
+        }
+        return null;
     }
 
     @Override

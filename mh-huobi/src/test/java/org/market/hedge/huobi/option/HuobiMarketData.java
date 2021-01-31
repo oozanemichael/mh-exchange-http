@@ -38,9 +38,8 @@ public class HuobiMarketData {
         }
     }
 
-
-    public static void main(String[] args) {
-
+    @Test
+    public void getOrderBook() {
         MHExchange huobi= MHExchangeFactory.INSTANCE.createExchange(HuobiExchange.class, TradingArea.Option);
         StreamingParsingCurrencyPair parsing=huobi.getStreamingParsing().parsingCurrencyPair;
         MHMarketDataService marketDataService=huobi.getMarketDataService();

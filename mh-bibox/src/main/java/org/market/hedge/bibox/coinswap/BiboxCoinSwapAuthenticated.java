@@ -38,4 +38,13 @@ public interface BiboxCoinSwapAuthenticated extends BiboxCoinSwap{
             @HeaderParam(FORM_SIGNATURE) String signature,
             @HeaderParam(FROM_TIME) String time);
 
+    @POST
+    @Path("v3/cbc/order/closeAll")
+    BiboxCoinSwapSingleResponse<String> closeAll(
+            @FormParam("cmd") String body,
+            @HeaderParam(FORM_APIKEY) String apiKey,
+            @HeaderParam(FORM_SIGNATURE) String signature,
+            @HeaderParam(FROM_TIME) String time);
+
+
 }

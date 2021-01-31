@@ -1,5 +1,6 @@
 package org.market.hedge.huobi.option;
 
+import org.junit.Test;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.market.hedge.MHExchange;
 import org.market.hedge.MHExchangeFactory;
@@ -19,7 +20,8 @@ public class HuobiOptionGetPosition {
 
     static Logger logger= LoggerFactory.getLogger(HuobiOptionGetPosition.class);
 
-    public static void main(String[] args) {
+    @Test
+    public void getPosition() {
         MHExchange huobi= MHExchangeFactory.INSTANCE.createExchange(HuobiExchange.class
                 ,"914069ad-uymylwhfeg-c8084d47-d25e0"
                 ,"fc791193-3ab4649c-e052fc6a-7016f"

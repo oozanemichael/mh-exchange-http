@@ -77,7 +77,7 @@ public class HuobiExchange extends BaseMHExchange implements MHExchange {
       case Futures:
         exchangeSpecification.setSslUri("https://api.hbdm.com");
         exchangeSpecification.setHost("api.hbdm.com");
-        exchangeSpecification.setPort(80);
+        //exchangeSpecification.setPort(80);
         exchangeSpecification.setExchangeName("Huobi");
         exchangeSpecification.setExchangeDescription(
                 "Huobi is a Chinese digital currency trading platform and exchange based in Beijing");

@@ -23,7 +23,7 @@ public interface Deribit {
    * @param currency required, the currency symbol
    * @param kind optional, Instrument kind, if not provided instruments of all kinds are considered
    * @param expired optional, set to true to show expired instruments instead of active ones
-   * @return
+   * @return List<DeribitInstrument>
    * @throws DeribitException
    * @throws IOException
    */

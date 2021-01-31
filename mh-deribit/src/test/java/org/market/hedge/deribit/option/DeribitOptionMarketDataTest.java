@@ -57,7 +57,7 @@ public class DeribitOptionMarketDataTest {
         try {
             List<DeribitInstrument> result=marketDataService.getContractInfos("BTC",null,null);
             result.forEach(e->{
-                logger.info("{}",e.getInstrumentName());
+                logger.info("{}",e);
             });
         } catch (IOException exception) {
             exception.printStackTrace();
