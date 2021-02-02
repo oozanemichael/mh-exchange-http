@@ -5,6 +5,9 @@ import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 import org.market.hedge.BaseMHExchange;
 import org.market.hedge.MHExchange;
 import org.market.hedge.MHExchangeSpecification;
+import org.market.hedge.bitget.usdtswap.service.BitgetUSwapAccountService;
+import org.market.hedge.bitget.usdtswap.service.BitgetUSwapMarketDataService;
+import org.market.hedge.bitget.usdtswap.service.BitgetUSwapTradeService;
 import org.market.hedge.core.TradingArea;
 import org.market.hedge.exception.NullTradingAreaException;
 import si.mazi.rescu.SynchronizedValueFactory;
@@ -20,9 +23,9 @@ public class BitgetExchange extends BaseMHExchange implements MHExchange {
     protected void initServices() {
         switch (mHexchangeSpecification.getTradingArea()){
             case PerpetualSwap:
-                this.mHmarketDataService=null;
-                this.mHtradeService=null;
-                this.mHaccountService=null;
+                this.mHmarketDataService= new BitgetUSwapMarketDataService(this);
+                this.mHtradeService= new BitgetUSwapTradeService(this);
+                this.mHaccountService= new BitgetUSwapAccountService(this);
                 break;
             default:
                 throw new NullTradingAreaException(mHexchangeSpecification.getTradingArea());
@@ -43,7 +46,7 @@ public class BitgetExchange extends BaseMHExchange implements MHExchange {
                 exchangeSpecification.setPort(80);
                 exchangeSpecification.setExchangeName("Bitget");
                 exchangeSpecification.setExchangeDescription(
-                        "Huobi is a Chinese digital currency trading platform and exchange based in Beijing");
+                        "Bitget");
                 return exchangeSpecification;
             default:
                 break;
