@@ -3,14 +3,14 @@ package org.market.hedge.bitget.usdtswap.service;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
-import org.market.hedge.bitget.BitgetAuthenticated;
+import org.market.hedge.bitget.usdtswap.BitgetUSwapAuthenticated;
 import si.mazi.rescu.ParamsDigest;
 import si.mazi.rescu.RestProxyFactory;
 
 public class BitgetUSwapBaseService extends BaseExchangeService implements BaseService {
 
   protected final String apiKey;
-  protected final BitgetAuthenticated bibox;
+  protected final BitgetUSwapAuthenticated bibox;
   protected final ParamsDigest signatureCreator;
 
   /**
@@ -22,7 +22,7 @@ public class BitgetUSwapBaseService extends BaseExchangeService implements BaseS
     super(exchange);
     this.bibox =
         RestProxyFactory.createProxy(
-                BitgetAuthenticated.class,
+                BitgetUSwapAuthenticated.class,
             exchange.getExchangeSpecification().getSslUri());
     this.apiKey = exchange.getExchangeSpecification().getApiKey();
     //this.signatureCreator =BitgetUSwapDigest.createInstance(exchange.getExchangeSpecification().getSecretKey());
