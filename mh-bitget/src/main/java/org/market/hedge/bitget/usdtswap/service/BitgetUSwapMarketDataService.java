@@ -34,28 +34,7 @@ public class BitgetUSwapMarketDataService extends BitgetUSwapMarketDataServiceRa
 
   @Override
   public OrderBook getOrderBook(ParsingCurrencyPair currencyPair, Object... args) throws IOException {
-    BitgeUSwapDepthResult result=null;
-    try {
-      result=bibox.getDepth(currencyPair.getParsing(),5);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-   /* List<LimitOrder> bids =
-            depth.getBids().entrySet().stream()
-                    .map(
-                            e ->
-                                    new LimitOrder(
-                                            Order.OrderType.BID, e.getValue(), parsingCurrencyPair.getCurrencyPair(), null, null, e.getKey()))
-                    .collect(Collectors.toList());
-    List<LimitOrder> asks =
-            depth.getAsks().entrySet().stream()
-                    .map(
-                            e ->
-                                    new LimitOrder(
-                                            Order.OrderType.ASK, e.getValue(), parsingCurrencyPair.getCurrencyPair(), null, null, e.getKey()))
-                    .collect(Collectors.toList());
-    return new OrderBook(depth.getTs(), asks, bids);*/
+    BitgeUSwapDepthResult result=bibox.getDepth(currencyPair.getParsing(),5);
 
 
     return null;
