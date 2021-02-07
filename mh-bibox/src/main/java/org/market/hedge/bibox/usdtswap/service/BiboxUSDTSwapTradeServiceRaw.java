@@ -28,9 +28,10 @@ public class BiboxUSDTSwapTradeServiceRaw  extends BiboxUSDTSwapBaseService {
         super(exchange);
     }
 
+    //todo 未实现，加密认证错误
     public String placeBiboxLimitOrder(MHLimitOrder limitOrder) {
 
-        try {
+        /*try {
             BiboxUSDTSwapPostionReq cmd =new BiboxUSDTSwapPostionReq(
                     BiboxOrderType.LIMIT_ORDER.asInt(),
                     0,
@@ -45,6 +46,7 @@ public class BiboxUSDTSwapTradeServiceRaw  extends BiboxUSDTSwapBaseService {
             long millis=System.currentTimeMillis();
 
             byte[] keyHmacMD5 = new byte[0];
+
             try {
                 keyHmacMD5 = HMACUtil.initHmacMD5Key(exchange.getExchangeSpecification().getSecretKey());
             } catch (Exception e) {
@@ -57,13 +59,17 @@ public class BiboxUSDTSwapTradeServiceRaw  extends BiboxUSDTSwapBaseService {
                 e.printStackTrace();
             };
 
+
+
             //String sign=BiboxDigest.buildSignature(millis+cmdJson,exchange.getExchangeSpecification().getSecretKey());
             BiboxCoinSwapSingleResponse<String> response = bibox.trade(cmdJson,apiKey,sign,String.valueOf(millis),"application/json");
             throwErrors(response);
             return response.getOrder_id();
         } catch (BiboxException e) {
             throw new ExchangeException(e.getMessage());
-        }
+        }*/
+
+        return null;
 
     }
 

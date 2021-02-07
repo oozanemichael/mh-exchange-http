@@ -9,6 +9,7 @@ import org.market.hedge.MHExchangeSpecification;
 import org.market.hedge.core.TradingArea;
 import org.market.hedge.deribit.dto.marketdata.DeribitCurrency;
 import org.market.hedge.deribit.dto.marketdata.DeribitInstrument;
+import org.market.hedge.deribit.option.service.DeribitOptionAccountService;
 import org.market.hedge.deribit.option.service.DeribitOptionMarketDataService;
 import org.market.hedge.deribit.option.service.DeribitOptionTradeService;
 import org.market.hedge.deribit.perpetualSwap.service.DeribitPerpetualSwapMarketDataService;
@@ -41,7 +42,7 @@ public class DeribitExchange extends BaseMHExchange implements MHExchange {
     switch (mHexchangeSpecification.getTradingArea()) {
       case Option:
         this.mHmarketDataService = new DeribitOptionMarketDataService(this);
-        this.accountService = new DeribitAccountService(this);
+        this.mHaccountService = new DeribitOptionAccountService(this);
         this.mHtradeService = new DeribitOptionTradeService(this);
         break;
       case PerpetualSwap:

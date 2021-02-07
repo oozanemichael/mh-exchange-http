@@ -4,6 +4,7 @@ import org.knowm.xchange.dto.Order;
 import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.deribit.DeribitExchange;
 import org.market.hedge.deribit.dto.trade.OrderPlacement;
+import org.market.hedge.deribit.dto.trade.OrderType;
 import org.market.hedge.deribit.service.DeribitTradeServiceRaw;
 import org.market.hedge.dto.trade.MHLimitOrder;
 import org.market.hedge.service.trade.MHTradeService;
@@ -21,10 +22,21 @@ public class DeribitOptionTradeService extends DeribitTradeServiceRaw implements
     @Override
     public String placeLimitOrder(MHLimitOrder limitOrder) throws IOException {
         OrderPlacement placement=null;
+        OrderType type=null;
+        switch (limitOrder.getType()){
+            case BID:
+            case ASK:
+                type=OrderType.limit;
+            case EXIT_ASK:
+            case EXIT_BID:
+                type=OrderType.stop_limit;
+
+        }
+
         if (limitOrder.getType()== Order.OrderType.BID || limitOrder.getType()== Order.OrderType.EXIT_BID){
             placement=buy(limitOrder.getParsingCurrencyPair().getParsing(),
                     limitOrder.getOriginalAmount(),
-                    null,
+                    type,
                     null,
                     limitOrder.getLimitPrice(),
                     null,
@@ -37,7 +49,7 @@ public class DeribitOptionTradeService extends DeribitTradeServiceRaw implements
         }else{
             placement=sell(limitOrder.getParsingCurrencyPair().getParsing(),
                     limitOrder.getOriginalAmount(),
-                    null,
+                    type,
                     null,
                     limitOrder.getLimitPrice(),
                     null,
@@ -54,6 +66,16 @@ public class DeribitOptionTradeService extends DeribitTradeServiceRaw implements
     @Override
     public List<String> placeLimitOrders(List<MHLimitOrder> LimitOrders) throws IOException {
         for (MHLimitOrder limitOrder : LimitOrders) {
+            OrderType type=null;
+            switch (limitOrder.getType()){
+                case BID:
+                case ASK:
+                    type=OrderType.limit;
+                case EXIT_ASK:
+                case EXIT_BID:
+                    type=OrderType.stop_limit;
+
+            }
             if (limitOrder.getType()== Order.OrderType.BID || limitOrder.getType()== Order.OrderType.EXIT_BID){
                 buy(limitOrder.getParsingCurrencyPair().getParsing(),
                         limitOrder.getOriginalAmount(),

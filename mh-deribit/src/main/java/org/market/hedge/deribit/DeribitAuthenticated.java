@@ -67,7 +67,7 @@ public interface DeribitAuthenticated {
   DeribitResponse<OrderPlacement> buy(
       @QueryParam("instrument_name") String instrumentName,
       @QueryParam("amount") BigDecimal amount,
-      @QueryParam("type") OrderType type,
+      @QueryParam("type") String type,
       @QueryParam("label") String label,
       @QueryParam("price") BigDecimal price,
       @QueryParam("time_in_force") TimeInForce timeInForce,
@@ -85,7 +85,7 @@ public interface DeribitAuthenticated {
   DeribitResponse<OrderPlacement> sell(
       @QueryParam("instrument_name") String instrumentName,
       @QueryParam("amount") BigDecimal amount,
-      @QueryParam("type") OrderType type,
+      @QueryParam("type") String type,
       @QueryParam("label") String label,
       @QueryParam("price") BigDecimal price,
       @QueryParam("time_in_force") TimeInForce timeInForce,
@@ -187,6 +187,19 @@ public interface DeribitAuthenticated {
       @QueryParam("sorting") String sorting,
       @HeaderParam("Authorization") ParamsDigest auth)
       throws DeribitException, IOException;
+
+  /**
+   * https://docs.deribit.com/v2/#private-get_positions
+   *
+   * @param instrument_name 	true	string
+   */
+  @GET
+  @Path("get_position")
+  DeribitResponse<Position> getPosition(
+          @QueryParam("instrument_name") String instrument_name,
+          @HeaderParam("Authorization") ParamsDigest auth)
+          throws DeribitException, IOException;
+
 
   /**
    * https://docs.deribit.com/v2/#private-get_positions

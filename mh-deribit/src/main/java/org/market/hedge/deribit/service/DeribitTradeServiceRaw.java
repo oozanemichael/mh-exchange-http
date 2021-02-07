@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class DeribitTradeServiceRaw extends DeribitBaseService {
 
@@ -37,7 +38,7 @@ public class DeribitTradeServiceRaw extends DeribitBaseService {
         .buy(
             instrumentName,
             amount,
-            type,
+            Objects.nonNull(type)?type.name():null,
             label,
             price,
             timeInForce,
@@ -69,7 +70,7 @@ public class DeribitTradeServiceRaw extends DeribitBaseService {
         .sell(
             instrumentName,
             amount,
-            type,
+            Objects.nonNull(type)?type.name():null,
             label,
             price,
             timeInForce,
