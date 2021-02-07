@@ -1,8 +1,0 @@
-org.market.hedge
-org.market.hedge.core
-org.market.hedge.dto.trade
-org.market.hedge.exception
-org.market.hedge.service
-org.market.hedge.service.account
-org.market.hedge.service.marketdata
-org.market.hedge.service.trade
