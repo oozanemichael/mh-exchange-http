@@ -1,13 +1,11 @@
 package org.market.hedge.bibox.coinswap.service;
 
+import com.alibaba.fastjson.JSONObject;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.market.hedge.bibox.BiboxException;
 import org.market.hedge.bibox.coinswap.dto.BiboxCoinSwapSingleResponse;
-import org.market.hedge.bibox.coinswap.dto.account.req.BiboxCoinSwapPostionReq;
 import org.market.hedge.bibox.coinswap.dto.account.resp.BiboxCoinSwapPostionResp;
-import org.market.hedge.bibox.dto.BiboxCommands;
-import org.market.hedge.bibox.service.BiboxDigest;
 import org.market.hedge.core.BilateralPositionInfo;
 import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.core.PositionInfo;
@@ -30,12 +28,16 @@ public class BiboxCoinSwapAccountService extends BiboxCoinSwapAccountServiceRaw 
   @Override
   public BilateralPositionInfo getBilateralPosition(ParsingCurrencyPair parsingCurrencyPair, Object... args) throws IOException {
     try {
-      BiboxCoinSwapPostionReq cmd =new BiboxCoinSwapPostionReq(parsingCurrencyPair.getParsing(),null);
-      String cmdJson= BiboxCommands.toJson(cmd);
-      long millis=System.currentTimeMillis();
-      String sign= BiboxDigest.buildSignature(millis+cmdJson,exchange.getExchangeSpecification().getSecretKey());
-      BiboxCoinSwapSingleResponse<List<BiboxCoinSwapPostionResp>> response = bibox.position(cmdJson,apiKey,sign,String.valueOf(millis));
+
+      JSONObject json = new JSONObject();
+      json.put("pair", parsingCurrencyPair.getParsing());
+
+      String text=json.toJSONString();
+      long timestamp = System.currentTimeMillis();
+      String sign = BiboxCoinSwapDigest.buildSignature(timestamp + text,exchange.getExchangeSpecification().getSecretKey());
+      BiboxCoinSwapSingleResponse<List<BiboxCoinSwapPostionResp>> response = bibox.position(text,apiKey,sign,String.valueOf(timestamp));
       throwErrors(response);
+
       BiboxCoinSwapPostionResp bid = response.getResult().get(0);
       PositionInfo bidPosition=PositionInfo.builder()
               .addAvailable(bid.getLc())

@@ -1,8 +1,11 @@
 package org.market.hedge.bibox.usdtswap;
 
 import org.market.hedge.bibox.coinswap.dto.BiboxCoinSwapSingleResponse;
+import org.market.hedge.bibox.usdtswap.dto.accout.resp.BiboxUSDTSwapPostionResp;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 /**
  * auth api
@@ -18,15 +21,28 @@ public interface BiboxUSDTSwapAuthenticated extends BiboxUSDTSwap{
      * @return order id
      */
     @POST
-    @Path("v3.1/ctrade/order/open")
-    //@Consumes(MediaType.APPLICATION_JSON)
+    @Path("v3/cbu/order/open")
     BiboxCoinSwapSingleResponse<String> trade(
             @FormParam("cmd") String body,
             @HeaderParam(FORM_APIKEY) String apiKey,
             @HeaderParam(FORM_SIGNATURE) String signature,
-            @HeaderParam(FROM_TIME) String time,
-            @HeaderParam("content-type") String contentType);
+            @HeaderParam(FROM_TIME) String time);
 
+    @POST
+    @Path("v3/cbu/order/closeAll")
+    BiboxCoinSwapSingleResponse<String> closeAll(
+            @FormParam("cmd") String body,
+            @HeaderParam(FORM_APIKEY) String apiKey,
+            @HeaderParam(FORM_SIGNATURE) String signature,
+            @HeaderParam(FROM_TIME) String time);
+
+    @POST
+    @Path("v3/cbu/position")
+    BiboxCoinSwapSingleResponse<List<BiboxUSDTSwapPostionResp>> position(
+            @FormParam("cmd") String body,
+            @HeaderParam(FORM_APIKEY) String apiKey,
+            @HeaderParam(FORM_SIGNATURE) String signature,
+            @HeaderParam(FROM_TIME) String time);
 
 
 }

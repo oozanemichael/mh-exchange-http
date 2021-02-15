@@ -24,6 +24,10 @@ public interface BiboxCoinSwap {
     static final String FORM_SIGNATURE = "bibox-api-sign";
     static final String FROM_TIME = "bibox-timestamp";
 
+    // Headers
+    public static final String HEADER_SIGN = "bibox-api-sign";
+    public static final String HEADER_API_KEY = "bibox-api-key";
+    public static final String HEADER_TIMESTAMP = "bibox-timestamp";
 
     /**
      * Retrieves the order book for a currency pair.

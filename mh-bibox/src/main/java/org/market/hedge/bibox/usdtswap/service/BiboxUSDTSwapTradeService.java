@@ -1,6 +1,7 @@
 package org.market.hedge.bibox.usdtswap.service;
 
 import org.knowm.xchange.Exchange;
+import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.dto.trade.MHLimitOrder;
 import org.market.hedge.service.trade.MHTradeService;
 
@@ -20,4 +21,10 @@ public class BiboxUSDTSwapTradeService extends BiboxUSDTSwapTradeServiceRaw impl
     public String placeLimitOrder(MHLimitOrder limitOrder) throws IOException {
         return placeBiboxLimitOrder(limitOrder).toString();
     }
+
+    @Override
+    public void cancelAllByInstrument(ParsingCurrencyPair parsingCurrencyPair) throws IOException {
+        cancelAllBibox(parsingCurrencyPair);
+    }
+
 }

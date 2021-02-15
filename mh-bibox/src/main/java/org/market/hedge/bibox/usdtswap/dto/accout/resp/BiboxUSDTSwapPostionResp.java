@@ -2,107 +2,131 @@ package org.market.hedge.bibox.usdtswap.dto.accout.resp;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
+
 public class BiboxUSDTSwapPostionResp {
-
     /**
-     * 合约符号
+     * 0代表成功，否则代表失败
      */
-    String pair;
-
+    Integer state;
     /**
-     * 持仓张数
+     *	杠杆
      */
-    String contract;
-
+    Integer l;
     /**
-     * 持仓保证金
+     *	仓位方向: 1, 多仓 2 , 空仓
      */
-    String margin;
-
+    Integer sd;
     /**
-     * 开仓均价
+     * 告警价格
      */
-    String price;
-
+    BigDecimal pa;
     /**
-     * 开仓方向：1开多，2开空
+     * 用户id
      */
-    String order_side;
-
+    Integer ui;
     /**
-     * 强平价格
+     * 	爆仓价格
      */
-    String price_force;
-
+    BigDecimal pf;
     /**
-     * 0:全仓，其它:逐仓杠杆倍数
+     *	仓位模式: 1全仓, 2逐仓
      */
-    String leverage;
-
+    Integer md;
     /**
-     * 开多未成交订单张数
+     *	可平仓位价值
      */
-    String icontract_up;
-
+    BigDecimal lc;
     /**
-     * 开空未成交订单张数
+     *	交易对
      */
-    String icontract_down;
+    String pi;
+    /**
+     *	保证金
+     */
+    BigDecimal mg;
+    /**
+     *	仓位价值 = 合约张数X合约面值
+     */
+    BigDecimal hc;
+    /**
+     * 开仓价格
+     */
+    BigDecimal po;
 
     public BiboxUSDTSwapPostionResp(
-            @JsonProperty("sss") String pair,
-            @JsonProperty("contract")  String contract,
-            @JsonProperty("margin")  String margin,
-            @JsonProperty("price")  String price,
-            @JsonProperty("order_side")  String order_side,
-            @JsonProperty("price_force")  String price_force,
-            @JsonProperty("leverage")  String leverage,
-            @JsonProperty("icontract_up")  String icontract_up,
-            @JsonProperty("icontract_down")  String icontract_down) {
-        this.pair = pair;
-        this.contract = contract;
-        this.margin = margin;
-        this.price = price;
-        this.order_side = order_side;
-        this.price_force = price_force;
-        this.leverage = leverage;
-        this.icontract_up = icontract_up;
-        this.icontract_down = icontract_down;
+            @JsonProperty("state") Integer state,
+            @JsonProperty("l") Integer l,
+            @JsonProperty("sd") Integer sd,
+            @JsonProperty("pa") BigDecimal pa,
+            @JsonProperty("ui") Integer ui,
+            @JsonProperty("pf") BigDecimal pf,
+            @JsonProperty("md") Integer md,
+            @JsonProperty("lc") BigDecimal lc,
+            @JsonProperty("pi") String pi,
+            @JsonProperty("mg") BigDecimal mg,
+            @JsonProperty("hc") BigDecimal hc,
+            @JsonProperty("po") BigDecimal po) {
+        this.state = state;
+        this.l = l;
+        this.sd = sd;
+        this.pa = pa;
+        this.ui = ui;
+        this.pf = pf;
+        this.md = md;
+        this.lc = lc;
+        this.pi = pi;
+        this.mg = mg;
+        this.hc = hc;
+        this.po = po;
     }
 
-    public String getPair() {
-        return pair;
+
+    public Integer getState() {
+        return state;
     }
 
-    public String getContract() {
-        return contract;
+    public Integer getL() {
+        return l;
     }
 
-    public String getMargin() {
-        return margin;
+    public Integer getSd() {
+        return sd;
     }
 
-    public String getPrice() {
-        return price;
+    public BigDecimal getPa() {
+        return pa;
     }
 
-    public String getOrder_side() {
-        return order_side;
+    public Integer getUi() {
+        return ui;
     }
 
-    public String getPrice_force() {
-        return price_force;
+    public BigDecimal getPf() {
+        return pf;
     }
 
-    public String getLeverage() {
-        return leverage;
+    public Integer getMd() {
+        return md;
     }
 
-    public String getIcontract_up() {
-        return icontract_up;
+    public BigDecimal getLc() {
+        return lc;
     }
 
-    public String getIcontract_down() {
-        return icontract_down;
+    public String getPi() {
+        return pi;
+    }
+
+    public BigDecimal getMg() {
+        return mg;
+    }
+
+    public BigDecimal getHc() {
+        return hc;
+    }
+
+    public BigDecimal getPo() {
+        return po;
     }
 }

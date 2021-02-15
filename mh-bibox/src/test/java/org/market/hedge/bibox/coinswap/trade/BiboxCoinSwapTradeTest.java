@@ -28,7 +28,7 @@ public class BiboxCoinSwapTradeTest {
 
     @Test
     public void placeLimitOrder() throws IOException {
-        MHExchange bibox= MHExchangeFactory.INSTANCE.createExchange(BiboxExchange.class,"00064ff6ec177438e289d5559b0693efc505af65","b53766db065a9413f572ad75b13f5464acbb75a0", TradingArea.CoinSwap);
+        MHExchange bibox= MHExchangeFactory.INSTANCE.createExchange(BiboxExchange.class,"50a67d14c3edd429ae212a31cf29df3b31c31feb","1023dfbb1d5e08c49452029b18e6a5003e7b3c68", TradingArea.CoinSwap);
         StreamingParsingCurrencyPair parsing=bibox.getStreamingParsing().parsingCurrencyPair;
         logger.warn("sss----{}",parsing.parsing(CurrencyPair.BTC_USD).getParsing());
         MHTradeService tradeService=  bibox.getTradeService();
@@ -36,12 +36,12 @@ public class BiboxCoinSwapTradeTest {
 
         MHLimitOrder order1=
                 new MHLimitOrder(
-                        Order.OrderType.EXIT_BID,
+                        Order.OrderType.BID,
                         new BigDecimal("1") ,
                         CurrencyPair.BTC_USD ,
                         "11223311",
                         new Date(),
-                        new BigDecimal("31349.0"),
+                        new BigDecimal("46000.0"),
                         parsing.parsing(CurrencyPair.BTC_USD));
         order1.setLeverage("5");
         try {
@@ -54,7 +54,7 @@ public class BiboxCoinSwapTradeTest {
 
     @Test
     public void cancelAllByInstrument() throws IOException {
-        MHExchange bibox= MHExchangeFactory.INSTANCE.createExchange(BiboxExchange.class,"00064ff6ec177438e289d5559b0693efc505af65","b53766db065a9413f572ad75b13f5464acbb75a0", TradingArea.CoinSwap);
+        MHExchange bibox= MHExchangeFactory.INSTANCE.createExchange(BiboxExchange.class,"50a67d14c3edd429ae212a31cf29df3b31c31feb","1023dfbb1d5e08c49452029b18e6a5003e7b3c68", TradingArea.CoinSwap);
         StreamingParsingCurrencyPair parsing=bibox.getStreamingParsing().parsingCurrencyPair;
         logger.warn("sss----{}",parsing.parsing(CurrencyPair.BTC_USD).getParsing());
         MHTradeService tradeService=  bibox.getTradeService();

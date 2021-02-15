@@ -25,6 +25,7 @@ public interface Bibox {
   static final String FORM_APIKEY = "apikey";
   static final String FORM_SIGNATURE = "sign";
 
+
   @GET
   @Path("mdata")
   BiboxResponse<BiboxTicker> mdata(@QueryParam("cmd") String cmd, @QueryParam("pair") String pair)

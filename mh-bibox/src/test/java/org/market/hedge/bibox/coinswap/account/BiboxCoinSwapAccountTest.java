@@ -21,7 +21,7 @@ public class BiboxCoinSwapAccountTest {
 
     @Test
     public void getBilateralPosition() throws IOException {
-        MHExchange bibox= MHExchangeFactory.INSTANCE.createExchange(BiboxExchange.class,"edf57c404c7724434f328fd7ed6f37e08055f375","dc1df5368ea42a6b2761fa296a11be77288415e9", TradingArea.CoinSwap);
+        MHExchange bibox= MHExchangeFactory.INSTANCE.createExchange(BiboxExchange.class,"50a67d14c3edd429ae212a31cf29df3b31c31feb","1023dfbb1d5e08c49452029b18e6a5003e7b3c68", TradingArea.CoinSwap);
         StreamingParsingCurrencyPair parsing=bibox.getStreamingParsing().parsingCurrencyPair;
         logger.warn("sss----{}",parsing.parsing(CurrencyPair.BTC_USD).getParsing());
         MHAccountService accountService=bibox.getAccountService();

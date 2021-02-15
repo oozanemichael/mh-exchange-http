@@ -25,9 +25,9 @@ public interface BiboxCoinSwapAuthenticated extends BiboxCoinSwap{
     @Path("v3/cbc/order/open")
     BiboxCoinSwapSingleResponse<String> trade(
             @FormParam("cmd") String body,
-            @HeaderParam(FORM_APIKEY) String apiKey,
-            @HeaderParam(FORM_SIGNATURE) String signature,
-            @HeaderParam(FROM_TIME) String time);
+            @HeaderParam(HEADER_API_KEY) String apiKey,
+            @HeaderParam(HEADER_SIGN) String signature,
+            @HeaderParam(HEADER_TIMESTAMP) String time);
 
 
     @POST

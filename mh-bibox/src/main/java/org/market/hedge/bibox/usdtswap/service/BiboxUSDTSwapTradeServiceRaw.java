@@ -1,13 +1,17 @@
 package org.market.hedge.bibox.usdtswap.service;
 
+import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.market.hedge.bibox.BiboxException;
 import org.market.hedge.bibox.coinswap.dto.BiboxCoinSwapSingleResponse;
+import org.market.hedge.bibox.coinswap.service.BiboxCoinSwapDigest;
 import org.market.hedge.bibox.dto.BiboxCommands;
 import org.market.hedge.bibox.dto.trade.BiboxOrderSide;
 import org.market.hedge.bibox.dto.trade.BiboxOrderType;
 import org.market.hedge.bibox.usdtswap.dto.trade.req.BiboxUSDTSwapPostionReq;
+import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.dto.trade.MHLimitOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,71 +32,44 @@ public class BiboxUSDTSwapTradeServiceRaw  extends BiboxUSDTSwapBaseService {
         super(exchange);
     }
 
-    //todo 未实现，加密认证错误
+
     public String placeBiboxLimitOrder(MHLimitOrder limitOrder) {
-
-        /*try {
-            BiboxUSDTSwapPostionReq cmd =new BiboxUSDTSwapPostionReq(
-                    BiboxOrderType.LIMIT_ORDER.asInt(),
-                    0,
-                    Integer.valueOf(limitOrder.getLeverage()),
-                    BiboxOrderSide.fromOrderType(limitOrder.getType()).asInt(),
-                    limitOrder.getLimitPrice().toPlainString(),
-                    limitOrder.getOriginalAmount().toPlainString(),
-                    limitOrder.getParsingCurrencyPair().getParsing(),
-                    6,
-                    Long.parseLong(limitOrder.getId()));
-            String cmdJson=BiboxCommands.toJson(cmd);
-            long millis=System.currentTimeMillis();
-
-            byte[] keyHmacMD5 = new byte[0];
-
-            try {
-                keyHmacMD5 = HMACUtil.initHmacMD5Key(exchange.getExchangeSpecification().getSecretKey());
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            JSONObject json = new JSONObject();
+            json.put("pair", limitOrder.getParsingCurrencyPair().getParsing());
+            json.put("amount", limitOrder.getOriginalAmount());
+            json.put("price", limitOrder.getLimitPrice().toString());
+            json.put("order_side", BiboxOrderSide.fromOrderType(limitOrder.getType()).asInt());
+            json.put("order_type", 2);
+            json.put("order_from", 6);
+            if (!StringUtils.isEmpty(limitOrder.getId())) {
+                json.put("client_oid", limitOrder.getId());
             }
-            String sign= null;
-            try {
-                sign = HMACUtil.encodeHmacMD5((millis+cmdJson).getBytes(), keyHmacMD5);
-            } catch (Exception e) {
-                e.printStackTrace();
-            };
 
-
-
-            //String sign=BiboxDigest.buildSignature(millis+cmdJson,exchange.getExchangeSpecification().getSecretKey());
-            BiboxCoinSwapSingleResponse<String> response = bibox.trade(cmdJson,apiKey,sign,String.valueOf(millis),"application/json");
+            String text=json.toJSONString();
+            long timestamp = System.currentTimeMillis();
+            String sign = BiboxCoinSwapDigest.buildSignature(timestamp + text,exchange.getExchangeSpecification().getSecretKey());
+            BiboxCoinSwapSingleResponse<String> response = bibox.trade(text,apiKey,sign,String.valueOf(timestamp));
             throwErrors(response);
             return response.getOrder_id();
+
         } catch (BiboxException e) {
             throw new ExchangeException(e.getMessage());
-        }*/
-
-        return null;
-
+        }
     }
 
-
-    /**
-     * 随机生成Long值
-     * @param bit 位数
-     * @return 返回Long值
-     * @throws Exception 异常
-     */
-    public static Long randomLong(int bit) throws Exception {
-        if (bit > 16){
-            throw new Exception("bit must <= 16");
+    public void cancelAllBibox(ParsingCurrencyPair parsingCurrencyPair) {
+        try {
+            JSONObject json = new JSONObject();
+            json.put("pair", parsingCurrencyPair.getParsing());
+            String text=json.toJSONString();
+            long timestamp = System.currentTimeMillis();
+            String sign = BiboxCoinSwapDigest.buildSignature(timestamp + text,exchange.getExchangeSpecification().getSecretKey());
+            BiboxCoinSwapSingleResponse<String> response = bibox.closeAll(text,apiKey,sign,String.valueOf(timestamp));
+            throwErrors(response);
+        } catch (BiboxException e) {
+            throw new ExchangeException(e.getMessage());
         }
-        if (bit < 6) {
-            throw new Exception("bit must >=6");
-        }
-        String midStr = "";
-        byte[] bytes = UUID.randomUUID().toString().getBytes();
-        for (int i = 0; i < bit; i++) {
-            midStr += String.valueOf(bytes[i]).toCharArray()[String.valueOf(bytes[i]).toCharArray().length - 1];
-        }
-        return Long.parseLong(midStr);
     }
 
 }

@@ -29,8 +29,8 @@ public class BiboxUSDTSwapTradeTest {
     @Test
     public void placeLimitOrder() throws IOException {
         MHExchange bibox= MHExchangeFactory.INSTANCE.createExchange(BiboxExchange.class,
-                "2d62e7bdfcf37d32d2d75770572962f467f52619",
-                "e93e9539ec1c9faa707280e3723fccfbbeb8e35f",
+                "00064ff6ec177438e289d5559b0693efc505af65",
+                "b53766db065a9413f572ad75b13f5464acbb75a0",
                 TradingArea.PerpetualSwap);
         StreamingParsingCurrencyPair parsing=bibox.getStreamingParsing().parsingCurrencyPair;
         logger.warn("sss----{}",parsing.parsing(CurrencyPair.BTC_USDT).getParsing());
@@ -39,32 +39,31 @@ public class BiboxUSDTSwapTradeTest {
 
         MHLimitOrder order1=
                 new MHLimitOrder(
-                        Order.OrderType.ASK,
-                        new BigDecimal("1") ,
+                        Order.OrderType.EXIT_BID,
+                        new BigDecimal("0.001") ,
                         CurrencyPair.BTC_USDT ,
-                        "11223311",
+                        null,
                         new Date(),
-                        new BigDecimal("35000"),
+                        new BigDecimal("48600.3"),
                         parsing.parsing(CurrencyPair.BTC_USDT));
-        order1.setLeverage("5");
-       MHLimitOrder order2=new MHLimitOrder(
-               Order.OrderType.BID,
-                new BigDecimal("1") ,
-                CurrencyPair.BTC_USDT ,
-                null,
-                new Date(),
-                new BigDecimal("19000"),
-                parsing.parsing(CurrencyPair.BTC_USDT));
-       /*
-        order1.setLeverage("10");
-        order2.setLeverage("10");
-        orders.add(order1);
-        orders.add(order2);*/
+        order1.setLeverage("100");
+
         try {
             tradeService.placeLimitOrder(order1);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void cancelAllByInstrument() throws IOException {
+        MHExchange bibox= MHExchangeFactory.INSTANCE.createExchange(BiboxExchange.class,
+                "00064ff6ec177438e289d5559b0693efc505af65",
+                "b53766db065a9413f572ad75b13f5464acbb75a0",
+                TradingArea.PerpetualSwap);        StreamingParsingCurrencyPair parsing=bibox.getStreamingParsing().parsingCurrencyPair;
+        logger.warn("sss----{}",parsing.parsing(CurrencyPair.BTC_USDT).getParsing());
+        MHTradeService tradeService=  bibox.getTradeService();
+        tradeService.cancelAllByInstrument(parsing.parsing(CurrencyPair.BTC_USDT));
     }
 
 
