@@ -7,6 +7,7 @@ import org.knowm.xchange.dto.trade.MarketOrder;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.service.trade.params.CurrencyPairParam;
 import org.market.hedge.dto.trade.MHLimitOrder;
+import org.market.hedge.dto.trade.MHMarketOrder;
 import org.market.hedge.huobi.HuobiUtils;
 import org.market.hedge.huobi.dto.trade.HuobiCreateOrderRequest;
 import org.market.hedge.huobi.dto.trade.HuobiMatchResult;
@@ -140,6 +141,35 @@ public class HuobiTradeServiceRaw extends HuobiBaseService {
             HuobiUtils.createUTCDate(exchange.getNonceFactory()),
             signatureCreator);
 
+    return checkResult(result);
+  }
+
+  public String placeHuobiMarketOrder(MHMarketOrder order) throws IOException {
+    String type;
+    if (order.getType() == OrderType.BID) {
+      type = "buy-market";
+    } else if (order.getType() == OrderType.ASK) {
+      type = "sell-market";
+    } else {
+      throw new ExchangeException("Unsupported order type.");
+    }
+
+    HuobiOrderResult result =
+            huobi.placeMarketOrder(
+                    new HuobiCreateOrderRequest(
+                            getAccountId(),
+                            order.getOriginalAmount().toString(),
+                            null,
+                            HuobiUtils.createHuobiCurrencyPair(order.getParsingCurrencyPair().getCurrencyPair()),
+                            type,
+                            order.getUserReference(),
+                            null,
+                            null),
+                    exchange.getExchangeSpecification().getApiKey(),
+                    HuobiDigest.HMAC_SHA_256,
+                    2,
+                    HuobiUtils.createUTCDate(exchange.getNonceFactory()),
+                    signatureCreator);
     return checkResult(result);
   }
 

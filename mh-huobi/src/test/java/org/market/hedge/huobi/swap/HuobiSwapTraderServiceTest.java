@@ -1,11 +1,13 @@
 package org.market.hedge.huobi.swap;
 
+import org.junit.Test;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
 import org.market.hedge.MHExchange;
 import org.market.hedge.MHExchangeFactory;
 import org.market.hedge.core.TradingArea;
 import org.market.hedge.dto.trade.MHLimitOrder;
+import org.market.hedge.dto.trade.MHMarketOrder;
 import org.market.hedge.huobi.HuobiExchange;
 import org.market.hedge.service.StreamingParsingCurrencyPair;
 import org.market.hedge.service.trade.MHTradeService;
@@ -18,30 +20,91 @@ import java.util.List;
 
 public class HuobiSwapTraderServiceTest {
 
-    public static void main(String[] args) {
+    @Test
+    public void placeLimitOrder() {
         MHExchange huobi= MHExchangeFactory.INSTANCE.createExchange(HuobiExchange.class
-                ,"914069ad-uymylwhfeg-c8084d47-d25e0"
-                ,"fc791193-3ab4649c-e052fc6a-7016f"
-                , TradingArea.PerpetualSwap);
+                ,"91fc3ce3-nbtycf4rw2-e21765a3-c6869"
+                ,"42cdc46e-9be105f5-6047f5a8-464a2"
+                , TradingArea.Spot);
         StreamingParsingCurrencyPair parsing=huobi.getStreamingParsing().parsingCurrencyPair;
         MHTradeService tradeService=  huobi.getTradeService();
         List<MHLimitOrder> orders=new ArrayList<>();
 
-        new MHLimitOrder(Order.OrderType.BID,
-                BigDecimal.ONE ,
-                CurrencyPair.BTC_USD ,
+        CurrencyPair pair = new CurrencyPair("EKO","BTC");
+
+        MHLimitOrder order=new MHLimitOrder(Order.OrderType.BID,
+                new BigDecimal("10000") ,
+                pair ,
                 "112233",
                 new Date(),
-                new BigDecimal(""),
-                parsing.parsing(CurrencyPair.BTC_USD)
+                new BigDecimal("0.0000000402"),
+                parsing.parsing(pair)
                 );
 
         try {
-
-            tradeService.placeLimitOrders(orders);
+            tradeService.placeLimitOrder(order);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void cancelOrder() {
+        MHExchange huobi= MHExchangeFactory.INSTANCE.createExchange(HuobiExchange.class
+                ,"91fc3ce3-nbtycf4rw2-e21765a3-c6869"
+                ,"42cdc46e-9be105f5-6047f5a8-464a2"
+                , TradingArea.Spot);
+        StreamingParsingCurrencyPair parsing=huobi.getStreamingParsing().parsingCurrencyPair;
+        MHTradeService tradeService=  huobi.getTradeService();
+        List<MHLimitOrder> orders=new ArrayList<>();
+
+        CurrencyPair pair = new CurrencyPair("EKO","BTC");
+
+        MHLimitOrder order=new MHLimitOrder(Order.OrderType.BID,
+                new BigDecimal("10000") ,
+                pair ,
+                "112233",
+                new Date(),
+                new BigDecimal("0.0000000399"),
+                parsing.parsing(pair)
+        );
+
+        try {
+            String order_id=tradeService.placeLimitOrder(order);
+
+            tradeService.cancelOrder(order_id);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Test
+    public void placeMarketOrder() {
+        MHExchange huobi= MHExchangeFactory.INSTANCE.createExchange(HuobiExchange.class
+                ,"91fc3ce3-nbtycf4rw2-e21765a3-c6869"
+                ,"42cdc46e-9be105f5-6047f5a8-464a2"
+                , TradingArea.Spot);
+        StreamingParsingCurrencyPair parsing=huobi.getStreamingParsing().parsingCurrencyPair;
+        MHTradeService tradeService=  huobi.getTradeService();
+        List<MHLimitOrder> orders=new ArrayList<>();
+
+        CurrencyPair pair = new CurrencyPair("EKO","BTC");
+
+        MHMarketOrder order=new MHMarketOrder(
+                Order.OrderType.BID,
+                new BigDecimal("0.0001"),
+                null,
+                parsing.parsing(pair)
+        );
+
+        try {
+            tradeService.placeMarketOrder(order);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 }

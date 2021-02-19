@@ -19,13 +19,13 @@ public class HuobiSwapMarketData {
     static Logger logger= LoggerFactory.getLogger(HuobiSwapMarketData.class);
 
     public static void main(String[] args) {
-        MHExchange huobi= MHExchangeFactory.INSTANCE.createExchange(HuobiExchange.class, TradingArea.PerpetualSwap);
+        MHExchange huobi= MHExchangeFactory.INSTANCE.createExchange(HuobiExchange.class, TradingArea.Spot);
         StreamingParsingCurrencyPair parsing=huobi.getStreamingParsing().parsingCurrencyPair;
         MHMarketDataService marketDataService=huobi.getMarketDataService();
         try {
             for (int i=0;i<10;i++){
-                OrderBook orderBook=marketDataService.getOrderBook(parsing.parsing(CurrencyPair.BTC_USD));
-                logger.info("{}","ask:"+orderBook.getAsks().get(0).getLimitPrice()+" bid:"+orderBook.getBids().get(0).getLimitPrice());
+                OrderBook orderBook=marketDataService.getOrderBook(parsing.parsing(new CurrencyPair("EKO","BTC")));
+                logger.info("{}","ask:"+orderBook.getAsks().get(0).getLimitPrice().toPlainString()+" bid:"+orderBook.getBids().get(0).getLimitPrice().toPlainString());
             }
         } catch (IOException e) {
             e.printStackTrace();

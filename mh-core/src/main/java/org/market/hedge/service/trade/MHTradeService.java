@@ -1,9 +1,11 @@
 package org.market.hedge.service.trade;
 
+import org.knowm.xchange.dto.trade.MarketOrder;
 import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
 import org.knowm.xchange.service.trade.TradeService;
 import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.dto.trade.MHLimitOrder;
+import org.market.hedge.dto.trade.MHMarketOrder;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,9 +33,8 @@ public interface MHTradeService extends TradeService {
     /**
      * 撤销单个订单
      * */
-    default String changeOrder(MHLimitOrder limitOrder) throws IOException {
-        this.cancelOrder(limitOrder.getId());
-        return this.placeLimitOrder(limitOrder);
+    default String placeMarketOrder(MHMarketOrder marketOrder) throws IOException {
+        throw new NotYetImplementedForExchangeException();
     }
 
 

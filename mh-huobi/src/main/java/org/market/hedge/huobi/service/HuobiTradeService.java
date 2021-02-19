@@ -5,7 +5,9 @@ import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.Order.IOrderFlags;
 import org.knowm.xchange.dto.trade.*;
 import org.knowm.xchange.service.trade.params.TradeHistoryParams;
+import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.dto.trade.MHLimitOrder;
+import org.market.hedge.dto.trade.MHMarketOrder;
 import org.market.hedge.huobi.HuobiAdapters;
 import org.market.hedge.huobi.dto.trade.HuobiOrder;
 import org.market.hedge.service.trade.MHTradeService;
@@ -65,6 +67,11 @@ public class HuobiTradeService extends HuobiTradeServiceRaw implements MHTradeSe
   }
 
   @Override
+  public String placeMarketOrder(MHMarketOrder marketOrder) throws IOException {
+    return placeHuobiMarketOrder(marketOrder);
+  }
+
+  @Override
   public OpenOrders getOpenOrders() throws IOException {
     return getOpenOrders(createOpenOrdersParams());
   }
@@ -85,5 +92,10 @@ public class HuobiTradeService extends HuobiTradeServiceRaw implements MHTradeSe
   @Override
   public String placeStopOrder(StopOrder stopOrder) throws IOException {
     return null;
+  }
+
+  @Override
+  public void cancelAllByInstrument(ParsingCurrencyPair parsingCurrencyPair) throws IOException {
+
   }
 }
