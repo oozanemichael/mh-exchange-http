@@ -1,4 +1,4 @@
-package org.market.hedge.bitget.usdtswap.service;
+package org.market.hedge.deribit.usdtswap.service;
 
 import org.knowm.xchange.Exchange;
 
@@ -6,7 +6,7 @@ import org.knowm.xchange.Exchange;
 public class BitgetUSwapAccountServiceRaw extends BitgetUSwapBaseService {
 
   protected BitgetUSwapAccountServiceRaw(Exchange exchange) {
-    super(exchange);
+    super( exchange);
   }
 
 }

@@ -1,4 +1,4 @@
-package org.market.hedge.bitget;
+package org.market.hedge.deribit;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.market.hedge.core.ParsingCurrencyPair;
@@ -15,5 +15,11 @@ public class BitgetStreamingParsing extends StreamingParsing {
     public ParsingCurrencyPair instancePerpetualSwap(CurrencyPair currencyPair, Object... args) {
         String parsing = "cmt_"+currencyPair.base.toString().toLowerCase()+currencyPair.counter.toString().toLowerCase();
         return new ParsingCurrencyPair(parsing,currencyPair, args);
+    }
+
+
+    public String getCurrencyPair(CurrencyPair currencyPair) {
+        String parsing = "cmt_"+currencyPair.base.toString().toLowerCase()+currencyPair.counter.toString().toLowerCase();
+        return parsing;
     }
 }

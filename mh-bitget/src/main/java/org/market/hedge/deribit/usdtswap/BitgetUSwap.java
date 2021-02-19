@@ -1,6 +1,7 @@
-package org.market.hedge.bitget.usdtswap;
+package org.market.hedge.deribit.usdtswap;
 
-import org.market.hedge.bitget.usdtswap.dto.marketdata.resq.BitgeUSwapDepthResult;
+import org.market.hedge.deribit.usdtswap.dto.marketdata.resq.BitgeUSwapDepthResult;
+import org.market.hedge.deribit.usdtswap.dto.marketdata.resq.BitgeUSwapTicker;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -37,5 +38,9 @@ public interface BitgetUSwap {
     @GET
     @Path("api/swap/v3/market/depth")
     BitgeUSwapDepthResult getDepth(@QueryParam("symbol") String symbol, @QueryParam("limit") Integer limit) throws IOException;
+
+    @GET
+    @Path("api/swap/v3/market/ticker")
+    BitgeUSwapTicker getTicker(@QueryParam("symbol") String symbol) throws IOException;
 
 }

@@ -1,13 +1,13 @@
-package org.market.hedge.bitget;
+package org.market.hedge.deribit;
 
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 import org.market.hedge.BaseMHExchange;
 import org.market.hedge.MHExchange;
 import org.market.hedge.MHExchangeSpecification;
-import org.market.hedge.bitget.usdtswap.service.BitgetUSwapAccountService;
-import org.market.hedge.bitget.usdtswap.service.BitgetUSwapMarketDataService;
-import org.market.hedge.bitget.usdtswap.service.BitgetUSwapTradeService;
+import org.market.hedge.deribit.usdtswap.service.BitgetUSwapAccountService;
+import org.market.hedge.deribit.usdtswap.service.BitgetUSwapMarketDataService;
+import org.market.hedge.deribit.usdtswap.service.BitgetUSwapTradeService;
 import org.market.hedge.core.TradingArea;
 import org.market.hedge.exception.NullTradingAreaException;
 import si.mazi.rescu.SynchronizedValueFactory;
@@ -22,10 +22,20 @@ public class BitgetExchange extends BaseMHExchange implements MHExchange {
     @Override
     protected void initServices() {
         switch (mHexchangeSpecification.getTradingArea()){
+            case Spot:
+                break;
+            case Margin:
+                break;
             case PerpetualSwap:
                 this.mHmarketDataService= new BitgetUSwapMarketDataService(this);
                 this.mHtradeService= new BitgetUSwapTradeService(this);
                 this.mHaccountService= new BitgetUSwapAccountService(this);
+                break;
+            case Futures:
+                break;
+            case Option:
+                break;
+            case CoinSwap:
                 break;
             default:
                 throw new NullTradingAreaException(mHexchangeSpecification.getTradingArea());
@@ -68,6 +78,12 @@ public class BitgetExchange extends BaseMHExchange implements MHExchange {
                 break;
         }
     }
+
+    @Override
+    public void applySpecification(MHExchangeSpecification exchangeSpecification) {
+        super.applySpecification(exchangeSpecification);
+    }
+
 
 }
 
