@@ -1,9 +1,9 @@
-package org.market.hedge.deribit.usdtswap.service;
+package org.market.hedge.bitget.usdtswap.service;
 
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
-import org.market.hedge.deribit.usdtswap.BitgetUSwapAuthenticated;
+import org.market.hedge.bitget.usdtswap.BitgetUSwapAuthenticated;
 import si.mazi.rescu.RestProxyFactory;
 
 public class BitgetUSwapBaseService extends BaseExchangeService implements BaseService {

@@ -1,12 +1,12 @@
-package org.market.hedge.deribit.usdtswap.service;
+package org.market.hedge.bitget.usdtswap.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.exceptions.ExchangeException;
-import org.market.hedge.deribit.usdtswap.dto.trade.req.BitgetUsdtSwapOrderDataListReq;
-import org.market.hedge.deribit.usdtswap.dto.trade.req.BitgetUsdtSwapOrderReq;
-import org.market.hedge.deribit.usdtswap.dto.trade.resp.BitgetUsdtSwapSingleResponse;
+import org.market.hedge.bitget.usdtswap.dto.trade.req.BitgetUsdtSwapOrderDataListReq;
+import org.market.hedge.bitget.usdtswap.dto.trade.req.BitgetUsdtSwapOrderReq;
+import org.market.hedge.bitget.usdtswap.dto.trade.resp.BitgetUsdtSwapSingleResponse;
 import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.dto.trade.MHLimitOrder;
 import org.market.hedge.service.trade.MHTradeService;
@@ -22,9 +22,12 @@ public class BitgetUSwapTradeService extends BitgetUSwapTradeServiceRaw implemen
     super(exchange);
   }
 
+  public int num = 0;
+
   @Override
   public List<String> placeLimitOrders(List<MHLimitOrder> limitOrders) throws IOException {
     List<BitgetUsdtSwapOrderDataListReq> ordersData=new ArrayList<>();
+     num = 0;
     for (MHLimitOrder LimitOrder:limitOrders){
       ordersData.add(getBitgetUsdtSwapCreateOrderRequest(LimitOrder));
     }
@@ -78,7 +81,7 @@ public class BitgetUSwapTradeService extends BitgetUSwapTradeServiceRaw implemen
             type,
             "0",
             "0",
-           ""
+           "wangjun#"+num++
      );
   }
 }

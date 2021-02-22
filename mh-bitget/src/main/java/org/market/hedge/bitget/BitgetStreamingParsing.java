@@ -1,4 +1,4 @@
-package org.market.hedge.deribit;
+package org.market.hedge.bitget;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.market.hedge.core.ParsingCurrencyPair;

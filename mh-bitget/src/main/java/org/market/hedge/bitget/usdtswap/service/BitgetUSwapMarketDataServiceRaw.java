@@ -1,7 +1,7 @@
-package org.market.hedge.deribit.usdtswap.service;
+package org.market.hedge.bitget.usdtswap.service;
 
 import org.knowm.xchange.Exchange;
-import org.market.hedge.deribit.usdtswap.dto.marketdata.resq.BitgeUSwapDepthResult;
+import org.market.hedge.bitget.usdtswap.dto.marketdata.resp.BitgeUSwapDepthResult;
 import org.market.hedge.core.ParsingCurrencyPair;
 
 import java.io.IOException;

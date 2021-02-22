@@ -1,11 +1,11 @@
-package org.market.hedge.deribit.swap;
+package org.market.hedge.bitget.Uswap;
 
 import org.junit.Test;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.market.hedge.MHExchange;
 import org.market.hedge.MHExchangeFactory;
-import org.market.hedge.deribit.BitgetExchange;
+import org.market.hedge.bitget.BitgetExchange;
 import org.market.hedge.core.TradingArea;
 import org.market.hedge.service.StreamingParsingCurrencyPair;
 import org.market.hedge.service.marketdata.MHMarketDataService;
@@ -16,7 +16,7 @@ public class BitgetMarketDataTest {
 
     Logger logger= LoggerFactory.getLogger(BitgetMarketDataTest.class);
 
-    public org.market.hedge.deribit.usdtswap.service.BitgetUSwapMarketDataService BitgetUSwapMarketDataService;
+    public org.market.hedge.bitget.usdtswap.service.BitgetUSwapMarketDataService BitgetUSwapMarketDataService;
 
     @Test
     public void getBitgetOrderBookTest()  {

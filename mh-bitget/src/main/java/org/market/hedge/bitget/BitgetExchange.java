@@ -1,13 +1,13 @@
-package org.market.hedge.deribit;
+package org.market.hedge.bitget;
 
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 import org.market.hedge.BaseMHExchange;
 import org.market.hedge.MHExchange;
 import org.market.hedge.MHExchangeSpecification;
-import org.market.hedge.deribit.usdtswap.service.BitgetUSwapAccountService;
-import org.market.hedge.deribit.usdtswap.service.BitgetUSwapMarketDataService;
-import org.market.hedge.deribit.usdtswap.service.BitgetUSwapTradeService;
+import org.market.hedge.bitget.usdtswap.service.BitgetUSwapAccountService;
+import org.market.hedge.bitget.usdtswap.service.BitgetUSwapMarketDataService;
+import org.market.hedge.bitget.usdtswap.service.BitgetUSwapTradeService;
 import org.market.hedge.core.TradingArea;
 import org.market.hedge.exception.NullTradingAreaException;
 import si.mazi.rescu.SynchronizedValueFactory;

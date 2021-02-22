@@ -1,10 +1,10 @@
-package org.market.hedge.deribit.usdtswap.service;
+package org.market.hedge.bitget.usdtswap.service;
 
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.trade.LimitOrder;
-import org.market.hedge.deribit.usdtswap.dto.marketdata.resq.BitgeUSwapDepthResult;
+import org.market.hedge.bitget.usdtswap.dto.marketdata.resp.BitgeUSwapDepthResult;
 import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.service.marketdata.MHMarketDataService;
 

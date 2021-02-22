@@ -1,12 +1,11 @@
-package org.market.hedge.deribit.usdtswap;
+package org.market.hedge.bitget.usdtswap;
 
 
-import org.market.hedge.deribit.usdtswap.dto.trade.req.BitgetUsdtSwapOrderReq;
-import org.market.hedge.deribit.usdtswap.dto.trade.resp.BitgetUsdtSwapSingleResponse;
+import org.market.hedge.bitget.usdtswap.dto.trade.req.BitgetUsdtSwapOrderReq;
+import org.market.hedge.bitget.usdtswap.dto.trade.resp.BitgetUsdtSwapSingleResponse;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
 
 /**
  * ACCESS-KEY：API KEY作为一个字符串。
@@ -37,12 +36,14 @@ public interface BitgetUSwapAuthenticated extends BitgetUSwap {
            );
 
 //    @POST
-//    @Path("v3/cbu/order/closeAll")
-//    BiboxCoinSwapSingleResponse<String> closeAll(
+//    @Path("api/swap/v3/order/cancel_batch_orders")
+//    BiboxCoinSwapSingleResponse<String> cancelAll(
 //            @FormParam("cmd") String body,
-//            @HeaderParam(FORM_APIKEY) String apiKey,
-//            @HeaderParam(FORM_SIGNATURE) String signature,
-//            @HeaderParam(FROM_TIME) String time);
+//            @HeaderParam(ACCESS_KEY) String apiKey,
+//            @HeaderParam(ACCESS_SIGN) String signature,
+//            @HeaderParam(ACCESS_TIMESTAMP) long time,
+//            @HeaderParam(ACCESS_PASSPHRASE) String passphrase
+//    );
 //
 //    @POST
 //    @Path("v3/cbu/position")

@@ -1,4 +1,4 @@
-package org.market.hedge.deribit.usdtswap.dto.marketdata.resq;
+package org.market.hedge.bitget.usdtswap.dto.marketdata.resp;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

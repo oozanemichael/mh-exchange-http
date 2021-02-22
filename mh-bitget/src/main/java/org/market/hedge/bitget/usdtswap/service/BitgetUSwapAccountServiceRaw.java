@@ -1,4 +1,4 @@
-package org.market.hedge.deribit.usdtswap.service;
+package org.market.hedge.bitget.usdtswap.service;
 
 import org.knowm.xchange.Exchange;
 

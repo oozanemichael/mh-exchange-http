@@ -1,7 +1,7 @@
-package org.market.hedge.deribit.usdtswap;
+package org.market.hedge.bitget.usdtswap;
 
-import org.market.hedge.deribit.usdtswap.dto.marketdata.resq.BitgeUSwapDepthResult;
-import org.market.hedge.deribit.usdtswap.dto.marketdata.resq.BitgeUSwapTicker;
+import org.market.hedge.bitget.usdtswap.dto.marketdata.resp.BitgeUSwapDepthResult;
+import org.market.hedge.bitget.usdtswap.dto.marketdata.resp.BitgeUSwapTicker;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
