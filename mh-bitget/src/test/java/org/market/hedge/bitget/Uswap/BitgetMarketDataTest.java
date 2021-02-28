@@ -1,4 +1,4 @@
-package org.market.hedge.deribit.swap;
+package org.market.hedge.bitget.Uswap;
 
 import org.junit.Test;
 import org.knowm.xchange.currency.CurrencyPair;
@@ -12,26 +12,34 @@ import org.market.hedge.service.marketdata.MHMarketDataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-
 public class BitgetMarketDataTest {
 
     Logger logger= LoggerFactory.getLogger(BitgetMarketDataTest.class);
 
+    public org.market.hedge.bitget.usdtswap.service.BitgetUSwapMarketDataService BitgetUSwapMarketDataService;
+
     @Test
-    public void getDeribitOrderBookTest() throws Exception {
+    public void getBitgetOrderBookTest()  {
         MHExchange exchange = MHExchangeFactory.INSTANCE.createExchange(BitgetExchange.class, TradingArea.PerpetualSwap);
         StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
         MHMarketDataService marketDataService=exchange.getMarketDataService();
+
         try {
             for (int i=0;i<10;i++){
-                OrderBook orderBook=marketDataService.getOrderBook(parsing.parsing(CurrencyPair.BTC_USDT));
-                logger.info("{}","ask:"+orderBook.getAsks().get(0).getLimitPrice()+" bid:"+orderBook.getBids().get(0).getLimitPrice());
+                OrderBook orderBook=marketDataService.getOrderBook(parsing.parsing(CurrencyPair.BTC_USDT),5);
+                logger.info("{}","ask0:"+orderBook.getAsks().get(0).getLimitPrice()+" bid0:"+orderBook.getBids().get(0).getLimitPrice());
+                logger.info("{}","ask1:"+orderBook.getAsks().get(1).getLimitPrice()+" bid1:"+orderBook.getBids().get(1).getLimitPrice());
+                logger.info("{}","ask2:"+orderBook.getAsks().get(2).getLimitPrice()+" bid2:"+orderBook.getBids().get(2).getLimitPrice());
+                logger.info("{}","ask3:"+orderBook.getAsks().get(3).getLimitPrice()+" bid3:"+orderBook.getBids().get(3).getLimitPrice());
+
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
+
 
 
 }

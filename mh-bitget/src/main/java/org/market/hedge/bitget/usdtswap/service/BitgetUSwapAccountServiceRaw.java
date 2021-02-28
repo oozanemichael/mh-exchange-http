@@ -6,7 +6,7 @@ import org.knowm.xchange.Exchange;
 public class BitgetUSwapAccountServiceRaw extends BitgetUSwapBaseService {
 
   protected BitgetUSwapAccountServiceRaw(Exchange exchange) {
-    super(exchange);
+    super( exchange);
   }
 
 }

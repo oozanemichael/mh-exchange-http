@@ -1,8 +1,8 @@
-package org.market.hedge.bitget.usdtswap.dto.marketdata.resq;
+package org.market.hedge.bitget.usdtswap.dto.marketdata.resp;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,13 +14,13 @@ public class BitgeUSwapDepthResult {
 
     List<List<String>> bids;
 
-    String timestamp;
+    Date timestamp;
 
 
     public BitgeUSwapDepthResult(
             @JsonProperty("asks") List<List<String>> asks,
             @JsonProperty("bids")  List<List<String>> bids,
-            @JsonProperty("timestamp")  String timestamp) {
+            @JsonProperty("timestamp")  Date timestamp) {
         this.asks = asks;
         this.bids = bids;
         this.timestamp = timestamp;
@@ -34,7 +34,7 @@ public class BitgeUSwapDepthResult {
         return bids;
     }
 
-    public String getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 

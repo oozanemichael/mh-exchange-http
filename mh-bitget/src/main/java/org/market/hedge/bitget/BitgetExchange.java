@@ -22,10 +22,20 @@ public class BitgetExchange extends BaseMHExchange implements MHExchange {
     @Override
     protected void initServices() {
         switch (mHexchangeSpecification.getTradingArea()){
+            case Spot:
+                break;
+            case Margin:
+                break;
             case PerpetualSwap:
                 this.mHmarketDataService= new BitgetUSwapMarketDataService(this);
                 this.mHtradeService= new BitgetUSwapTradeService(this);
                 this.mHaccountService= new BitgetUSwapAccountService(this);
+                break;
+            case Futures:
+                break;
+            case Option:
+                break;
+            case CoinSwap:
                 break;
             default:
                 throw new NullTradingAreaException(mHexchangeSpecification.getTradingArea());
@@ -68,6 +78,12 @@ public class BitgetExchange extends BaseMHExchange implements MHExchange {
                 break;
         }
     }
+
+    @Override
+    public void applySpecification(MHExchangeSpecification exchangeSpecification) {
+        super.applySpecification(exchangeSpecification);
+    }
+
 
 }
 

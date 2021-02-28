@@ -16,4 +16,10 @@ public class BitgetStreamingParsing extends StreamingParsing {
         String parsing = "cmt_"+currencyPair.base.toString().toLowerCase()+currencyPair.counter.toString().toLowerCase();
         return new ParsingCurrencyPair(parsing,currencyPair, args);
     }
+
+
+    public String getCurrencyPair(CurrencyPair currencyPair) {
+        String parsing = "cmt_"+currencyPair.base.toString().toLowerCase()+currencyPair.counter.toString().toLowerCase();
+        return parsing;
+    }
 }
