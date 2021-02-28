@@ -7,65 +7,65 @@ public class PositionInfo {
     /**
      * //true		品种代码	"BTC","ETH"...
      * */
-    String symbol;
+    private String symbol;
 
     /**
      *	true		合约代码	"BTC180914" ...
      * */
-    String contract_code;
+    private String contract_code;
 
     /**
      * true		持仓量
      * */
-    BigDecimal volume	;
+    private BigDecimal volume	;
 
     /**
      *	true		可平仓数量
      * */
-    BigDecimal available;
+    private BigDecimal available;
 
     /**
      * true		冻结数量
      * */
-    BigDecimal frozen	;
+    private BigDecimal frozen	;
 
     /**
      * true   开仓均价
      * */
-    BigDecimal cost_open;
+    private BigDecimal cost_open;
     /**
      *	true		持仓均价
      * */
-    BigDecimal cost_hold;
+    private BigDecimal cost_hold;
 
     /**
      * 	true		未实现盈亏
      * */
-    BigDecimal profit_unreal;
+    private BigDecimal profit_unreal;
 
     /**
      *	true		收益率
      * */
-    BigDecimal profit_rate;
+    private BigDecimal profit_rate;
 
     /**
      * true		收益
      * */
-    BigDecimal profit	;
+    private BigDecimal profit	;
 
     /**
      * true   持仓保证金
      * */
-    BigDecimal position_margin;
+    private BigDecimal position_margin;
     /**
      * true  杠杠倍数
      * */
-    Integer lever_rate;
+    private Integer lever_rate;
 
     /**
      * true		"buy":买 "sell":卖
      * */
-    String direction;
+    private String direction;
 
 
 

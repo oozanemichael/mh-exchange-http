@@ -1,6 +1,5 @@
 package org.market.hedge.service.trade;
 
-import org.knowm.xchange.dto.trade.MarketOrder;
 import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
 import org.knowm.xchange.service.trade.TradeService;
 import org.market.hedge.core.ParsingCurrencyPair;

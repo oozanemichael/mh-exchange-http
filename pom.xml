@@ -28,6 +28,7 @@
         <module>mh-core</module>
         <module>mh-deribit</module>
         <module>mh-bitget</module>
+        <module>mh-binance</module>
     </modules>
 
     <properties>
