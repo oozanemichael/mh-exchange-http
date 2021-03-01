@@ -29,8 +29,10 @@ public abstract class BaseMHExchange extends BaseExchange implements  MHExchange
     public BaseMHExchange() {
     }
 
+    @Override
     protected abstract void initServices();
 
+    @Override
     public void applySpecification(MHExchangeSpecification exchangeSpecification) {
         MHExchangeSpecification defaultSpecification = this.getDefaultExchangeSpecification(exchangeSpecification.getTradingArea());
         if (exchangeSpecification == null) {
@@ -132,7 +134,7 @@ public abstract class BaseMHExchange extends BaseExchange implements  MHExchange
 
     }
 
-
+    @Override
     public List<CurrencyPair> getExchangeSymbols() {
         return new ArrayList(this.getExchangeMetaData().getCurrencyPairs().keySet());
     }
@@ -141,19 +143,22 @@ public abstract class BaseMHExchange extends BaseExchange implements  MHExchange
         return exchangeSpecification.getExchangeName().toLowerCase().replace(" ", "").replace("-", "").replace(".", "");
     }
 
+    @Override
     public MHExchangeSpecification getExchangeSpecification() {
         return this.mHexchangeSpecification;
     }
 
-
+    @Override
     public MHMarketDataService getMarketDataService() {
         return this.mHmarketDataService;
     }
 
+    @Override
     public MHTradeService getTradeService() {
         return this.mHtradeService;
     }
 
+    @Override
     public MHAccountService getAccountService() {
         return this.mHaccountService;
     }

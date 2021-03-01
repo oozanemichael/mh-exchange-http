@@ -106,7 +106,7 @@ public class BinanceExchange extends BaseMHExchange implements MHExchange {
 
   @Override
   public void remoteInit() {
-    /*try {
+    try {
       // populate currency pair keys only, exchange does not provide any other metadata for download
       Map<CurrencyPair, CurrencyPairMetaData> currencyPairs = exchangeMetaData.getCurrencyPairs();
       Map<Currency, CurrencyMetaData> currencies = exchangeMetaData.getCurrencies();
@@ -166,8 +166,8 @@ public class BinanceExchange extends BaseMHExchange implements MHExchange {
                   counterMaxQty,
                   amountPrecision, // base precision
                   pairPrecision, // counter precision
-                  null, *//* TODO get fee tiers, although this is not necessary now
-                        because their API returns current fee directly *//*
+                  null, /* TODO get fee tiers, although this is not necessary now
+                        because their API returns current fee directly */
                   stepSize,
                   null,
                   marketOrderAllowed));
@@ -187,7 +187,7 @@ public class BinanceExchange extends BaseMHExchange implements MHExchange {
       }
     } catch (Exception e) {
       throw new ExchangeException("Failed to initialize: " + e.getMessage(), e);
-    }*/
+    }
   }
 
   private int numberOfDecimals(String value) {
