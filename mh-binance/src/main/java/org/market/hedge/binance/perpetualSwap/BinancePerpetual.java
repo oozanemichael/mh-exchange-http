@@ -59,7 +59,7 @@ public interface BinancePerpetual {
   BinanceExchangeInfo exchangeInfo() throws IOException;
 
   @GET
-  @Path("api/v3/depth")
+  @Path("fapi/v1/depth")
   /**
    * @param symbol
    * @param limit optional, default 100 max 5000. Valid limits: [5, 10, 20, 50, 100, 500, 1000,
@@ -98,8 +98,7 @@ public interface BinancePerpetual {
       @QueryParam("limit") Integer limit)
       throws IOException, BinanceException;
 
-  @GET
-  @Path("fapi/v1/klines")
+
   /**
    * Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.<br>
    * If startTime and endTime are not sent, the most recent klines are returned.
@@ -113,6 +112,8 @@ public interface BinancePerpetual {
    * @throws IOException
    * @throws BinanceException
    */
+  @GET
+  @Path("fapi/v1/klines")
   List<Object[]> klines(
       @QueryParam("symbol") String symbol,
       @QueryParam("interval") String interval,

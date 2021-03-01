@@ -139,6 +139,8 @@ public class BinanceTradeService extends BinanceTradeServiceRaw implements Trade
     }
   }
 
+
+
   public void placeTestOrder(
       OrderType type, Order order, BigDecimal limitPrice, BigDecimal stopPrice) throws IOException {
     try {

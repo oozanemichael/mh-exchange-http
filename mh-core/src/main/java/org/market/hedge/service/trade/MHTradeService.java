@@ -36,6 +36,16 @@ public interface MHTradeService extends TradeService {
         throw new NotYetImplementedForExchangeException();
     }
 
+    /**
+     * 撤销单个订单
+     * */
+    default String placeMarketOrders(List<MHMarketOrder> marketOrder) throws IOException {
+        throw new NotYetImplementedForExchangeException();
+    }
+
+
+
+
 
     default void verifyOrder(MHLimitOrder limitOrder) {
         throw new NotYetImplementedForExchangeException();

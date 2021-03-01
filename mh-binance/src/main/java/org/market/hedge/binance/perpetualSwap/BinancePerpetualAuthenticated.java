@@ -3,6 +3,7 @@ package org.market.hedge.binance.perpetualSwap;
 import org.market.hedge.binance.dto.BinanceException;
 import org.market.hedge.binance.dto.account.*;
 import org.market.hedge.binance.dto.trade.*;
+import org.market.hedge.binance.perpetualSwap.dto.trade.req.BinancePerpetualOrder;
 import si.mazi.rescu.ParamsDigest;
 import si.mazi.rescu.SynchronizedValueFactory;
 
@@ -56,6 +57,16 @@ public interface BinancePerpetualAuthenticated extends BinancePerpetual {
       @HeaderParam(X_MBX_APIKEY) String apiKey,
       @QueryParam(SIGNATURE) ParamsDigest signature)
       throws IOException, BinanceException;
+
+  @POST
+  @Path("fapi/v1/batchOrders")
+  List<BinanceNewOrder> batchOrders(
+          @FormParam("batchOrders") List<BinancePerpetualOrder> batchOrders,
+          @FormParam("recvWindow") Long recvWindow,
+          @FormParam("timestamp") SynchronizedValueFactory<Long> timestamp,
+          @HeaderParam(X_MBX_APIKEY) String apiKey,
+          @QueryParam(SIGNATURE) ParamsDigest signature)
+          throws IOException, BinanceException;
 
   @POST
   @Path("api/v3/order/test")

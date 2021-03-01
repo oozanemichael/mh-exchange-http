@@ -18,6 +18,6 @@ public class BinanceStreamingParsing extends StreamingParsing {
 
     @Override
     public ParsingCurrencyPair instancePerpetualSwap(CurrencyPair currencyPair, Object... args) {
-        return new ParsingCurrencyPair(null,currencyPair, args);
+        return new ParsingCurrencyPair(currencyPair.base.toString().toUpperCase()+currencyPair.counter.toString().toUpperCase() ,currencyPair, args);
     }
 }
