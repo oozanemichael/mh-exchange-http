@@ -2,11 +2,11 @@ package org.market.hedge.binance.perpetualSwap;
 
 import org.junit.Test;
 import org.knowm.xchange.currency.CurrencyPair;
-import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.market.hedge.MHExchange;
 import org.market.hedge.MHExchangeFactory;
 
 import org.market.hedge.binance.BinanceExchange;
+import org.market.hedge.core.Kline;
 import org.market.hedge.core.KlineInterval;
 import org.market.hedge.core.TradingArea;
 import org.market.hedge.service.StreamingParsingCurrencyPair;
@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.List;
 
 public class BinancePerpetualMarketDataServiceTest {
 
@@ -26,7 +27,10 @@ public class BinancePerpetualMarketDataServiceTest {
         StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
         MHMarketDataService marketDataService=exchange.getMarketDataService();
         try {
-            marketDataService.getKlines(parsing.parsing(CurrencyPair.BTC_USDT), KlineInterval.m15,20);
+            List<Kline> getKlines=marketDataService.getKlines(parsing.parsing(CurrencyPair.BTC_USDT), KlineInterval.m15,20);
+            getKlines.forEach(e->{
+                logger.info("{}",e.getClose());
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }

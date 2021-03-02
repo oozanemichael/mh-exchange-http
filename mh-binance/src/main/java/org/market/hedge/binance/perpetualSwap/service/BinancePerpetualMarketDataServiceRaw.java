@@ -8,6 +8,7 @@ import org.market.hedge.binance.dto.marketdata.BinanceKline;
 import org.market.hedge.core.Kline;
 import org.market.hedge.core.KlineInterval;
 import org.market.hedge.binance.perpetualSwap.BinancePerpetualAuthenticated;
+import org.market.hedge.core.ParsingCurrencyPair;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -22,13 +23,13 @@ public class BinancePerpetualMarketDataServiceRaw extends BinancePerpetualBaseSe
     }
 
     public List<Kline> klines(
-            CurrencyPair pair, KlineInterval interval, Integer limit, Long startTime, Long endTime)
+            ParsingCurrencyPair pair, KlineInterval interval, Integer limit, Long startTime, Long endTime)
             throws IOException {
         List<Object[]> raw =
                 decorateApiCall(
                         () ->
                                 binance.klines(
-                                        BinanceAdapters.toSymbol(pair), interval.code(), limit, startTime, endTime))
+                                        pair.getParsing(), interval.code(), limit, startTime, endTime))
                         .withRetry(retry("klines"))
                         .withRateLimiter(rateLimiter(REQUEST_WEIGHT_RATE_LIMITER))
                         .call();
@@ -37,8 +38,10 @@ public class BinancePerpetualMarketDataServiceRaw extends BinancePerpetualBaseSe
                 .collect(Collectors.toList());
     }
 
-    public Kline newKline(CurrencyPair pair, KlineInterval interval, Object[] obj) {
-        return new Kline( pair,
+    public Kline newKline(ParsingCurrencyPair pair, KlineInterval interval, Object[] obj) {
+        return new Kline(
+                pair.getCurrencyPair(),
+                pair.getParsing(),
                 interval,
                 Long.valueOf(obj[0].toString()),
                 new BigDecimal(obj[1].toString()),

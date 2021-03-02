@@ -7,21 +7,23 @@ import java.text.SimpleDateFormat;
 
 public class Kline {
 
-  private final CurrencyPair pair;
-  private final KlineInterval interval;
-  private final long openTime;
-  private final BigDecimal open;
-  private final BigDecimal high;
-  private final BigDecimal low;
-  private final BigDecimal close;
-  private final BigDecimal volume;
-  private final long closeTime;
-  private final BigDecimal quoteAssetVolume;
-  private final long numberOfTrades;
-  private final BigDecimal takerBuyBaseAssetVolume;
-  private final BigDecimal takerBuyQuoteAssetVolume;
+  private  CurrencyPair pair;
+  private  String parsing;
+  private  KlineInterval interval;
+  private  long openTime;
+  private  BigDecimal open;
+  private  BigDecimal high;
+  private  BigDecimal low;
+  private  BigDecimal close;
+  private  BigDecimal volume;
+  private  long closeTime;
+  private  BigDecimal quoteAssetVolume;
+  private  long numberOfTrades;
+  private  BigDecimal takerBuyBaseAssetVolume;
+  private  BigDecimal takerBuyQuoteAssetVolume;
 
-  public Kline(CurrencyPair pair, KlineInterval interval, long openTime, BigDecimal open, BigDecimal high, BigDecimal low, BigDecimal close, BigDecimal volume, long closeTime, BigDecimal quoteAssetVolume, long numberOfTrades, BigDecimal takerBuyBaseAssetVolume, BigDecimal takerBuyQuoteAssetVolume) {
+  public Kline(CurrencyPair pair,String parsing, KlineInterval interval, long openTime, BigDecimal open, BigDecimal high, BigDecimal low, BigDecimal close, BigDecimal volume, long closeTime, BigDecimal quoteAssetVolume, long numberOfTrades, BigDecimal takerBuyBaseAssetVolume, BigDecimal takerBuyQuoteAssetVolume) {
+    this.parsing=parsing;
     this.pair = pair;
     this.interval = interval;
     this.openTime = openTime;
@@ -37,8 +39,19 @@ public class Kline {
     this.takerBuyQuoteAssetVolume = takerBuyQuoteAssetVolume;
   }
 
-  public CurrencyPair getCurrencyPair() {
+  public Kline(){}
+
+
+  public BigDecimal getAveragePrice() {
+    return low.add(high).divide(new BigDecimal("2"));
+  }
+
+  public CurrencyPair getPair() {
     return pair;
+  }
+
+  public String getParsing() {
+    return parsing;
   }
 
   public KlineInterval getInterval() {
@@ -49,23 +62,19 @@ public class Kline {
     return openTime;
   }
 
-  public BigDecimal getOpenPrice() {
+  public BigDecimal getOpen() {
     return open;
   }
 
-  public BigDecimal getHighPrice() {
+  public BigDecimal getHigh() {
     return high;
   }
 
-  public BigDecimal getLowPrice() {
+  public BigDecimal getLow() {
     return low;
   }
 
-  public BigDecimal getAveragePrice() {
-    return low.add(high).divide(new BigDecimal("2"));
-  }
-
-  public BigDecimal getClosePrice() {
+  public BigDecimal getClose() {
     return close;
   }
 

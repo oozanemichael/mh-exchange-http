@@ -4,10 +4,7 @@ import org.knowm.xchange.ExchangeSpecification;
 import org.market.hedge.BaseMHExchange;
 import org.market.hedge.MHExchange;
 import org.market.hedge.MHExchangeSpecification;
-import org.market.hedge.binance.dto.account.AssetDetail;
 import org.market.hedge.binance.dto.meta.exchangeinfo.BinanceExchangeInfo;
-import org.market.hedge.binance.dto.meta.exchangeinfo.Filter;
-import org.market.hedge.binance.dto.meta.exchangeinfo.Symbol;
 import org.market.hedge.binance.perpetualSwap.BinancePerpetualAuthenticated;
 import org.market.hedge.binance.perpetualSwap.service.BinancePerpetualAccountService;
 import org.market.hedge.binance.perpetualSwap.service.BinancePerpetualMarketDataService;
@@ -17,19 +14,12 @@ import org.market.hedge.binance.service.BinanceMarketDataService;
 import org.market.hedge.binance.service.BinanceTradeService;
 import org.knowm.xchange.client.ExchangeRestProxyBuilder;
 import org.knowm.xchange.client.ResilienceRegistries;
-import org.knowm.xchange.currency.Currency;
-import org.knowm.xchange.currency.CurrencyPair;
-import org.knowm.xchange.dto.meta.CurrencyMetaData;
-import org.knowm.xchange.dto.meta.CurrencyPairMetaData;
-import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.utils.AuthUtils;
 import org.market.hedge.core.TradingArea;
 import org.market.hedge.exception.NullTradingAreaException;
 import si.mazi.rescu.SynchronizedValueFactory;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Map;
 
 public class BinanceExchange extends BaseMHExchange implements MHExchange {
 
@@ -42,22 +32,27 @@ public class BinanceExchange extends BaseMHExchange implements MHExchange {
 
   @Override
   protected void initServices() {
-    this.binance =
-        ExchangeRestProxyBuilder.forInterface(
-                BinanceAuthenticated.class, getExchangeSpecification())
-            .build();
+
     this.timestampFactory =
-        new BinanceTimestampFactory(
-            binance, getExchangeSpecification().getResilience(), getResilienceRegistries());
+            new BinanceTimestampFactory(
+                    binance, getExchangeSpecification().getResilience(), getResilienceRegistries());
     switch (mHexchangeSpecification.getTradingArea()){
       case Spot:
+        this.binance =
+                ExchangeRestProxyBuilder.forInterface(
+                        BinanceAuthenticated.class, getExchangeSpecification())
+                        .build();
         this.marketDataService = new BinanceMarketDataService(this, binance, getResilienceRegistries());
         this.tradeService = new BinanceTradeService(this, binance, getResilienceRegistries());
         this.accountService = new BinanceAccountService(this, binance, getResilienceRegistries());
       case PerpetualSwap:
-        this.mHmarketDataService= new BinancePerpetualMarketDataService(this, binance, getResilienceRegistries());
-        this.mHtradeService = new BinancePerpetualTradeService(this, binance, getResilienceRegistries());
-        this.mHaccountService = new BinancePerpetualAccountService(this, binance, getResilienceRegistries());
+        this.binancePerpetual =
+                ExchangeRestProxyBuilder.forInterface(
+                        BinancePerpetualAuthenticated.class, getExchangeSpecification())
+                        .build();
+        this.mHmarketDataService= new BinancePerpetualMarketDataService(this, binancePerpetual, getResilienceRegistries());
+        this.mHtradeService = new BinancePerpetualTradeService(this, binancePerpetual, getResilienceRegistries());
+        this.mHaccountService = new BinancePerpetualAccountService(this, binancePerpetual, getResilienceRegistries());
       default:
         break;
     }
@@ -106,7 +101,7 @@ public class BinanceExchange extends BaseMHExchange implements MHExchange {
 
   @Override
   public void remoteInit() {
-    try {
+   /* try {
       // populate currency pair keys only, exchange does not provide any other metadata for download
       Map<CurrencyPair, CurrencyPairMetaData> currencyPairs = exchangeMetaData.getCurrencyPairs();
       Map<Currency, CurrencyMetaData> currencies = exchangeMetaData.getCurrencies();
@@ -166,8 +161,8 @@ public class BinanceExchange extends BaseMHExchange implements MHExchange {
                   counterMaxQty,
                   amountPrecision, // base precision
                   pairPrecision, // counter precision
-                  null, /* TODO get fee tiers, although this is not necessary now
-                        because their API returns current fee directly */
+                  null, *//* TODO get fee tiers, although this is not necessary now
+                        because their API returns current fee directly *//*
                   stepSize,
                   null,
                   marketOrderAllowed));
@@ -187,7 +182,7 @@ public class BinanceExchange extends BaseMHExchange implements MHExchange {
       }
     } catch (Exception e) {
       throw new ExchangeException("Failed to initialize: " + e.getMessage(), e);
-    }
+    }*/
   }
 
   private int numberOfDecimals(String value) {
