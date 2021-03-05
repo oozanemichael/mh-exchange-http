@@ -1,7 +1,9 @@
 package org.market.hedge.binance.perpetualSwap;
 
 import org.junit.Test;
+import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
+import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.market.hedge.MHExchange;
 import org.market.hedge.MHExchangeFactory;
 
@@ -31,6 +33,23 @@ public class BinancePerpetualMarketDataServiceTest {
             getKlines.forEach(e->{
                 logger.info("{}",e.getClose());
             });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    @Test
+    public void  getOrderBook() throws IOException {
+        MHExchange exchange = MHExchangeFactory.INSTANCE.createExchange(BinanceExchange.class, TradingArea.PerpetualSwap);
+        StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
+        MHMarketDataService marketDataService=exchange.getMarketDataService();
+        try {
+            OrderBook orderBook =marketDataService.getOrderBook(parsing.parsing(CurrencyPair.BTC_USDT),20);
+            for (int i=0;i<10;i++){
+                logger.info("{}","ask:"+orderBook.getAsks().get(i).getLimitPrice()+" bid:"+orderBook.getBids().get(i).getLimitPrice());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

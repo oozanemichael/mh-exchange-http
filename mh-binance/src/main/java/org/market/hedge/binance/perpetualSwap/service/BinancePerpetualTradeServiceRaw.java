@@ -15,6 +15,7 @@ import org.market.hedge.binance.perpetualSwap.BinancePerpetualAuthenticated;
 import org.market.hedge.binance.perpetualSwap.dto.trade.req.BinancePerpetualOrder;
 import org.market.hedge.binance.service.BinanceTradeService;
 import org.market.hedge.core.ParsingCurrencyPair;
+import org.market.hedge.dto.trade.MHLimitOrder;
 import org.market.hedge.dto.trade.MHMarketOrder;
 
 import java.io.IOException;
@@ -32,7 +33,30 @@ public class BinancePerpetualTradeServiceRaw extends BinancePerpetualBaseService
     }
 
 
-    protected String placeOrders(List<MHMarketOrder> marketOrder)
+    protected String placeOrdersLimit(List<MHLimitOrder> limitOrders) throws IOException {
+        OrderType type=OrderType.LIMIT;
+        List<BinancePerpetualOrder> batchOrders=new ArrayList<BinancePerpetualOrder>();
+        limitOrders.forEach(e->{
+            BinancePerpetualOrder newOrder =
+                    newOrder(
+                            e.getParsingCurrencyPair(),
+                            BinanceAdapters.convert(e.getType()),
+                            type,
+                            null,
+                            e.getOriginalAmount(),
+                            e.getLimitPrice(),
+                            getClientOrderId(e),
+                            null);
+        });
+        try {
+            binance.batchOrders(batchOrders,null,getTimestampFactory(),apiKey,signatureCreator);
+            return "success";
+        } catch (BinanceException e) {
+            throw BinanceErrorAdapter.adapt(e);
+        }
+    }
+
+    protected String placeOrdersMarket(List<MHMarketOrder> marketOrder)
             throws IOException {
         OrderType type=OrderType.MARKET;
         List<BinancePerpetualOrder> batchOrders=new ArrayList<BinancePerpetualOrder>();

@@ -518,4 +518,23 @@ public interface BinancePerpetualAuthenticated extends BinancePerpetual {
   Map<?, ?> closeUserDataStream(
       @HeaderParam(X_MBX_APIKEY) String apiKey, @PathParam("listenKey") String listenKey)
       throws IOException, BinanceException;
+
+
+  /**
+   * Closes the websocket authenticated connection.
+   *
+   * @param apiKey the api key
+   * symbol	STRING	NO
+   * recvWindow	LONG	NO
+   * timestamp	LONG	YES
+   */
+  @DELETE
+  @Path("fapi/v2/positionRisk")
+  Map<?, ?> positionRisk(
+          @QueryParam("symbol") String symbol,
+          @QueryParam("recvWindow") Long recvWindow,
+          @QueryParam("timestamp") SynchronizedValueFactory<Long> timestamp,
+          @HeaderParam(X_MBX_APIKEY) String apiKey,
+          @QueryParam(SIGNATURE) ParamsDigest signature)
+          throws IOException, BinanceException;
 }

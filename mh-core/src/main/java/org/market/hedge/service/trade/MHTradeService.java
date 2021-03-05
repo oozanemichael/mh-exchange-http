@@ -18,7 +18,7 @@ public interface MHTradeService extends TradeService {
     /**
     * 下多个订单
     * */
-    default List<String> placeLimitOrders(List<MHLimitOrder> LimitOrders) throws IOException {
+    default List<String> placeLimitOrders(List<MHLimitOrder> limitOrders) throws IOException {
         throw new NotYetImplementedForExchangeException();
     }
 
@@ -42,9 +42,6 @@ public interface MHTradeService extends TradeService {
     default String placeMarketOrders(List<MHMarketOrder> marketOrder) throws IOException {
         throw new NotYetImplementedForExchangeException();
     }
-
-
-
 
 
     default void verifyOrder(MHLimitOrder limitOrder) {
