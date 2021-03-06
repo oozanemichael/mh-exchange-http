@@ -9,7 +9,7 @@ import org.market.hedge.core.TradingArea;
 import org.market.hedge.huobi.HuobiExchange;
 import org.market.hedge.huobi.futures.dto.marketdata.HuobiFuturesContractInfo;
 import org.market.hedge.huobi.futures.service.HuobiFuturesMarketDataService;
-import org.market.hedge.huobi.swap.HuobiSwapMarketData;
+import org.market.hedge.huobi.coinSwap.HuobiSwapMarketData;
 import org.market.hedge.service.StreamingParsingCurrencyPair;
 import org.market.hedge.service.marketdata.MHMarketDataService;
 import org.slf4j.Logger;

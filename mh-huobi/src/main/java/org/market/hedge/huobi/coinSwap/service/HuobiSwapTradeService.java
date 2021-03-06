@@ -1,4 +1,4 @@
-package org.market.hedge.huobi.swap.service;
+package org.market.hedge.huobi.coinSwap.service;
 
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.dto.Order;
@@ -8,8 +8,8 @@ import org.market.hedge.dto.trade.MHLimitOrder;
 import org.market.hedge.huobi.service.HuobiDigest;
 import org.market.hedge.service.trade.MHTradeService;
 import org.market.hedge.huobi.option.dto.trader.results.HuobiOptionPlaceOrdersResult;
-import org.market.hedge.huobi.swap.dto.trader.HuobiSwapCreateBatchOrderRequest;
-import org.market.hedge.huobi.swap.dto.trader.HuobiSwapCreateOrderRequest;
+import org.market.hedge.huobi.coinSwap.dto.trader.HuobiSwapCreateBatchOrderRequest;
+import org.market.hedge.huobi.coinSwap.dto.trader.HuobiSwapCreateOrderRequest;
 
 import java.io.IOException;
 import java.util.ArrayList;

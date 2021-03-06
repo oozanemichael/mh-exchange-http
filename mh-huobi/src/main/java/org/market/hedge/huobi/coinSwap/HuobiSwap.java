@@ -1,8 +1,8 @@
-package org.market.hedge.huobi.swap;
+package org.market.hedge.huobi.coinSwap;
 
 import org.market.hedge.huobi.dto.marketdata.results.HuobiDepthResult;
 import org.market.hedge.huobi.option.dto.trader.results.HuobiOptionPlaceOrdersResult;
-import org.market.hedge.huobi.swap.dto.trader.HuobiSwapCreateBatchOrderRequest;
+import org.market.hedge.huobi.coinSwap.dto.trader.HuobiSwapCreateBatchOrderRequest;
 import si.mazi.rescu.ParamsDigest;
 
 import javax.ws.rs.*;
