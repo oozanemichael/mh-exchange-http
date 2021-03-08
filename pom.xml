@@ -29,6 +29,7 @@
         <module>mh-deribit</module>
         <module>mh-bitget</module>
         <module>mh-binance</module>
+        <module>mh-okex</module>
     </modules>
 
     <properties>
