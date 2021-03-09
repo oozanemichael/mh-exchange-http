@@ -1,4 +1,4 @@
-package org.market.hedge.huobi.swap.service;
+package org.market.hedge.huobi.coinSwap.service;
 
 
 import org.knowm.xchange.Exchange;

@@ -46,9 +46,8 @@ public class HuobiStreamingParsing extends StreamingParsing {
         return new ParsingCurrencyPair(null,currencyPair, args);
     }
 
-
     @Override
-    public ParsingCurrencyPair instancePerpetualSwap(CurrencyPair currencyPair, Object... args) {
+    public ParsingCurrencyPair instanceCoinSwap(CurrencyPair currencyPair, Object... args) {
         return new ParsingCurrencyPair(currencyPair.base.toString()+"-"+currencyPair.counter.toString(),currencyPair, args);
     }
 

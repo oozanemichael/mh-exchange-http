@@ -1,4 +1,4 @@
-package org.market.hedge.huobi.swap.dto.trader;
+package org.market.hedge.huobi.coinSwap.dto.trader;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

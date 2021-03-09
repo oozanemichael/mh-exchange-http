@@ -1,4 +1,4 @@
-package org.market.hedge.huobi.swap;
+package org.market.hedge.huobi.coinSwap;
 
 import org.junit.Test;
 import org.knowm.xchange.currency.CurrencyPair;

@@ -19,8 +19,8 @@ import org.market.hedge.huobi.option.service.HuobiOptionAccountService;
 import org.market.hedge.huobi.option.service.HuobiOptionMarketDataService;
 import org.market.hedge.huobi.option.service.HuobiOptionTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
-import org.market.hedge.huobi.swap.service.HuobiSwapMarketDataService;
-import org.market.hedge.huobi.swap.service.HuobiSwapTradeService;
+import org.market.hedge.huobi.coinSwap.service.HuobiSwapMarketDataService;
+import org.market.hedge.huobi.coinSwap.service.HuobiSwapTradeService;
 import si.mazi.rescu.SynchronizedValueFactory;
 
 import java.io.IOException;
@@ -42,7 +42,7 @@ public class HuobiExchange extends BaseMHExchange implements MHExchange {
         this.mHtradeService = new HuobiOptionTradeService(this);
         this.mHaccountService = new HuobiOptionAccountService(this);
         break;
-      case PerpetualSwap:
+      case CoinSwap:
         this.mHmarketDataService=new HuobiSwapMarketDataService(this);
         this.mHtradeService=new HuobiSwapTradeService(this);
         break;
@@ -73,7 +73,7 @@ public class HuobiExchange extends BaseMHExchange implements MHExchange {
                 "Huobi is a Chinese digital currency trading platform and exchange based in Beijing");
         return exchangeSpecification;
       case Option:
-      case PerpetualSwap:
+      case CoinSwap:
       case Futures:
         exchangeSpecification.setSslUri("https://api.hbdm.com");
         exchangeSpecification.setHost("api.hbdm.com");
