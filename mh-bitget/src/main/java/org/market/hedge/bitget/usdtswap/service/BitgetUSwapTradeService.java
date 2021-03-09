@@ -25,7 +25,7 @@ public class BitgetUSwapTradeService extends BitgetUSwapTradeServiceRaw implemen
   public int num = 0;
 
   @Override
-  public String placeLimitOrders(List<MHLimitOrder> limitOrders) throws IOException {
+  public List<String> placeLimitOrders(List<MHLimitOrder> limitOrders) throws IOException {
     List<BitgetUsdtSwapOrderDataListReq> ordersData=new ArrayList<>();
      num = 0;
     for (MHLimitOrder LimitOrder:limitOrders){

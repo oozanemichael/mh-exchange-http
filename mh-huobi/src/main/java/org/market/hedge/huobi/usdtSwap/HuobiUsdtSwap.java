@@ -1,9 +1,6 @@
-package org.market.hedge.huobi.usdt;
+package org.market.hedge.huobi.usdtSwap;
 
 import org.market.hedge.huobi.dto.marketdata.results.HuobiDepthResult;
-import org.market.hedge.huobi.option.dto.trader.results.HuobiOptionPlaceOrdersResult;
-import org.market.hedge.huobi.swap.dto.trader.HuobiSwapCreateBatchOrderRequest;
-import si.mazi.rescu.ParamsDigest;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

@@ -66,8 +66,11 @@ public class HuobiStreamingParsing extends StreamingParsing {
         );
     }
 
-    public static void main(String[] args) {
-        System.out.println(new HuobiStreamingParsing(TradingArea.Futures).instanceFutures(CurrencyPair.BTC_USD,new Date()).getParsing());
+    /**
+     * BTC-USDT
+     * */
+    @Override
+    public ParsingCurrencyPair instancePerpetualSwap(CurrencyPair currencyPair, Object... args) {
+        return new ParsingCurrencyPair(currencyPair.base.toString()+"-"+currencyPair.counter.toString(),currencyPair, args);
     }
-
 }

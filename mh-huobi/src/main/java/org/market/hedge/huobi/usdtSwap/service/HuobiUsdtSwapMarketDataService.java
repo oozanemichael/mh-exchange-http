@@ -1,4 +1,4 @@
-package org.market.hedge.huobi.usdt.service;
+package org.market.hedge.huobi.usdtSwap.service;
 
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.dto.Order;

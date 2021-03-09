@@ -18,10 +18,8 @@ public class OkexBaseService extends BaseExchangeService implements BaseService 
 
     protected OkexBaseService(Exchange exchange) {
         super(exchange);
-        //okex = RestProxyFactory.createProxy(
-                        //okex.class, exchange.getExchangeSpecification().getSslUri());
-        //signatureCreator =
-               // HuobiOptionDigest.createInstance(exchange.getExchangeSpecification().getSecretKey());
+        okex = RestProxyFactory.createProxy(
+                Okex.class, exchange.getExchangeSpecification().getSslUri());
     }
 
 

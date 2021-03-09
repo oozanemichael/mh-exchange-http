@@ -27,7 +27,7 @@ public class BiboxUSDTSwapMarketDataService extends BiboxUSDTSwapMarketDataServi
      * */
     @Override
     public OrderBook getOrderBook(ParsingCurrencyPair currencyPair, Object... args) throws IOException {
-        Integer depth = 10; // default on website
+        Integer depth = 10;
         if (args != null && args.length > 0) {
             if (args[0] instanceof Integer && (Integer) args[0] > 0) {
                 depth = (Integer) args[0];

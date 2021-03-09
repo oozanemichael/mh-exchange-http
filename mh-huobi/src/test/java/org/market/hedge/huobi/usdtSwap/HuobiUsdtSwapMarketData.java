@@ -1,4 +1,4 @@
-package org.market.hedge.huobi.spot;
+package org.market.hedge.huobi.usdtSwap;
 
 import org.junit.Test;
 import org.knowm.xchange.currency.CurrencyPair;
@@ -14,13 +14,13 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-public class HuobiSpotMarketData {
+public class HuobiUsdtSwapMarketData {
 
-    static Logger logger= LoggerFactory.getLogger(HuobiSpotMarketData.class);
+    static Logger logger= LoggerFactory.getLogger(HuobiUsdtSwapMarketData.class);
 
     @Test
     public void getOrderBook() {
-        MHExchange huobi= MHExchangeFactory.INSTANCE.createExchange(HuobiExchange.class, TradingArea.Spot);
+        MHExchange huobi= MHExchangeFactory.INSTANCE.createExchange(HuobiExchange.class, TradingArea.PerpetualSwap);
         StreamingParsingCurrencyPair parsing=huobi.getStreamingParsing().parsingCurrencyPair;
         MHMarketDataService marketDataService=huobi.getMarketDataService();
         try {

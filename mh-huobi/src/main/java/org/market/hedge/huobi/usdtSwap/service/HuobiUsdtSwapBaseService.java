@@ -1,4 +1,4 @@
-package org.market.hedge.huobi.usdt.service;
+package org.market.hedge.huobi.usdtSwap.service;
 
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.exceptions.ExchangeException;
@@ -6,20 +6,20 @@ import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
 import org.market.hedge.huobi.dto.HuobiResult;
 import org.market.hedge.huobi.option.dto.HuobiOptionResult;
-import org.market.hedge.huobi.swap.HuobiSwap;
+import org.market.hedge.huobi.usdtSwap.HuobiUsdtSwap;
 import si.mazi.rescu.ParamsDigest;
 import si.mazi.rescu.RestProxyFactory;
 
 public class HuobiUsdtSwapBaseService extends BaseExchangeService implements BaseService {
 
-    protected HuobiSwap huobiSwap;
+    protected HuobiUsdtSwap huobiSwap;
     protected ParamsDigest signatureCreator;
 
     protected HuobiUsdtSwapBaseService(Exchange exchange) {
         super(exchange);
         huobiSwap =
                 RestProxyFactory.createProxy(
-                        HuobiSwap.class, exchange.getExchangeSpecification().getSslUri());
+                        HuobiUsdtSwap.class, exchange.getExchangeSpecification().getSslUri());
         signatureCreator =
                 HuobiUsdtSwapDigest.createInstance(exchange.getExchangeSpecification().getSecretKey());
     }
