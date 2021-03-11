@@ -19,6 +19,10 @@ public class OkexResult<V> {
     this.data = data;
   }
 
+  public Boolean isSuccess(){
+    return Integer.parseInt(code) == 0;
+  }
+
   public String getError() {
     return (msg.length() == 0) ? code : msg;
   }

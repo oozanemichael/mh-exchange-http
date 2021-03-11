@@ -19,12 +19,12 @@ public class OkexMarketDataTest {
 
     @Test
     public void getOrderBook() {
-        MHExchange huobi= MHExchangeFactory.INSTANCE.createExchange(OkexExchange.class, TradingArea.PerpetualSwap);
+        MHExchange huobi= MHExchangeFactory.INSTANCE.createExchange(OkexExchange.class, TradingArea.Spot);
         StreamingParsingCurrencyPair parsing=huobi.getStreamingParsing().parsingCurrencyPair;
         MHMarketDataService marketDataService=huobi.getMarketDataService();
         try {
             for (int i=0;i<10;i++){
-                OrderBook orderBook=marketDataService.getOrderBook(parsing.parsing(CurrencyPair.BTC_USDT));
+                OrderBook orderBook=marketDataService.getOrderBook(parsing.parsing(CurrencyPair.BTC_USD));
                 logger.info("{}","ask:"+orderBook.getAsks().get(0).getLimitPrice()+" bid:"+orderBook.getBids().get(0).getLimitPrice());
             }
         } catch (IOException e) {
