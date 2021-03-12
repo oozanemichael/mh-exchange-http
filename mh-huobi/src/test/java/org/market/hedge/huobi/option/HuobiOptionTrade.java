@@ -30,8 +30,8 @@ public class HuobiOptionTrade {
     @Test
     public void getTransactionHistory(){
         MHExchange huobi= MHExchangeFactory.INSTANCE.createExchange(HuobiExchange.class
-                ,"914069ad-uymylwhfeg-c8084d47-d25e0"
-                ,"fc791193-3ab4649c-e052fc6a-7016f"
+                ,"7c2081a2-407fa453-yh4fhmvs5k-e350d"
+                ,"7fe3c480-f1d03dbe-7c396272-a5954"
                 , TradingArea.Option);
         StreamingParsingCurrencyPair parsing=huobi.getStreamingParsing().parsingCurrencyPair;
         HuobiOptionTradeService tradeService= (HuobiOptionTradeService) huobi.getTradeService();
@@ -40,7 +40,7 @@ public class HuobiOptionTrade {
                     "BTC",
                     null,
                     0,
-                    10,
+                    1,
                     null,
                     null,
                     null);

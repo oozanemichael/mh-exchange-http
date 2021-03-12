@@ -5,6 +5,10 @@ import org.market.hedge.BaseMHExchange;
 import org.market.hedge.MHExchange;
 import org.market.hedge.MHExchangeSpecification;
 import org.market.hedge.binance.dto.meta.exchangeinfo.BinanceExchangeInfo;
+import org.market.hedge.binance.option.BinanceOptionAuthenticated;
+import org.market.hedge.binance.option.service.BinanceOptionAccountService;
+import org.market.hedge.binance.option.service.BinanceOptionMarketDataService;
+import org.market.hedge.binance.option.service.BinanceOptionTradeService;
 import org.market.hedge.binance.perpetualSwap.BinancePerpetualAuthenticated;
 import org.market.hedge.binance.perpetualSwap.service.BinancePerpetualAccountService;
 import org.market.hedge.binance.perpetualSwap.service.BinancePerpetualMarketDataService;
@@ -27,6 +31,7 @@ public class BinanceExchange extends BaseMHExchange implements MHExchange {
 
   private BinanceExchangeInfo exchangeInfo;
   private BinanceAuthenticated binance;
+  private BinanceOptionAuthenticated binanceOption;
   private BinancePerpetualAuthenticated binancePerpetual;
   private SynchronizedValueFactory<Long> timestampFactory;
 
@@ -45,6 +50,7 @@ public class BinanceExchange extends BaseMHExchange implements MHExchange {
         this.marketDataService = new BinanceMarketDataService(this, binance, getResilienceRegistries());
         this.tradeService = new BinanceTradeService(this, binance, getResilienceRegistries());
         this.accountService = new BinanceAccountService(this, binance, getResilienceRegistries());
+        break;
       case PerpetualSwap:
         this.binancePerpetual =
                 ExchangeRestProxyBuilder.forInterface(
@@ -53,6 +59,16 @@ public class BinanceExchange extends BaseMHExchange implements MHExchange {
         this.mHmarketDataService= new BinancePerpetualMarketDataService(this, binancePerpetual, getResilienceRegistries());
         this.mHtradeService = new BinancePerpetualTradeService(this, binancePerpetual, getResilienceRegistries());
         this.mHaccountService = new BinancePerpetualAccountService(this, binancePerpetual, getResilienceRegistries());
+        break;
+      case Option:
+        this.binanceOption =
+                ExchangeRestProxyBuilder.forInterface(
+                        BinanceOptionAuthenticated.class, getExchangeSpecification())
+                        .build();
+        this.mHmarketDataService= new BinanceOptionMarketDataService(this, binanceOption, getResilienceRegistries());
+        this.mHtradeService = new BinanceOptionTradeService(this, binanceOption, getResilienceRegistries());
+        this.mHaccountService = new BinanceOptionAccountService(this, binanceOption, getResilienceRegistries());
+        break;
       default:
         break;
     }
@@ -207,6 +223,9 @@ public class BinanceExchange extends BaseMHExchange implements MHExchange {
         return spec;
       case PerpetualSwap:
         spec.setSslUri("https://fapi.binance.com");
+        return spec;
+      case Option:
+        spec.setSslUri("https://vapi.binance.com");
         return spec;
       default:
         break;
