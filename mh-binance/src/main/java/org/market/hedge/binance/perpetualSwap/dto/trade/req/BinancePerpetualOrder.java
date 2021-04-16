@@ -9,7 +9,8 @@ import java.math.BigDecimal;
 
 public class BinancePerpetualOrder {
 
-    @JsonProperty("symbol") String symbol;
+    @JsonProperty("symbol")
+    String symbol;
     @JsonProperty("side")
     OrderSide side;
     @JsonProperty("type")
@@ -18,9 +19,12 @@ public class BinancePerpetualOrder {
     TimeInForce timeInForce;
     @JsonProperty("quantity")
     BigDecimal quantity;
-    @JsonProperty("price") BigDecimal price;
-    @JsonProperty("newClientOrderId") String newClientOrderId;
-    @JsonProperty("stopPrice") BigDecimal stopPrice;
+    @JsonProperty("price")
+    BigDecimal price;
+    @JsonProperty("newClientOrderId")
+    String newClientOrderId;
+    @JsonProperty("stopPrice")
+    BigDecimal stopPrice;
 
     public BinancePerpetualOrder(String symbol, OrderSide side, OrderType type, TimeInForce timeInForce, BigDecimal quantity, BigDecimal price, String newClientOrderId, BigDecimal stopPrice) {
         this.symbol = symbol;

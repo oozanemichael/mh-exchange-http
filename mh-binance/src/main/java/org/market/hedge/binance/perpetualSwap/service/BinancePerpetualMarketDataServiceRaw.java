@@ -5,10 +5,10 @@ import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.trade.LimitOrder;
-import org.market.hedge.binance.BinanceAdapters;
 import org.market.hedge.binance.BinanceExchange;
-import org.market.hedge.binance.dto.marketdata.BinanceKline;
 import org.market.hedge.binance.dto.marketdata.BinanceOrderbook;
+import org.market.hedge.binance.perpetualSwap.dto.marketData.resp.BinancePremiumIndex;
+import org.market.hedge.binance.perpetualSwap.dto.trade.req.FundimgRatereq;
 import org.market.hedge.core.Kline;
 import org.market.hedge.core.KlineInterval;
 import org.market.hedge.binance.perpetualSwap.BinancePerpetualAuthenticated;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 import static org.market.hedge.binance.BinanceResilience.REQUEST_WEIGHT_RATE_LIMITER;
 
 public class BinancePerpetualMarketDataServiceRaw extends BinancePerpetualBaseService{
-    protected BinancePerpetualMarketDataServiceRaw(BinanceExchange exchange, BinancePerpetualAuthenticated binance, ResilienceRegistries resilienceRegistries) {
+    public BinancePerpetualMarketDataServiceRaw(BinanceExchange exchange, BinancePerpetualAuthenticated binance, ResilienceRegistries resilienceRegistries) {
         super(exchange, binance, resilienceRegistries);
     }
 
@@ -32,6 +32,17 @@ public class BinancePerpetualMarketDataServiceRaw extends BinancePerpetualBaseSe
                 .withRetry(retry("depth"))
                 .withRateLimiter(rateLimiter(REQUEST_WEIGHT_RATE_LIMITER), depthPermits(limit))
                 .call();
+    }
+
+    public BinancePremiumIndex getPremiumIndexRaw(ParsingCurrencyPair pair)throws IOException {
+        return binance.getPremiumIndex(pair.getCurrencyPair().toString());
+    }
+    public List<BinancePremiumIndex> getAllPremiumIndexRaw()throws IOException {
+        return binance.getAllPremiumIndex();
+    }
+
+    public List<FundimgRatereq>  getFundingRate(ParsingCurrencyPair pair, Long startTime,Long endTime,Integer limit) throws IOException {
+        return binance.getFundingRate(pair.getParsing(),startTime,endTime, limit);
     }
 
     public static OrderBook convertOrderBook(BinanceOrderbook ob, CurrencyPair pair) {

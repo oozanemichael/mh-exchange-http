@@ -5,11 +5,10 @@ import org.market.hedge.binance.dto.marketdata.*;
 import org.market.hedge.binance.dto.meta.BinanceSystemStatus;
 import org.market.hedge.binance.dto.meta.BinanceTime;
 import org.market.hedge.binance.dto.meta.exchangeinfo.BinanceExchangeInfo;
+import org.market.hedge.binance.perpetualSwap.dto.marketData.resp.BinancePremiumIndex;
+import org.market.hedge.binance.perpetualSwap.dto.trade.req.FundimgRatereq;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.util.List;
@@ -180,4 +179,35 @@ public interface BinancePerpetual {
    * @throws BinanceException
    */
   List<BinancePriceQuantity> tickerAllBookTickers() throws IOException, BinanceException;
+
+
+  @GET
+  @Path("fapi/v1/premiumIndex")
+  /**
+   * 最新标记价格和资金费率
+   */
+  BinancePremiumIndex getPremiumIndex(@QueryParam("symbol") String symbol)
+          throws IOException, BinanceException;
+
+
+  @GET
+  @Path("fapi/v1/premiumIndex")
+  /**
+   * 最新标记价格和资金费率()所有
+   */
+  List<BinancePremiumIndex> getAllPremiumIndex()
+          throws IOException, BinanceException;
+
+  @GET
+  @Path("fapi/v1/fundingRate")
+  /**
+   * 查询资金费率历史
+   */
+  List<FundimgRatereq> getFundingRate(@QueryParam("symbol") String symbol,
+                                      @QueryParam("startTime") Long startTime,
+                                      @QueryParam("endTime") Long endTime,
+                                      @QueryParam("limit") Integer limit)
+          throws IOException, BinanceException;
+
+
 }

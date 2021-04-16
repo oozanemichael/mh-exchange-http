@@ -17,11 +17,15 @@ import org.market.hedge.binance.service.BinanceTradeService;
 import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.dto.trade.MHLimitOrder;
 import org.market.hedge.dto.trade.MHMarketOrder;
+import si.mazi.rescu.ParamsDigest;
+import si.mazi.rescu.SynchronizedValueFactory;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.knowm.xchange.client.ResilienceRegistries.NON_IDEMPOTENTE_CALLS_RETRY_CONFIG_NAME;
 import static org.market.hedge.binance.BinanceResilience.*;
@@ -47,9 +51,10 @@ public class BinancePerpetualTradeServiceRaw extends BinancePerpetualBaseService
                             e.getLimitPrice(),
                             getClientOrderId(e),
                             null);
+            batchOrders.add(newOrder);
         });
         try {
-            binance.batchOrders(batchOrders,null,getTimestampFactory(),apiKey,signatureCreator);
+            List<BinanceNewOrder> list=binance.batchOrders(batchOrders,null,getTimestampFactory(),apiKey,signatureCreator);
             return "success";
         } catch (BinanceException e) {
             throw BinanceErrorAdapter.adapt(e);
@@ -71,6 +76,7 @@ public class BinancePerpetualTradeServiceRaw extends BinancePerpetualBaseService
                             null,
                             getClientOrderId(e),
                             null);
+            batchOrders.add(newOrder);
         });
         try {
             binance.batchOrders(batchOrders,null,getTimestampFactory(),apiKey,signatureCreator);
@@ -115,5 +121,15 @@ public class BinancePerpetualTradeServiceRaw extends BinancePerpetualBaseService
                 stopPrice);
 
     }
+
+    public  boolean getPositionSideDual(Long recvWindow) throws IOException {
+        return binance.getPositionSideDual(getTimestampFactory(),null,apiKey,signatureCreator);
+    }
+
+    public HashMap setPositionSideDual(String dualSidePosition, Long recvWindow) throws IOException {
+        return binance.setPositionSideDual(dualSidePosition,recvWindow,getTimestampFactory(),apiKey,signatureCreator);
+
+    }
+
 
 }

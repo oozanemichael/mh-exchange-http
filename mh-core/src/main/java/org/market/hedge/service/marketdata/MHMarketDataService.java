@@ -8,6 +8,7 @@ import org.knowm.xchange.utils.StreamUtils;
 import org.market.hedge.core.Kline;
 import org.market.hedge.core.KlineInterval;
 import org.market.hedge.core.ParsingCurrencyPair;
+import org.market.hedge.core.PremiumIndex;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,6 +32,19 @@ public interface MHMarketDataService extends MarketDataService {
     default List<Kline> getKlines(ParsingCurrencyPair pair, KlineInterval interval, Integer limit) throws IOException {
         throw new NotYetImplementedForExchangeException();    }
 
+    /**
+     * 获取单币对最新标记价格和资金费率
+     * */
+    default PremiumIndex getPremiumIndex(ParsingCurrencyPair pair) throws IOException {
+        throw new NotYetImplementedForExchangeException();
+    }
+
+    /**
+     * 获取全部币对最新标记价格和资金费率
+     * */
+    default List<PremiumIndex> getAllPremiumIndex() throws IOException {
+        throw new NotYetImplementedForExchangeException();
+    }
 
 
 

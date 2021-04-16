@@ -3,6 +3,7 @@ package org.market.hedge.binance.perpetualSwap;
 import org.market.hedge.binance.dto.BinanceException;
 import org.market.hedge.binance.dto.account.*;
 import org.market.hedge.binance.dto.trade.*;
+import org.market.hedge.binance.perpetualSwap.dto.marketData.resp.BinancePositionInfo;
 import org.market.hedge.binance.perpetualSwap.dto.trade.req.BinancePerpetualOrder;
 import si.mazi.rescu.ParamsDigest;
 import si.mazi.rescu.SynchronizedValueFactory;
@@ -11,6 +12,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -528,13 +530,36 @@ public interface BinancePerpetualAuthenticated extends BinancePerpetual {
    * recvWindow	LONG	NO
    * timestamp	LONG	YES
    */
-  @DELETE
+  @GET
   @Path("fapi/v2/positionRisk")
-  Map<?, ?> positionRisk(
+  List<BinancePositionInfo> positionRisk(
           @QueryParam("symbol") String symbol,
           @QueryParam("recvWindow") Long recvWindow,
           @QueryParam("timestamp") SynchronizedValueFactory<Long> timestamp,
           @HeaderParam(X_MBX_APIKEY) String apiKey,
           @QueryParam(SIGNATURE) ParamsDigest signature)
+          throws IOException, BinanceException;
+
+  @GET
+  @Path("/fapi/v1/positionSide/dual")
+  /**
+   * 查询持仓模式(USER_DATA)
+   */
+  Boolean getPositionSideDual(@QueryParam("timestamp") SynchronizedValueFactory<Long> timestamp,
+                              @QueryParam("recvWindow") Long recvWindow,
+                              @HeaderParam(X_MBX_APIKEY) String apiKey,
+                              @QueryParam(SIGNATURE) ParamsDigest signature)
+          throws IOException, BinanceException;
+
+  @POST
+  @Path("/fapi/v1/positionSide/dual")
+  /**
+   * 更改持仓模式(TRADE)
+   */
+  HashMap setPositionSideDual(@QueryParam("dualSidePosition") String dualSidePosition,
+                              @QueryParam("recvWindow") Long recvWindow,
+                              @QueryParam("timestamp") SynchronizedValueFactory<Long> timestamp,
+                              @HeaderParam(X_MBX_APIKEY) String apiKey,
+                              @QueryParam(SIGNATURE) ParamsDigest signature)
           throws IOException, BinanceException;
 }

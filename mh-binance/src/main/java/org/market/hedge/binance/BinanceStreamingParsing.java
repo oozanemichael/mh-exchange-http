@@ -47,5 +47,29 @@ public class BinanceStreamingParsing extends StreamingParsing {
 
     }
 
+    /**
+     * eg: BTCUSDT_210625
+     *
+     *      @param args args[0] 期权到期日  true  时间戳
+     *
+     * */
+    @Override
+    public ParsingCurrencyPair instanceFutures(CurrencyPair currencyPair, Object... args) {
+        String st=currencyPair.base.toString().toUpperCase()+currencyPair.counter.toString().toUpperCase();
+        String[] strNow1 = new SimpleDateFormat("yyyy-MM-dd").format(new Date((Long) args[0])).toString().split("-");
+        String strNow=(strNow1[0].substring(strNow1[0].length()-2,strNow1[0].length()))
+                +(Integer.parseInt(strNow1[1])>9?Integer.parseInt(strNow1[1]):("0"+Integer.parseInt(strNow1[1])))
+                +strNow1[2];
 
+        return new ParsingCurrencyPair(st+"_"+strNow,currencyPair,args);
+    }
+
+    public static void main(String[] args) {
+        String[] strNow1 = new SimpleDateFormat("yyyy-MM-dd").format(new Date(1618502400000L)).toString().split("-");
+        String strNow=(strNow1[0].substring(strNow1[0].length()-2,strNow1[0].length()))
+                +(Integer.parseInt(strNow1[1])>9?Integer.parseInt(strNow1[1]):("0"+Integer.parseInt(strNow1[1])))
+                +strNow1[2];
+
+        System.out.println(strNow);
+    }
 }

@@ -1,7 +1,6 @@
 package org.market.hedge.binance.perpetualSwap;
 
 import org.junit.Test;
-import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.market.hedge.MHExchange;
@@ -10,6 +9,7 @@ import org.market.hedge.MHExchangeFactory;
 import org.market.hedge.binance.BinanceExchange;
 import org.market.hedge.core.Kline;
 import org.market.hedge.core.KlineInterval;
+import org.market.hedge.core.PremiumIndex;
 import org.market.hedge.core.TradingArea;
 import org.market.hedge.service.StreamingParsingCurrencyPair;
 import org.market.hedge.service.marketdata.MHMarketDataService;
@@ -22,6 +22,7 @@ import java.util.List;
 public class BinancePerpetualMarketDataServiceTest {
 
     Logger logger= LoggerFactory.getLogger(BinancePerpetualMarketDataServiceTest.class);
+
 
     @Test
     public void klines() throws IOException {
@@ -55,5 +56,39 @@ public class BinancePerpetualMarketDataServiceTest {
         }
 
     }
+
+    @Test
+    public void  getAllPremiumIndex() throws IOException {
+        MHExchange exchange = MHExchangeFactory.INSTANCE.createExchange(BinanceExchange.class, TradingArea.PerpetualSwap);
+        StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
+        MHMarketDataService marketDataService=exchange.getMarketDataService();
+        try {
+            List<PremiumIndex>  result =marketDataService.getAllPremiumIndex();
+            result.forEach(e->{
+                logger.info(e.getSymbol());
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void  getPremiumIndex() throws IOException {
+        MHExchange exchange = MHExchangeFactory.INSTANCE.createExchange(BinanceExchange.class, TradingArea.PerpetualSwap);
+        StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
+        MHMarketDataService marketDataService=exchange.getMarketDataService();
+        /*try {
+            List<PremiumIndex>  result =marketDataService.getPremiumIndex(parsing.);
+            for (int i=0;i<10;i++){
+                logger.info("getLastFundingRate:{}",result.get(0).getLastFundingRate());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+    }
+
+
 
 }

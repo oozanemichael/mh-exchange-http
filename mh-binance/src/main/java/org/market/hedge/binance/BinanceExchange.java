@@ -52,6 +52,7 @@ public class BinanceExchange extends BaseMHExchange implements MHExchange {
         this.accountService = new BinanceAccountService(this, binance, getResilienceRegistries());
         break;
       case PerpetualSwap:
+      case Futures:
         this.binancePerpetual =
                 ExchangeRestProxyBuilder.forInterface(
                         BinancePerpetualAuthenticated.class, getExchangeSpecification())
@@ -222,6 +223,7 @@ public class BinanceExchange extends BaseMHExchange implements MHExchange {
         spec.setSslUri("https://api.binance.com");
         return spec;
       case PerpetualSwap:
+      case Futures:
         spec.setSslUri("https://fapi.binance.com");
         return spec;
       case Option:
