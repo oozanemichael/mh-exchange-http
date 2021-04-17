@@ -1,5 +1,8 @@
 package org.market.hedge.binance.perpetualSwap.service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.knowm.xchange.client.ResilienceRegistries;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
@@ -22,10 +25,8 @@ import si.mazi.rescu.SynchronizedValueFactory;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static org.knowm.xchange.client.ResilienceRegistries.NON_IDEMPOTENTE_CALLS_RETRY_CONFIG_NAME;
 import static org.market.hedge.binance.BinanceResilience.*;
@@ -53,8 +54,10 @@ public class BinancePerpetualTradeServiceRaw extends BinancePerpetualBaseService
                             null);
             batchOrders.add(newOrder);
         });
+        BinancePerpetualOrder[] strings = new BinancePerpetualOrder[batchOrders.size()];
+        batchOrders.toArray(strings);
         try {
-            List<BinanceNewOrder> list=binance.batchOrders(batchOrders,null,getTimestampFactory(),apiKey,signatureCreator);
+            binance.batchOrders(JSON.toJSONString(strings),getTimestampFactory().createValue(),getTimestampFactory(),apiKey,signatureCreator);
             return "success";
         } catch (BinanceException e) {
             throw BinanceErrorAdapter.adapt(e);
@@ -79,7 +82,9 @@ public class BinancePerpetualTradeServiceRaw extends BinancePerpetualBaseService
             batchOrders.add(newOrder);
         });
         try {
-            binance.batchOrders(batchOrders,null,getTimestampFactory(),apiKey,signatureCreator);
+            BinancePerpetualOrder[] strings = new BinancePerpetualOrder[batchOrders.size()];
+            batchOrders.toArray(strings);
+            binance.batchOrders(JSON.toJSONString(strings),getRecvWindow(),getTimestampFactory(),apiKey,signatureCreator);
             return "success";
         } catch (BinanceException e) {
             throw BinanceErrorAdapter.adapt(e);

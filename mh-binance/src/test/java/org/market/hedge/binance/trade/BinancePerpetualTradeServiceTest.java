@@ -50,21 +50,21 @@ public class BinancePerpetualTradeServiceTest {
     @Test
     public void placeLimitOrder() {
         MHExchange exchange= MHExchangeFactory.INSTANCE.createExchange(BinanceExchange.class
-                ,"ajmNWdDNiHENQ51N7btBGU8ijdMJRuZstBKBbNnn9iplHR5U2GUjGClulVpozU9U"
-                ,"PX1t8o3K3HYGmR5FPYg6EN3XaRaSsNC8pStEshZWN44O2L9ryUHOggjAU0TtNtq1"
+                ,"NEq7SZ4xcE8jcRkeOvhJHJlgzV3X243g02KiF2TQqEIIPoOFI1nmaHhu8j1iSAMH"
+                ,"J9GlHxSgCK759BBEEFLzbjYglsqiZWLQMEjR8kuUwHv1FID0HhdYmm6VDrLNc8IQ"
                 , TradingArea.PerpetualSwap);
         StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
         MHTradeService tradeService=  exchange.getTradeService();
-        ParsingCurrencyPair pair=parsing.parsing(CurrencyPair.BTC_USDT,new Date(1613116800000L),new BigDecimal("36000"), Direction.Call);
+        ParsingCurrencyPair pair=parsing.parsing(CurrencyPair.BTC_USDT);
         try {
             MHLimitOrder  order1=
                     new MHLimitOrder(
-                            Order.OrderType.BID,
+                            Order.OrderType.ASK,
                             new BigDecimal("10") ,
                             CurrencyPair.BTC_USDT ,
                             "11223311",
                             new Date(),
-                            new BigDecimal("63000.2"),
+                            new BigDecimal("63000"),
                             pair);
             log.info(pair.getParsing());
             List<MHLimitOrder> limitOrders=new ArrayList<>();

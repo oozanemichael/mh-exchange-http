@@ -63,7 +63,7 @@ public interface BinancePerpetualAuthenticated extends BinancePerpetual {
   @POST
   @Path("fapi/v1/batchOrders")
   List<BinanceNewOrder> batchOrders(
-          @FormParam("batchOrders") List<BinancePerpetualOrder> batchOrders,
+          @FormParam("batchOrders") String batchOrders,
           @FormParam("recvWindow") Long recvWindow,
           @FormParam("timestamp") SynchronizedValueFactory<Long> timestamp,
           @HeaderParam(X_MBX_APIKEY) String apiKey,
