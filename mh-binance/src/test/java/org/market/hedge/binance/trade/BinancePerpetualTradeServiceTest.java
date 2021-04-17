@@ -5,18 +5,13 @@ import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
 import org.market.hedge.MHExchange;
 import org.market.hedge.MHExchangeFactory;
-import org.market.hedge.binance.BinanceAdapters;
 import org.market.hedge.binance.BinanceExchange;
-import org.market.hedge.binance.dto.trade.OrderSide;
-import org.market.hedge.binance.dto.trade.OrderType;
 import org.market.hedge.binance.perpetualSwap.BinancePerpetualMarketDataServiceTest;
-import org.market.hedge.binance.perpetualSwap.dto.trade.req.BinancePerpetualOrder;
-import org.market.hedge.core.Direction;
 import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.core.PositionInfo;
 import org.market.hedge.core.TradingArea;
 import org.market.hedge.dto.trade.MHLimitOrder;
-import org.market.hedge.dto.trade.MHMarketOrder;
+import org.market.hedge.dto.trade.Result;
 import org.market.hedge.service.StreamingParsingCurrencyPair;
 import org.market.hedge.service.account.MHAccountService;
 import org.market.hedge.service.trade.MHTradeService;
@@ -27,6 +22,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class BinancePerpetualTradeServiceTest {
 
@@ -50,21 +46,21 @@ public class BinancePerpetualTradeServiceTest {
     @Test
     public void placeLimitOrder() {
         MHExchange exchange= MHExchangeFactory.INSTANCE.createExchange(BinanceExchange.class
-                ,"ajmNWdDNiHENQ51N7btBGU8ijdMJRuZstBKBbNnn9iplHR5U2GUjGClulVpozU9U"
-                ,"PX1t8o3K3HYGmR5FPYg6EN3XaRaSsNC8pStEshZWN44O2L9ryUHOggjAU0TtNtq1"
+                ,"NEq7SZ4xcE8jcRkeOvhJHJlgzV3X243g02KiF2TQqEIIPoOFI1nmaHhu8j1iSAMH"
+                ,"J9GlHxSgCK759BBEEFLzbjYglsqiZWLQMEjR8kuUwHv1FID0HhdYmm6VDrLNc8IQ"
                 , TradingArea.PerpetualSwap);
         StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
         MHTradeService tradeService=  exchange.getTradeService();
-        ParsingCurrencyPair pair=parsing.parsing(CurrencyPair.BTC_USDT,new Date(1613116800000L),new BigDecimal("36000"), Direction.Call);
+        ParsingCurrencyPair pair=parsing.parsing(CurrencyPair.BTC_USDT);
         try {
             MHLimitOrder  order1=
                     new MHLimitOrder(
-                            Order.OrderType.BID,
+                            Order.OrderType.ASK,
                             new BigDecimal("10") ,
                             CurrencyPair.BTC_USDT ,
                             "11223311",
                             new Date(),
-                            new BigDecimal("63000.2"),
+                            new BigDecimal("63000"),
                             pair);
             log.info(pair.getParsing());
             List<MHLimitOrder> limitOrders=new ArrayList<>();
@@ -86,6 +82,38 @@ public class BinancePerpetualTradeServiceTest {
         try {
             PositionInfo positionInfo =  accountService.getPosition(parsing.parsing(CurrencyPair.BTC_USDT),null);
             log.info("positionInfo:{}",positionInfo.getSymbol());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void setMarginType() throws IOException {
+        MHExchange exchange= MHExchangeFactory.INSTANCE.createExchange(BinanceExchange.class
+                ,"ajmNWdDNiHENQ51N7btBGU8ijdMJRuZstBKBbNnn9iplHR5U2GUjGClulVpozU9U"
+                ,"PX1t8o3K3HYGmR5FPYg6EN3XaRaSsNC8pStEshZWN44O2L9ryUHOggjAU0TtNtq1"
+                , TradingArea.PerpetualSwap);
+        StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
+        MHTradeService tradeService=  exchange.getTradeService();
+        try {
+            Result result =  tradeService.setMarginType(parsing.parsing(CurrencyPair.BTC_USDT), null);
+            log.info("resultmap:{}",result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void setLeverage() throws IOException {
+        MHExchange exchange= MHExchangeFactory.INSTANCE.createExchange(BinanceExchange.class
+                ,"ajmNWdDNiHENQ51N7btBGU8ijdMJRuZstBKBbNnn9iplHR5U2GUjGClulVpozU9U"
+                ,"PX1t8o3K3HYGmR5FPYg6EN3XaRaSsNC8pStEshZWN44O2L9ryUHOggjAU0TtNtq1"
+                , TradingArea.PerpetualSwap);
+        StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
+        MHTradeService tradeService=  exchange.getTradeService();
+        try {
+            Map<String,Object> map =  tradeService.setLeverage(parsing.parsing(CurrencyPair.BTC_USDT),25);
+            log.info("resultmap:{}",map);
         } catch (IOException e) {
             e.printStackTrace();
         }

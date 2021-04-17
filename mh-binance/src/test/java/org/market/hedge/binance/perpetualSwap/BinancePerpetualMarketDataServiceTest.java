@@ -65,7 +65,7 @@ public class BinancePerpetualMarketDataServiceTest {
         try {
             List<PremiumIndex>  result =marketDataService.getAllPremiumIndex();
             result.forEach(e->{
-                logger.info(e.getSymbol());
+                logger.info(e.getSymbol()+"費率："+e.getLastFundingRate());
             });
         } catch (IOException e) {
             e.printStackTrace();

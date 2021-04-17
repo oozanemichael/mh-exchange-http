@@ -4,7 +4,7 @@ import org.market.hedge.binance.dto.BinanceException;
 import org.market.hedge.binance.dto.account.*;
 import org.market.hedge.binance.dto.trade.*;
 import org.market.hedge.binance.perpetualSwap.dto.marketData.resp.BinancePositionInfo;
-import org.market.hedge.binance.perpetualSwap.dto.trade.req.BinancePerpetualOrder;
+import org.market.hedge.binance.perpetualSwap.dto.trade.req.Binanceresult;
 import si.mazi.rescu.ParamsDigest;
 import si.mazi.rescu.SynchronizedValueFactory;
 
@@ -63,7 +63,7 @@ public interface BinancePerpetualAuthenticated extends BinancePerpetual {
   @POST
   @Path("fapi/v1/batchOrders")
   List<BinanceNewOrder> batchOrders(
-          @FormParam("batchOrders") List<BinancePerpetualOrder> batchOrders,
+          @FormParam("batchOrders") String batchOrders,
           @FormParam("recvWindow") Long recvWindow,
           @FormParam("timestamp") SynchronizedValueFactory<Long> timestamp,
           @HeaderParam(X_MBX_APIKEY) String apiKey,
@@ -562,4 +562,32 @@ public interface BinancePerpetualAuthenticated extends BinancePerpetual {
                               @HeaderParam(X_MBX_APIKEY) String apiKey,
                               @QueryParam(SIGNATURE) ParamsDigest signature)
           throws IOException, BinanceException;
+
+  @POST
+  @Path("/fapi/v1/marginType")
+  /**
+   * 变换逐全仓模式(TRADE)
+   */
+  Binanceresult setMarginType(@FormParam("symbol") String symbol,
+                       @FormParam("marginType") MarginType marginType,
+                       @FormParam("recvWindow") Long recvWindow,
+                       @FormParam("timestamp") SynchronizedValueFactory<Long> timestamp,
+                       @FormParam(X_MBX_APIKEY) String apiKey,
+                       @FormParam(SIGNATURE) ParamsDigest signature)
+          throws IOException, BinanceException;
+
+  @POST
+  @Path("/fapi/v1/leverage")
+  /**
+   * 调整开仓杠杆(TRADE)
+   */
+  HashMap setLeverage(@FormParam("symbol") String symbol,
+                        @FormParam("leverage") Integer leverage,
+                        @FormParam("recvWindow") Long recvWindow,
+                        @FormParam("timestamp") SynchronizedValueFactory<Long> timestamp,
+                        @FormParam(X_MBX_APIKEY) String apiKey,
+                        @FormParam(SIGNATURE) ParamsDigest signature)
+          throws IOException, BinanceException;
+
+
 }

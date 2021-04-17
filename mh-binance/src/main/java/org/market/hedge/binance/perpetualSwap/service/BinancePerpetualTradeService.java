@@ -2,12 +2,14 @@ package org.market.hedge.binance.perpetualSwap.service;
 
 import org.knowm.xchange.client.ResilienceRegistries;
 import org.market.hedge.binance.BinanceExchange;
+import org.market.hedge.binance.dto.trade.MarginType;
 import org.market.hedge.binance.perpetualSwap.BinancePerpetualAuthenticated;
+import org.market.hedge.binance.perpetualSwap.dto.trade.req.Binanceresult;
+import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.dto.trade.MHLimitOrder;
 import org.market.hedge.dto.trade.MHMarketOrder;
+import org.market.hedge.dto.trade.Result;
 import org.market.hedge.service.trade.MHTradeService;
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -37,5 +39,19 @@ public class BinancePerpetualTradeService extends BinancePerpetualTradeServiceRa
     @Override
     public HashMap setPositionSideDual(String dualSidePosition, Long recvWindow) throws IOException {
         return super.setPositionSideDual(dualSidePosition, recvWindow);
+    }
+
+
+    @Override
+    public Result setMarginType(ParsingCurrencyPair parsingCurrencyPair, Object... args) throws IOException {
+        //全仓模式
+        Binanceresult binanceresult =  super.setMarginType(parsingCurrencyPair,MarginType.CROSSED);
+            return new Result(binanceresult.getCode(),binanceresult.getMsg());
+    }
+
+    @Override
+    public HashMap<String, Object> setLeverage(ParsingCurrencyPair parsingCurrencyPair, Integer leverage) throws IOException {
+
+        return super.setLeverage(parsingCurrencyPair,leverage);
     }
 }

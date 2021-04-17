@@ -1,5 +1,7 @@
 package org.market.hedge.huobi;
 
+import org.knowm.xchange.dto.Order;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -49,4 +51,5 @@ class HuobiProperties {
   public String getSecretKey() {
     return secretKey;
   }
+
 }
