@@ -45,7 +45,7 @@ public class BinanceOptionTradeServiceRaw extends BinanceOptionBaseService {
                             null);
         });
         try {
-            binance.batchOrders(batchOrders,null,getTimestampFactory(),apiKey,signatureCreator);
+            binance.batchOrders(batchOrders,getTimestampFactory().createValue(),getTimestampFactory(),apiKey,signatureCreator);
             return "success";
         } catch (BinanceException e) {
             throw BinanceErrorAdapter.adapt(e);

@@ -59,7 +59,7 @@ public interface BinanceOptionAuthenticated extends BinanceOption {
       throws IOException, BinanceException;
 
   @POST
-  @Path("fapi/v1/batchOrders")
+  @Path("vapi/v1/batchOrders")
   List<BinanceNewOrder> batchOrders(
           @FormParam("batchOrders") List<BinancePerpetualOrder> batchOrders,
           @FormParam("recvWindow") Long recvWindow,

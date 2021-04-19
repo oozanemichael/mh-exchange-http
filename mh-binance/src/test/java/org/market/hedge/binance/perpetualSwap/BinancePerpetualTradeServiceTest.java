@@ -1,4 +1,4 @@
-package org.market.hedge.binance.trade;
+package org.market.hedge.binance.perpetualSwap;
 
 import org.junit.Test;
 import org.knowm.xchange.currency.CurrencyPair;
