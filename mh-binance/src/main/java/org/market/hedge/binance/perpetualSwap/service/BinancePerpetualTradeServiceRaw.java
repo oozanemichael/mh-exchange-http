@@ -9,6 +9,7 @@ import org.market.hedge.binance.BinanceExchange;
 import org.market.hedge.binance.dto.BinanceException;
 import org.market.hedge.binance.dto.trade.*;
 import org.market.hedge.binance.perpetualSwap.BinancePerpetualAuthenticated;
+import org.market.hedge.binance.perpetualSwap.dto.trade.req.BinancePerpetualLeverage;
 import org.market.hedge.binance.perpetualSwap.dto.trade.req.BinancePerpetualOrder;
 import org.market.hedge.binance.perpetualSwap.dto.trade.req.Binanceresult;
 import org.market.hedge.binance.service.BinanceTradeService;
@@ -130,15 +131,13 @@ public class BinancePerpetualTradeServiceRaw extends BinancePerpetualBaseService
 
     }
 
-
     public Binanceresult setMarginType(ParsingCurrencyPair pair, MarginType marginType) throws IOException {
         return binance.setMarginType(pair.getParsing(),marginType,null,getTimestampFactory(),apiKey,signatureCreator);
 
     }
 
-    public HashMap setLeverage(ParsingCurrencyPair pair, Integer leverage) throws IOException {
+    public BinancePerpetualLeverage setLeverageRaw(ParsingCurrencyPair pair, Integer leverage) throws IOException {
         return binance.setLeverage(pair.getParsing(),leverage,null,getTimestampFactory(),apiKey,signatureCreator);
-
     }
 
 

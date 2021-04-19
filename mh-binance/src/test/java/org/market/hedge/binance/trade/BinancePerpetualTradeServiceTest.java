@@ -7,6 +7,8 @@ import org.market.hedge.MHExchange;
 import org.market.hedge.MHExchangeFactory;
 import org.market.hedge.binance.BinanceExchange;
 import org.market.hedge.binance.perpetualSwap.BinancePerpetualMarketDataServiceTest;
+import org.market.hedge.binance.perpetualSwap.service.BinancePerpetualTradeService;
+import org.market.hedge.binance.perpetualSwap.service.BinancePerpetualTradeServiceRaw;
 import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.core.PositionInfo;
 import org.market.hedge.core.TradingArea;
@@ -88,32 +90,32 @@ public class BinancePerpetualTradeServiceTest {
     }
 
     @Test
-    public void setMarginType() throws IOException {
+    public void setLeverage() throws IOException {
         MHExchange exchange= MHExchangeFactory.INSTANCE.createExchange(BinanceExchange.class
-                ,"ajmNWdDNiHENQ51N7btBGU8ijdMJRuZstBKBbNnn9iplHR5U2GUjGClulVpozU9U"
-                ,"PX1t8o3K3HYGmR5FPYg6EN3XaRaSsNC8pStEshZWN44O2L9ryUHOggjAU0TtNtq1"
+                ,"NEq7SZ4xcE8jcRkeOvhJHJlgzV3X243g02KiF2TQqEIIPoOFI1nmaHhu8j1iSAMH"
+                ,"J9GlHxSgCK759BBEEFLzbjYglsqiZWLQMEjR8kuUwHv1FID0HhdYmm6VDrLNc8IQ"
                 , TradingArea.PerpetualSwap);
         StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
         MHTradeService tradeService=  exchange.getTradeService();
         try {
-            Result result =  tradeService.setMarginType(parsing.parsing(CurrencyPair.BTC_USDT), null);
-            log.info("resultmap:{}",result);
+            tradeService.setLeverage(parsing.parsing(CurrencyPair.BTC_USDT),25);
+            //log.info("resultmap:{}",map);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+
     @Test
-    public void setLeverage() throws IOException {
+    public void setMarginTypeRaw() throws IOException {
         MHExchange exchange= MHExchangeFactory.INSTANCE.createExchange(BinanceExchange.class
-                ,"ajmNWdDNiHENQ51N7btBGU8ijdMJRuZstBKBbNnn9iplHR5U2GUjGClulVpozU9U"
-                ,"PX1t8o3K3HYGmR5FPYg6EN3XaRaSsNC8pStEshZWN44O2L9ryUHOggjAU0TtNtq1"
+                ,"NEq7SZ4xcE8jcRkeOvhJHJlgzV3X243g02KiF2TQqEIIPoOFI1nmaHhu8j1iSAMH"
+                ,"J9GlHxSgCK759BBEEFLzbjYglsqiZWLQMEjR8kuUwHv1FID0HhdYmm6VDrLNc8IQ"
                 , TradingArea.PerpetualSwap);
         StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
-        MHTradeService tradeService=  exchange.getTradeService();
+        BinancePerpetualTradeServiceRaw tradeServiceRaw= (BinancePerpetualTradeServiceRaw) exchange.getTradeService();
         try {
-            Map<String,Object> map =  tradeService.setLeverage(parsing.parsing(CurrencyPair.BTC_USDT),25);
-            log.info("resultmap:{}",map);
+            tradeServiceRaw.setMarginType(parsing.parsing(CurrencyPair.BTC_USDT), null);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -5,10 +5,8 @@ import org.knowm.xchange.service.trade.TradeService;
 import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.dto.trade.MHLimitOrder;
 import org.market.hedge.dto.trade.MHMarketOrder;
-import org.market.hedge.dto.trade.Result;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -45,11 +43,6 @@ public interface MHTradeService extends TradeService {
         throw new NotYetImplementedForExchangeException();
     }
 
-
-    default void verifyOrder(MHLimitOrder limitOrder) {
-        throw new NotYetImplementedForExchangeException();
-    }
-
     /**
      * 根据合约名称撤销关于此合约的所有订单
      * */
@@ -57,17 +50,11 @@ public interface MHTradeService extends TradeService {
         throw new NotYetImplementedForExchangeException();
     }
 
-    /**
-     * 变换逐全仓模式
-     */
-    default Result setMarginType(ParsingCurrencyPair parsingCurrencyPair, Object ...args)throws IOException {
-        throw new NotYetImplementedForExchangeException();
-    }
 
     /**
      * 调整开仓杠杆
      */
-    default HashMap<String, Object> setLeverage(ParsingCurrencyPair parsingCurrencyPair, Integer leverage)throws IOException {
+    default void setLeverage(ParsingCurrencyPair parsingCurrencyPair, Integer leverage)throws IOException {
         throw new NotYetImplementedForExchangeException();
     }
 }
