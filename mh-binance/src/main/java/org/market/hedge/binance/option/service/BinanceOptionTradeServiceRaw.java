@@ -1,15 +1,15 @@
 package org.market.hedge.binance.option.service;
 
+import com.alibaba.fastjson.JSON;
 import org.knowm.xchange.client.ResilienceRegistries;
 import org.knowm.xchange.dto.Order;
-import org.market.hedge.binance.BinanceAdapters;
-import org.market.hedge.binance.BinanceErrorAdapter;
-import org.market.hedge.binance.BinanceExchange;
+import org.market.hedge.binance.*;
 import org.market.hedge.binance.dto.BinanceException;
 import org.market.hedge.binance.dto.trade.OrderSide;
 import org.market.hedge.binance.dto.trade.OrderType;
 import org.market.hedge.binance.dto.trade.TimeInForce;
 import org.market.hedge.binance.option.BinanceOptionAuthenticated;
+import org.market.hedge.binance.option.dto.trade.req.BinanceOptionOrder;
 import org.market.hedge.binance.perpetualSwap.BinancePerpetualAuthenticated;
 import org.market.hedge.binance.perpetualSwap.dto.trade.req.BinancePerpetualOrder;
 import org.market.hedge.binance.service.BinanceTradeService;
@@ -17,6 +17,7 @@ import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.dto.trade.MHLimitOrder;
 import org.market.hedge.dto.trade.MHMarketOrder;
 
+import javax.ws.rs.FormParam;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -31,21 +32,29 @@ public class BinanceOptionTradeServiceRaw extends BinanceOptionBaseService {
 
     protected String placeOrdersLimit(List<MHLimitOrder> limitOrders) throws IOException {
         OrderType type=OrderType.LIMIT;
-        List<BinancePerpetualOrder> batchOrders=new ArrayList<BinancePerpetualOrder>();
+        List<BinanceOptionOrder> batchOrders=new ArrayList<BinanceOptionOrder>();
         limitOrders.forEach(e->{
-            BinancePerpetualOrder newOrder =
-                    newOrder(
-                            e.getParsingCurrencyPair(),
-                            BinanceAdapters.convert(e.getType()),
-                            type,
-                            null,
-                            e.getOriginalAmount(),
-                            e.getLimitPrice(),
-                            getClientOrderId(e),
-                            null);
+            BinanceOptionOrder newOrder =
+                    BinanceOptionOrder.builder()
+                            .side(BinanceAdapters.convert(e.getType()))
+                            .symbol(e.getParsingCurrencyPair().getParsing())
+                            .type(type)
+                            .clientOrderId(getClientOrderId(e))
+                            .quantity(e.getOriginalAmount())
+                            .price(e.getLimitPrice())
+                            .build();
+            batchOrders.add(newOrder);
         });
+        BinanceOptionOrder[] strings = new BinanceOptionOrder[batchOrders.size()];
+        batchOrders.toArray(strings);
         try {
-            binance.batchOrders(batchOrders,getTimestampFactory().createValue(),getTimestampFactory(),apiKey,signatureCreator);
+            UrlParamsBuilder builder =UrlParamsBuilder.build()
+                    .putToUrl("orders",JSON.toJSONString(strings))
+                    .setMethod("POST");
+
+            String signature=BinanceSignature.createSignature(apiKey,secretKey,builder);
+
+            binance.batchOrders(JSON.toJSONString(strings),BinanceOptionApiConstants.DEFAULT_RECEIVING_WINDOW,getTimestampFactory(),apiKey,signature);
             return "success";
         } catch (BinanceException e) {
             throw BinanceErrorAdapter.adapt(e);
@@ -68,8 +77,11 @@ public class BinanceOptionTradeServiceRaw extends BinanceOptionBaseService {
                             getClientOrderId(e),
                             null);
         });
+        BinancePerpetualOrder[] strings = new BinancePerpetualOrder[batchOrders.size()];
+        batchOrders.toArray(strings);
+
         try {
-            binance.batchOrders(batchOrders,null,getTimestampFactory(),apiKey,signatureCreator);
+            binance.batchOrders(JSON.toJSONString(strings),null,getTimestampFactory(),apiKey,"signatureCreator");
             return "success";
         } catch (BinanceException e) {
             throw BinanceErrorAdapter.adapt(e);

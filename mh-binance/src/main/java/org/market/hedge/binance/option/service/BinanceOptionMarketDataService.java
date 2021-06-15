@@ -5,6 +5,7 @@ import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.market.hedge.binance.BinanceExchange;
 import org.market.hedge.binance.dto.marketdata.BinanceOrderbook;
 import org.market.hedge.binance.option.BinanceOptionAuthenticated;
+import org.market.hedge.binance.option.dto.marketdat.resq.OptionInfo;
 import org.market.hedge.binance.perpetualSwap.BinancePerpetualAuthenticated;
 import org.market.hedge.core.Kline;
 import org.market.hedge.core.KlineInterval;
@@ -42,5 +43,12 @@ public class BinanceOptionMarketDataService extends BinanceOptionMarketDataServi
     @Override
     public List<Kline> getKlines(ParsingCurrencyPair pair, KlineInterval interval, Integer limit) throws IOException {
         return klines(pair,  interval,  limit, null, null);
+    }
+
+    /**
+     * /vapi/v1/optionInfo
+     * */
+    public List<OptionInfo> optionInfo() throws IOException {
+        return binance.optionInfo().getData();
     }
 }

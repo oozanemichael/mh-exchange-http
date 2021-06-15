@@ -1,69 +1,75 @@
 package org.market.hedge.binance.option.dto.trade.req;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
+import lombok.Data;
 import org.market.hedge.binance.dto.trade.OrderSide;
 import org.market.hedge.binance.dto.trade.OrderType;
 import org.market.hedge.binance.dto.trade.TimeInForce;
 
 import java.math.BigDecimal;
 
+@Data
+@Builder
 public class BinanceOptionOrder {
 
-    @JsonProperty("symbol") String symbol;
+    /**
+     * STRING	YES	期权交易对	BTC-200730-9000-C
+     */
+    @JsonProperty("symbol")
+    private String symbol;
+
+    /**
+     * ENUM	YES	买卖方向 SELL, BUY	BUY
+     */
     @JsonProperty("side")
-    OrderSide side;
+    private OrderSide side;
+
+    /**
+     *	ENUM	YES	订单类型 LIMIT, MARKET	LIMIT
+     */
     @JsonProperty("type")
-    OrderType type;
-    @JsonProperty("timeInForce")
-    TimeInForce timeInForce;
+    private OrderType type;
+
+    /**
+     *	DECIMAL	YES	下单数量	3
+     */
     @JsonProperty("quantity")
-    BigDecimal quantity;
-    @JsonProperty("price") BigDecimal price;
-    @JsonProperty("newClientOrderId") String newClientOrderId;
-    @JsonProperty("stopPrice") BigDecimal stopPrice;
+    private BigDecimal quantity;
 
-    public BinanceOptionOrder(String symbol, OrderSide side, OrderType type, TimeInForce timeInForce, BigDecimal quantity, BigDecimal price, String newClientOrderId, BigDecimal stopPrice) {
-        this.symbol = symbol;
-        this.side = side;
-        this.type = type;
-        this.timeInForce = timeInForce;
-        this.quantity = quantity;
-        this.price = price;
-        this.newClientOrderId = newClientOrderId;
-        this.stopPrice = stopPrice;
-    }
+    /**
+     *	DECIMAL	NO	委托价格	1000
+     */
+    @JsonProperty("price")
+    private BigDecimal price;
 
-    public String getSymbol() {
-        return symbol;
-    }
+    /**
+     *	ENUM	NO	有效方法（默认GTC）	GTC
+     */
+    @JsonProperty("timeInForce")
+    private TimeInForce timeInForce;
 
-    public OrderSide getSide() {
-        return side;
-    }
+    /**
+     *	BOOLEAN	NO	是否仅平仓单（默认false）	false
+     */
+    @JsonProperty("reduceOnly")
+    private Boolean reduceOnly;
 
-    public OrderType getType() {
-        return type;
-    }
+    /**
+     *	BOOLEAN	NO	是否仅被动成交（默认false）	false
+     */
+    @JsonProperty("postOnly")
+    private String postOnly;
 
-    public TimeInForce getTimeInForce() {
-        return timeInForce;
-    }
+    /**
+     *	ENUM	NO	"ACK", "RESULT", 默认 "ACK"	ACK
+     */
+    @JsonProperty("newOrderRespType")
+    private String newOrderRespType;
 
-    public BigDecimal getQuantity() {
-        return quantity;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public String getNewClientOrderId() {
-        return newClientOrderId;
-    }
-
-    public BigDecimal getStopPrice() {
-        return stopPrice;
-    }
-
-
+    /**
+     *	STRING	NO	用户自定义的订单号，不可以重复出现在挂单中
+     */
+    @JsonProperty("clientOrderId")
+    private String clientOrderId;
 }

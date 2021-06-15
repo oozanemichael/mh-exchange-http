@@ -3,6 +3,7 @@ package org.market.hedge.binance.option;
 import org.market.hedge.binance.dto.BinanceException;
 import org.market.hedge.binance.dto.account.*;
 import org.market.hedge.binance.dto.trade.*;
+import org.market.hedge.binance.option.dto.BinanceOptionResponse;
 import org.market.hedge.binance.perpetualSwap.dto.trade.req.BinancePerpetualOrder;
 import si.mazi.rescu.ParamsDigest;
 import si.mazi.rescu.SynchronizedValueFactory;
@@ -60,12 +61,12 @@ public interface BinanceOptionAuthenticated extends BinanceOption {
 
   @POST
   @Path("vapi/v1/batchOrders")
-  List<BinanceNewOrder> batchOrders(
-          @FormParam("batchOrders") List<BinancePerpetualOrder> batchOrders,
-          @FormParam("recvWindow") Long recvWindow,
-          @FormParam("timestamp") SynchronizedValueFactory<Long> timestamp,
+  BinanceOptionResponse<List<BinanceNewOrder>> batchOrders(
+          @QueryParam("orders") String orders,
+          @QueryParam("recvWindow") Long recvWindow,
+          @QueryParam("timestamp") SynchronizedValueFactory<Long> timestamp,
           @HeaderParam(X_MBX_APIKEY) String apiKey,
-          @QueryParam(SIGNATURE) ParamsDigest signature)
+          @QueryParam(SIGNATURE) String signature)
           throws IOException, BinanceException;
 
   @POST

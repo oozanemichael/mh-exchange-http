@@ -5,6 +5,8 @@ import org.market.hedge.binance.dto.marketdata.*;
 import org.market.hedge.binance.dto.meta.BinanceSystemStatus;
 import org.market.hedge.binance.dto.meta.BinanceTime;
 import org.market.hedge.binance.dto.meta.exchangeinfo.BinanceExchangeInfo;
+import org.market.hedge.binance.option.dto.BinanceOptionResponse;
+import org.market.hedge.binance.option.dto.marketdat.resq.OptionInfo;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -147,37 +149,10 @@ public interface BinanceOption {
   BinanceTicker24h ticker24h(@QueryParam("symbol") String symbol)
       throws IOException, BinanceException;
 
-  @GET
-  @Path("api/v3/ticker/price")
-  /**
-   * Latest price for a symbol.
-   *
-   * @return
-   * @throws IOException
-   * @throws BinanceException
-   */
-  BinancePrice tickerPrice(@QueryParam("symbol") String symbol)
-      throws IOException, BinanceException;
 
   @GET
-  @Path("api/v3/ticker/price")
-  /**
-   * Latest price for all symbols.
-   *
-   * @return
-   * @throws IOException
-   * @throws BinanceException
-   */
-  List<BinancePrice> tickerAllPrices() throws IOException, BinanceException;
+  @Path("/vapi/v1/optionInfo")
+  BinanceOptionResponse<List<OptionInfo>> optionInfo()
+          throws IOException, BinanceException;
 
-  @GET
-  @Path("api/v3/ticker/bookTicker")
-  /**
-   * Best price/qty on the order book for all symbols.
-   *
-   * @return
-   * @throws IOException
-   * @throws BinanceException
-   */
-  List<BinancePriceQuantity> tickerAllBookTickers() throws IOException, BinanceException;
 }

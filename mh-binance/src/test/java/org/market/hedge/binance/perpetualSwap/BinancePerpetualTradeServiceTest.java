@@ -58,7 +58,7 @@ public class BinancePerpetualTradeServiceTest {
             MHLimitOrder  order1=
                     new MHLimitOrder(
                             Order.OrderType.ASK,
-                            new BigDecimal("10") ,
+                            new BigDecimal("100000") ,
                             CurrencyPair.BTC_USDT ,
                             "11223311",
                             new Date(),

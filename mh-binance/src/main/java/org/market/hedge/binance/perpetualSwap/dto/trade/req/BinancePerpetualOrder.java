@@ -15,12 +15,12 @@ public class BinancePerpetualOrder {
     OrderSide side;
     @JsonProperty("type")
     OrderType type;
-    @JsonProperty("timeInForce")
-    TimeInForce timeInForce;
     @JsonProperty("quantity")
     BigDecimal quantity;
     @JsonProperty("price")
     BigDecimal price;
+    @JsonProperty("timeInForce")
+    TimeInForce timeInForce;
     @JsonProperty("newClientOrderId")
     String newClientOrderId;
     @JsonProperty("stopPrice")

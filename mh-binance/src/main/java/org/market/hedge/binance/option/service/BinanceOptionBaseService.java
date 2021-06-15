@@ -22,6 +22,7 @@ public class BinanceOptionBaseService extends BaseResilientExchangeService<Binan
     protected final Logger LOG = LoggerFactory.getLogger(getClass());
 
     protected final String apiKey;
+    protected final String secretKey;
     protected final BinanceOptionAuthenticated binance;
     protected final ParamsDigest signatureCreator;
 
@@ -33,6 +34,7 @@ public class BinanceOptionBaseService extends BaseResilientExchangeService<Binan
         super(exchange, resilienceRegistries);
         this.binance = binance;
         this.apiKey = exchange.getExchangeSpecification().getApiKey();
+        this.secretKey = exchange.getExchangeSpecification().getSecretKey();
         this.signatureCreator =
                 BinanceHmacDigest.createInstance(exchange.getExchangeSpecification().getSecretKey());
     }
