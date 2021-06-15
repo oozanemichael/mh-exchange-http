@@ -164,7 +164,7 @@ public interface BinanceOptionAuthenticated extends BinanceOption {
       throws IOException, BinanceException;
 
   @DELETE
-  @Path("api/v3/openOrders")
+  @Path("vapi/v1/allOpenOrders")
   /**
    * Cancels all active orders on a symbol. This includes OCO orders.
    *

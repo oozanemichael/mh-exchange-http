@@ -58,4 +58,23 @@ public class BinanceOptionTradeServiceTest {
         }
     }
 
+    @Test
+    public void cancelAllByInstrument(){
+        MHExchange exchange= MHExchangeFactory.INSTANCE.createExchange(BinanceExchange.class
+                ,"29GQOVNXobSNF0CKZIV0NBdsjch3t8MGCa9wf8xNrfkawNixLVHiDRM2tIMeR54P"
+                ,"XuZlFL2nOzQfEBkYht6l7yXlVPjGZ3aZbyTqrKw4i0bKnl64xbq1tD8batSvmdDq"
+                , TradingArea.Option);
+        StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
+        MHTradeService tradeService=  exchange.getTradeService();
+        ParsingCurrencyPair pair=parsing.parsing(CurrencyPair.BTC_USDT
+                ,new Date(1623945600000L)
+                ,new BigDecimal("25000")
+                , Direction.Call);
+        try {
+            tradeService.cancelAllByInstrument(pair);
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+    }
+
 }

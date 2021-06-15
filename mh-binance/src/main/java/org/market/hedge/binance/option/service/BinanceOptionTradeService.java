@@ -2,8 +2,10 @@ package org.market.hedge.binance.option.service;
 
 import org.knowm.xchange.client.ResilienceRegistries;
 import org.market.hedge.binance.BinanceExchange;
+import org.market.hedge.binance.dto.trade.BinanceCancelledOrder;
 import org.market.hedge.binance.option.BinanceOptionAuthenticated;
 import org.market.hedge.binance.perpetualSwap.BinancePerpetualAuthenticated;
+import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.dto.trade.MHLimitOrder;
 import org.market.hedge.dto.trade.MHMarketOrder;
 import org.market.hedge.service.trade.MHTradeService;
@@ -25,5 +27,10 @@ public class BinanceOptionTradeService extends BinanceOptionTradeServiceRaw impl
     @Override
     public String placeMarketOrders(List<MHMarketOrder> marketOrder) throws IOException {
         return placeOrdersMarket(marketOrder);
+    }
+
+    @Override
+    public void cancelAllByInstrument(ParsingCurrencyPair parsingCurrencyPair) throws IOException {
+        List<BinanceCancelledOrder> list=cancelAllOpenOrders(parsingCurrencyPair.getParsing());
     }
 }
