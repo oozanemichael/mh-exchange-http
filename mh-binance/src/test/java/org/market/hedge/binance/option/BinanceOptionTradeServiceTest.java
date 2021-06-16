@@ -30,24 +30,24 @@ public class BinanceOptionTradeServiceTest {
     @Test
     public void placeLimitOrder() {
         MHExchange exchange= MHExchangeFactory.INSTANCE.createExchange(BinanceExchange.class
-                ,"RWT8FZr9yQh0cc7V0b9TRBpgI07jHFN5e7jBBK4m8ysn2sn7qHA9PQ7H4bFFJEjw"
-                ,"QEqJrVHbn8VnpGgcXNVCGvl2jkyqeJ1UZiboCH7y264O84rDvaAm8oyqRcFFevAx"
+                ,"29GQOVNXobSNF0CKZIV0NBdsjch3t8MGCa9wf8xNrfkawNixLVHiDRM2tIMeR54P"
+                ,"XuZlFL2nOzQfEBkYht6l7yXlVPjGZ3aZbyTqrKw4i0bKnl64xbq1tD8batSvmdDq"
                 , TradingArea.Option);
         StreamingParsingCurrencyPair parsing=exchange.getStreamingParsing().parsingCurrencyPair;
         MHTradeService tradeService=  exchange.getTradeService();
         ParsingCurrencyPair pair=parsing.parsing(CurrencyPair.BTC_USDT
-                ,new Date(1619107200000L)
-                ,new BigDecimal("60000")
-                , Direction.Call);
+                ,new Date(1623945600000L)
+                ,new BigDecimal("25000")
+                , Direction.Put);
         try {
             MHLimitOrder order1=
                     new MHLimitOrder(
-                            Order.OrderType.ASK,
-                            new BigDecimal("10") ,
+                            Order.OrderType.BID,
+                            new BigDecimal("1") ,
                             CurrencyPair.BTC_USDT ,
                             "11223311",
                             new Date(),
-                            new BigDecimal("63000"),
+                            new BigDecimal("0.5"),
                             pair);
             log.info(pair.getParsing());
             List<MHLimitOrder> limitOrders=new ArrayList<>();
@@ -69,7 +69,8 @@ public class BinanceOptionTradeServiceTest {
         ParsingCurrencyPair pair=parsing.parsing(CurrencyPair.BTC_USDT
                 ,new Date(1623945600000L)
                 ,new BigDecimal("25000")
-                , Direction.Call);
+                , Direction.Put);
+        log.info(pair.getParsing());
         try {
             tradeService.cancelAllByInstrument(pair);
         } catch (IOException exception) {

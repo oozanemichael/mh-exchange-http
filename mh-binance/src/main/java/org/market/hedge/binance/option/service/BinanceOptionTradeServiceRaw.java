@@ -2,30 +2,25 @@ package org.market.hedge.binance.option.service;
 
 import com.alibaba.fastjson.JSON;
 import org.knowm.xchange.client.ResilienceRegistries;
-import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
 import org.market.hedge.binance.*;
 import org.market.hedge.binance.dto.BinanceException;
-import org.market.hedge.binance.dto.trade.BinanceCancelledOrder;
 import org.market.hedge.binance.dto.trade.OrderSide;
 import org.market.hedge.binance.dto.trade.OrderType;
 import org.market.hedge.binance.dto.trade.TimeInForce;
 import org.market.hedge.binance.option.BinanceOptionAuthenticated;
 import org.market.hedge.binance.option.dto.trade.req.BinanceOptionOrder;
-import org.market.hedge.binance.perpetualSwap.BinancePerpetualAuthenticated;
 import org.market.hedge.binance.perpetualSwap.dto.trade.req.BinancePerpetualOrder;
 import org.market.hedge.binance.service.BinanceTradeService;
 import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.dto.trade.MHLimitOrder;
 import org.market.hedge.dto.trade.MHMarketOrder;
 
-import javax.ws.rs.FormParam;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.market.hedge.binance.BinanceResilience.REQUEST_WEIGHT_RATE_LIMITER;
 
 public class BinanceOptionTradeServiceRaw extends BinanceOptionBaseService {
 
@@ -128,19 +123,14 @@ public class BinanceOptionTradeServiceRaw extends BinanceOptionBaseService {
 
     }
 
-    public List<BinanceCancelledOrder> cancelAllOpenOrders(String symbol)
+    public void cancelAllOpenOrders(String symbol)
             throws IOException, BinanceException {
-        return decorateApiCall(
-                () ->
-                        binance.cancelAllOpenOrders(
-                                symbol,
-                                getRecvWindow(),
-                                getTimestampFactory(),
-                                super.apiKey,
-                                super.signatureCreator))
-                .withRetry(retry("cancelAllOpenOrders"))
-                .withRateLimiter(rateLimiter(REQUEST_WEIGHT_RATE_LIMITER))
-                .call();
+        binance.cancelAllOpenOrders(
+                symbol,
+                getRecvWindow(),
+                getTimestampFactory(),
+                super.apiKey,
+                super.signatureCreator);
     }
 
 }

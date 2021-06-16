@@ -8,7 +8,6 @@ import org.knowm.xchange.dto.trade.LimitOrder;
 import org.market.hedge.binance.BinanceExchange;
 import org.market.hedge.binance.dto.marketdata.BinanceOrderbook;
 import org.market.hedge.binance.option.BinanceOptionAuthenticated;
-import org.market.hedge.binance.perpetualSwap.BinancePerpetualAuthenticated;
 import org.market.hedge.core.Kline;
 import org.market.hedge.core.KlineInterval;
 import org.market.hedge.core.ParsingCurrencyPair;

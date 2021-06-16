@@ -2,10 +2,8 @@ package org.market.hedge.binance.perpetualSwap.service;
 
 import org.knowm.xchange.client.ResilienceRegistries;
 import org.market.hedge.binance.BinanceExchange;
-import org.market.hedge.binance.dto.trade.MarginType;
 import org.market.hedge.binance.perpetualSwap.BinancePerpetualAuthenticated;
 import org.market.hedge.binance.perpetualSwap.dto.trade.req.BinancePerpetualLeverage;
-import org.market.hedge.binance.perpetualSwap.dto.trade.req.Binanceresult;
 import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.dto.trade.MHLimitOrder;
 import org.market.hedge.dto.trade.MHMarketOrder;

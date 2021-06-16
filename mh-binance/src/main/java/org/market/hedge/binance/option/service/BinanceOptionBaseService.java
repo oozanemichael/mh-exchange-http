@@ -6,7 +6,6 @@ import org.market.hedge.binance.BinanceExchange;
 import org.market.hedge.binance.dto.meta.BinanceSystemStatus;
 import org.market.hedge.binance.dto.meta.exchangeinfo.BinanceExchangeInfo;
 import org.market.hedge.binance.option.BinanceOptionAuthenticated;
-import org.market.hedge.binance.perpetualSwap.BinancePerpetualAuthenticated;
 import org.market.hedge.binance.service.BinanceHmacDigest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -31,6 +31,6 @@ public class BinanceOptionTradeService extends BinanceOptionTradeServiceRaw impl
 
     @Override
     public void cancelAllByInstrument(ParsingCurrencyPair parsingCurrencyPair) throws IOException {
-        List<BinanceCancelledOrder> list=cancelAllOpenOrders(parsingCurrencyPair.getParsing());
+        cancelAllOpenOrders(parsingCurrencyPair.getParsing());
     }
 }

@@ -175,7 +175,7 @@ public interface BinanceOptionAuthenticated extends BinanceOption {
    * @throws IOException
    * @throws BinanceException
    */
-  List<BinanceCancelledOrder> cancelAllOpenOrders(
+  BinanceOptionResponse<Void> cancelAllOpenOrders(
       @QueryParam("symbol") String symbol,
       @QueryParam("recvWindow") Long recvWindow,
       @QueryParam("timestamp") SynchronizedValueFactory<Long> timestamp,
