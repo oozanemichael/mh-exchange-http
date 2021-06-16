@@ -50,8 +50,11 @@ public class BinanceOptionTradeServiceRaw extends BinanceOptionBaseService {
             UrlParamsBuilder builder =UrlParamsBuilder.build()
                     .putToUrl("orders",JSON.toJSONString(strings))
                     .setMethod("POST");
+            UrlParamsBuilder builder111 =UrlParamsBuilder.build()
+                    .putToUrl("batchOrders", JSON.toJSONString(strings))
+                    .setMethod("POST");
 
-            String signature=BinanceSignature.createSignature(apiKey,secretKey,builder);
+            String signature=BinanceSignature.createSignature(apiKey,secretKey,builder111);
 
             binance.batchOrders(JSON.toJSONString(strings),BinanceOptionApiConstants.DEFAULT_RECEIVING_WINDOW,getTimestampFactory(),apiKey,signature);
             return "success";
@@ -80,7 +83,7 @@ public class BinanceOptionTradeServiceRaw extends BinanceOptionBaseService {
         batchOrders.toArray(strings);
 
         try {
-            binance.batchOrders(JSON.toJSONString(strings),null,getTimestampFactory(),apiKey,"signatureCreator");
+            //binance.batchOrders(JSON.toJSONString(strings),null,getTimestampFactory(),apiKey,signatureCreator);
             return "success";
         } catch (BinanceException e) {
             throw BinanceErrorAdapter.adapt(e);
