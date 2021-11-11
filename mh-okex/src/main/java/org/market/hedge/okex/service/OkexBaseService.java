@@ -1,5 +1,9 @@
 package org.market.hedge.okex.service;
 
+import com.okex.open.api.config.APIConfiguration;
+import com.okex.open.api.enums.I18nEnum;
+import com.okex.open.api.service.trade.TradeAPIService;
+import com.okex.open.api.service.trade.impl.TradeAPIServiceImpl;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.service.BaseExchangeService;
@@ -17,11 +21,24 @@ public class OkexBaseService extends BaseExchangeService implements BaseService 
 
     protected Okex okex;
     protected ParamsDigest signatureCreator;
+    protected APIConfiguration config;
+    protected TradeAPIService tradeAPIService;
 
     protected OkexBaseService(Exchange exchange) {
         super(exchange);
         okex = RestProxyFactory.createProxy(
                 Okex.class, exchange.getExchangeSpecification().getSslUri());
+
+        config = new APIConfiguration();
+        config.setEndpoint("https://www.okex.com/");
+
+        config.setApiKey(exchange.getExchangeSpecification().getApiKey());
+        config.setSecretKey(exchange.getExchangeSpecification().getSecretKey());
+        config.setPassphrase(exchange.getExchangeSpecification().getUserName());//"pwn2own"
+        config.setPrint(true);
+        /* config.setI18n(I18nEnum.SIMPLIFIED_CHINESE);*/
+        config.setI18n(I18nEnum.ENGLISH);
+        tradeAPIService = new TradeAPIServiceImpl(config);
     }
 
     protected <R> R checkResult(OkexResult<R> okexResult) {

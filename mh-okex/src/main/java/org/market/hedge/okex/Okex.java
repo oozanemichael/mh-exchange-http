@@ -1,11 +1,9 @@
 package org.market.hedge.okex;
 
 import org.market.hedge.okex.dto.marketdata.resp.OkexDepthResp;
+import org.market.hedge.okex.dto.trade.resp.OkexCancelAllResp;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 
@@ -28,5 +26,14 @@ public interface Okex {
     @Path("api/v5/market/books")
     OkexDepthResp books(@QueryParam("instId") String instId, @QueryParam("sz") String sz)
             throws IOException;
+
+
+    /**
+     * /api/option/v3/cancel_all/<underlying>
+     * 撤销全部订单
+     * */
+    @POST
+    @Path("api/v5/market/books")
+    OkexCancelAllResp cancelAll() throws IOException;
 
 }

@@ -9,5 +9,4 @@ public class HuobiOptionTradeServiceRaw extends HuobiOptionBaseService {
     }
 
 
-
 }

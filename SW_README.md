@@ -1,9 +1,10 @@
+[toc]
 
-#1. sw 结构划分
+# mh-exchange-http 结构划分
 
-## 2.http api
+## http api
 
-### 3.交易类型
+### 交易类型
 
 + Spot,
 
@@ -15,7 +16,7 @@
 
 + Option;
 
-#### 4.交易类型下 api 区分
+#### 交易类型下 api 区分
 + account （auth）
 + marketdata
 + trade （auth）

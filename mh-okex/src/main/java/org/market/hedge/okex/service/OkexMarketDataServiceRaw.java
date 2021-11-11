@@ -6,7 +6,6 @@ import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.trade.LimitOrder;
 import org.market.hedge.core.ParsingCurrencyPair;
 import org.market.hedge.okex.dto.marketdata.resp.OkexDepth;
-import org.market.hedge.okex.dto.marketdata.resp.OkexDepthResp;
 
 import java.io.IOException;
 import java.util.Date;
