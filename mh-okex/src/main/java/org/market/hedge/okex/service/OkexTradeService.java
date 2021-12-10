@@ -13,7 +13,9 @@ import org.market.hedge.okex.dto.trade.resp.OkexOrder;
 import org.market.hedge.service.trade.MHTradeService;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class OkexTradeService extends OkexTradeServiceRaw implements MHTradeService {
@@ -40,6 +42,12 @@ public class OkexTradeService extends OkexTradeServiceRaw implements MHTradeServ
 //        placeOrder.setReduceOnly(false);
         JSONObject result = tradeAPIService.placeOrder(placeOrder);
         return result.toJSONString();
+    }
+
+    public static void main(String[] args) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String dateString = sdf.format(new Date());
+        System.out.println(dateString.substring(2,dateString.length()));
     }
 
     @Override

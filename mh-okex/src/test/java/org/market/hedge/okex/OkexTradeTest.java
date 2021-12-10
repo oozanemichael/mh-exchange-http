@@ -25,10 +25,12 @@ public class OkexTradeTest {
 
     static Logger logger= LoggerFactory.getLogger(OkexTradeTest.class);
 
-    /**
+
+/**
      * 批量下单 Place Multiple Orders
      * POST /api/v5/trade/batch-orders
      */
+
     @Test
     public void placeMultipleOrders(){
 
@@ -45,21 +47,21 @@ public class OkexTradeTest {
         placeOrder1.setSz("1");
         placeOrder1.setPx("0.002");
         placeOrder1.setReduceOnly(null);
-
         placeOrders.add(placeOrder1);
 
-//        JSONObject result = tradeAPIService.placeMultipleOrders(placeOrders);
-//
-//        toResultString(LOG, "result", result);
+        //JSONObject result = tradeAPIService.placeMultipleOrders(placeOrders);
+
+        //toResultString(LOG, "result", result);
     }
 
-    /**
+
+/**
      * 批量撤单 Cancel Multiple Orders
      * POST /api/v5/trade/cancel-batch-orders
      */
+
     @Test
     public void cancelMultipleOrders(){
-
         MHExchangeSpecification exSpec = new OkexExchange().getDefaultExchangeSpecification(TradingArea.Option);
         exSpec.setUserName("pwn2own");
         exSpec.setApiKey("fe759d96-30c7-4ee4-9643-9e9f2dbb7b2a");
@@ -122,3 +124,4 @@ public class OkexTradeTest {
     }
 
 }
+
